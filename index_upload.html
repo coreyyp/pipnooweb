@@ -349,13 +349,17 @@
         flex-direction: column;
         padding: 30px 24px;
         gap: 20px;
-        transform: translateY(-120%);
-        transition: transform var(--transition-smooth);
+        transform: translateY(-150%);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform var(--transition-smooth), opacity var(--transition-smooth);
         z-index: 99;
       }
 
       .nav-links.active {
         transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
       }
     }
 
@@ -694,7 +698,7 @@
         width: 100px;
         height: 100px;
         object-fit: contain;
-        transform: scale(2.5);
+        transform: translateY(-1cm) scale(2.5);
       }
     }
 
@@ -1383,6 +1387,33 @@
       .story-grid:nth-child(even) .story-illustration-container {
         order: 2;
       }
+
+      #section-story .container {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      .story-hero {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      .story-text {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      .story-text h2 {
+        text-align: left !important;
+      }
+
+      .story-slideshow-container {
+        border-radius: 0;
+      }
+
+      .story-slide img {
+        border-radius: 0;
+      }
     }
 
 
@@ -1940,7 +1971,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 24px;
+      gap: 4px;
       box-sizing: border-box;
     }
 
@@ -1971,7 +2002,7 @@
     .contact-fields-list {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 2px;
     }
 
     .contact-field-row,
@@ -2113,6 +2144,39 @@
         flex-direction: column;
         gap: 16px;
         text-align: center;
+      }
+
+      .contact-field-row,
+      .contact-instagram-btn {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+
+      .contact-field-value {
+        text-align: left;
+      }
+
+      .contact-form-card {
+        background-image: none;
+        background-color: #8BAC8E;
+        border: 1px solid rgba(45, 66, 54, 0.1);
+        border-radius: 12px;
+        aspect-ratio: auto;
+        padding: 30px 24px !important;
+      }
+
+      .value-title {
+        order: 1;
+      }
+
+      .value-desc {
+        order: 2;
+      }
+
+      .value-image-container {
+        order: 3;
+        margin: 0 !important;
       }
     }
   </style>
