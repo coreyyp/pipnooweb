@@ -1,0 +1,3007 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PIP & NOO | Radically Upcycled, 100% Handmade Slow Fashion</title>
+  <meta name="description"
+    content="PIP & NOO is a slow fashion brand creating radically upcycled, 100% handmade, and completely one-of-a-kind clothing and accessories to combat fast fashion.">
+
+  <!-- Google Fonts: Josefin Sans, Montserrat and DM Serif Display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Josefin+Sans:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /* ----------------------------------------------------
+       1. GLOBAL STYLES & VARIABLES
+       ---------------------------------------------------- */
+    :root {
+      /* Brand Color Palette */
+      --color-bg: #FAF6F0;
+      /* Warm Off-White */
+      --color-chocolate: #3C2A21;
+      /* Dark Chocolate Brown */
+      --color-caramel: #8F6240;
+      /* Caramel Brown */
+      --color-cream: #E8D8C8;
+      /* Soft Beige/Cream */
+      --color-forest: #2D4236;
+      /* Forest Green */
+      --color-mint: #8CA89E;
+      /* Muted Mint Green */
+      --color-orange: #D95D39;
+      /* Warm Retro Orange */
+      --color-orange-hover: #C24D2C;
+      --color-white: #FFFFFF;
+      --color-light-gray: #ECE6DE;
+
+      /* Typography */
+      --font-display: 'Montserrat', sans-serif;
+      --font-body: 'Montserrat', sans-serif;
+      --font-nav: 'Josefin Sans', sans-serif;
+
+      /* Layout & Animation */
+      --transition-fast: 0.2s ease;
+      --transition-smooth: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --border-radius: 6px;
+      --max-width: 1200px;
+    }
+
+    /* Support custom font if uploaded locally by user later */
+    @font-face {
+      font-family: 'Aku and Kamu';
+      src: url('AkuAndKamu.woff2') format('woff2'),
+        url('AkuAndKamu.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-chocolate);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      color: var(--color-chocolate);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color var(--transition-fast);
+    }
+
+    button {
+      font-family: var(--font-body);
+      background: none;
+      border: none;
+      cursor: pointer;
+      outline: none;
+      transition: all var(--transition-fast);
+    }
+
+    /* Container Utilities */
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section-padding {
+      padding: 80px 0;
+    }
+
+    @media (max-width: 768px) {
+      .section-padding {
+        padding: 50px 0;
+      }
+    }
+
+    /* Primary CTA Button */
+    .btn {
+      display: inline-block;
+      padding: 12px 28px;
+      background-color: var(--color-chocolate);
+      color: var(--color-bg);
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      border-radius: var(--border-radius);
+      transition: background-color var(--transition-smooth), transform var(--transition-fast);
+      border: 1px solid var(--color-chocolate);
+    }
+
+    .btn:hover {
+      background-color: var(--color-orange);
+      border-color: var(--color-orange);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--color-chocolate);
+      border: 1px solid var(--color-chocolate);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--color-orange);
+      border-color: var(--color-orange);
+      color: var(--color-bg);
+      transform: translateY(-2px);
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: var(--font-nav);
+      text-transform: none;
+      letter-spacing: 0.5px;
+      border-radius: 30px;
+      background-color: var(--color-cream);
+      color: var(--color-caramel);
+    }
+
+    .badge-orange {
+      background-color: var(--color-orange);
+      color: var(--color-bg);
+    }
+
+    .badge-forest {
+      background-color: var(--color-forest);
+      color: var(--color-bg);
+    }
+
+    .badge-sold {
+      background-color: var(--color-light-gray);
+      color: var(--color-caramel);
+      text-decoration: line-through;
+    }
+
+    /* ----------------------------------------------------
+       2. HEADER & STICKY NAVIGATION
+       ---------------------------------------------------- */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: var(--color-bg);
+      /* Solid off-white/cream background */
+      border-bottom: 1px solid var(--color-light-gray);
+      transition: padding var(--transition-fast);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+    }
+
+    .logo {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .logo-img {
+      height: 69px;
+      width: auto;
+      display: block;
+    }
+
+    .logo-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--color-orange);
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 32px;
+    }
+
+    .nav-links a {
+      font-family: var(--font-nav);
+      font-size: 13px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 8px 0;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--color-orange);
+      transition: width var(--transition-fast);
+    }
+
+    .nav-links a:hover {
+      color: var(--color-orange);
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .nav-links a.active {
+      color: var(--color-orange);
+    }
+
+    .nav-actions {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 20px;
+    }
+
+    .cart-trigger {
+      position: relative;
+      font-family: var(--font-nav);
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: none !important;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      border-radius: var(--border-radius);
+    }
+
+    .cart-trigger:hover {
+      color: var(--color-orange);
+    }
+
+    .cart-icon {
+      position: relative;
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -6px;
+      right: -8px;
+      background-color: var(--color-orange);
+      color: var(--color-bg);
+      font-size: 10px;
+      font-weight: 700;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .cart-count.bounce {
+      transform: scale(1.3);
+    }
+
+    /* Mobile Hamburger Menu */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      width: 24px;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: var(--color-chocolate);
+      transition: var(--transition-fast);
+    }
+
+    /* Responsive Header */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background-color: var(--color-bg);
+        border-bottom: 1px solid var(--color-light-gray);
+        flex-direction: column;
+        padding: 30px 24px;
+        gap: 20px;
+        transform: translateY(-120%);
+        transition: transform var(--transition-smooth);
+        z-index: 99;
+      }
+
+      .nav-links.active {
+        transform: translateY(0);
+      }
+    }
+
+    /* ----------------------------------------------------
+       3. SINGLE-PAGE SYSTEM (SECTIONS DISPLAY)
+       ---------------------------------------------------- */
+    .page-section {
+      display: none;
+      animation: fadeIn 0.4s ease-out forwards;
+    }
+
+    .page-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ----------------------------------------------------
+       4. HOME SECTION
+       ---------------------------------------------------- */
+    .hero {
+      position: relative;
+      background-color: #F6F3EB;
+      margin: 0;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      min-height: 520px;
+      align-items: stretch;
+    }
+
+    .hero-content {
+      padding: 60px 60px 60px 8%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 24px;
+    }
+
+    @media (min-width: 1248px) {
+      .hero-content {
+        padding-left: calc((100vw - 1200px) / 2 + 24px);
+      }
+    }
+
+    .hero-title {
+      font-size: 54px;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .hero-title-icon {
+      position: absolute;
+      left: calc(100% + 20px + 1.5cm);
+      bottom: 5px;
+      height: 90px;
+      width: auto;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    @media (max-width: 992px) {
+      .hero-title-icon {
+        display: none;
+      }
+    }
+
+    .hero-title span {
+      color: var(--color-orange);
+    }
+
+    .hero-subtitle {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--color-caramel);
+      max-width: 480px;
+    }
+
+    .hero-image-container {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      padding: 0;
+      margin: 0;
+    }
+
+    .hero-illustration {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      filter: drop-shadow(0 15px 30px rgba(60, 42, 33, 0.1));
+    }
+
+    .hero-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+    }
+
+    .hero-slide.active {
+      opacity: 1;
+      z-index: 2;
+    }
+
+    .hero-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .hero-image-container:hover .hero-slide img {
+      transform: scale(1.03);
+    }
+
+    @media (max-width: 992px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        margin: 0;
+      }
+
+      .hero-content {
+        padding: 40px 24px;
+        align-items: center;
+      }
+
+      .hero-title {
+        font-size: 38px;
+      }
+
+      .hero-image-container {
+        height: 300px;
+        padding: 0;
+      }
+    }
+
+    /* Meet the Founder Section */
+    .founder-section {
+      padding: 60px 24px;
+      background-color: var(--color-white);
+      margin-bottom: 0;
+    }
+
+    .home-spacer-white {
+      height: 60px;
+      background-color: var(--color-white);
+    }
+
+    @media (max-width: 992px) {
+      .home-spacer-white {
+        height: 40px;
+      }
+    }
+
+    .founder-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .founder-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .founder-title {
+      font-family: var(--font-display);
+      font-size: 42px;
+      color: var(--color-brown);
+      line-height: 1.2;
+    }
+
+    .founder-desc {
+      font-size: 15px;
+      color: #55443b;
+      line-height: 1.8;
+    }
+
+    .founder-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      padding-bottom: 20px;
+    }
+
+    .founder-img-wrapper {
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      aspect-ratio: 4/5;
+      box-shadow: 0 10px 25px rgba(60, 42, 33, 0.08);
+      background-color: var(--color-light-gray);
+    }
+
+    .founder-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-smooth);
+    }
+
+    .founder-img-wrapper img:hover {
+      transform: scale(1.05);
+    }
+
+    .founder-images .offset-img {
+      transform: translateY(20px);
+    }
+
+    @media (max-width: 992px) {
+      .founder-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .founder-title {
+        font-size: 32px;
+      }
+
+      .founder-images {
+        gap: 15px;
+        padding-bottom: 0;
+      }
+
+      .founder-images .offset-img {
+        transform: translateY(0);
+      }
+    }
+
+    /* Request a Custom Piece Section */
+    .custom-request-section {
+      padding: 100px 24px;
+      background-color: #FAF6F0;
+    }
+
+    .custom-request-card {
+      background-color: var(--color-white);
+      border-radius: var(--border-radius);
+      padding: 80px;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 65px;
+      align-items: center;
+      box-shadow: 0 10px 30px rgba(60, 42, 33, 0.04);
+      border: 1px solid rgba(60, 42, 33, 0.05);
+    }
+
+    .custom-request-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 24px;
+    }
+
+    .custom-request-title {
+      font-family: var(--font-display);
+      font-size: 44px;
+      color: var(--color-brown);
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .custom-request-desc {
+      font-size: 17px;
+      color: #55443b;
+      line-height: 1.8;
+      margin: 0;
+      max-width: 650px;
+    }
+
+    .custom-request-badge-panel {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .custom-request-svg {
+      width: 180px;
+      height: 180px;
+    }
+
+    .custom-request-img {
+      width: 180px;
+      height: 180px;
+      object-fit: contain;
+      transform: scale(2.5);
+    }
+
+    @media (max-width: 768px) {
+      .custom-request-card {
+        grid-template-columns: 1fr;
+        padding: 30px 24px;
+        gap: 30px;
+        text-align: center;
+      }
+
+      .custom-request-content {
+        align-items: center;
+      }
+
+      .custom-request-title {
+        font-size: 28px;
+      }
+
+      .custom-request-svg {
+        width: 100px;
+        height: 100px;
+      }
+
+      .custom-request-img {
+        width: 100px;
+        height: 100px;
+        object-fit: contain;
+        transform: scale(2.5);
+      }
+    }
+
+    /* Core Values Grid */
+    .values-section {
+      background-color: var(--color-white);
+      border-top: 1px solid var(--color-light-gray);
+      border-bottom: 1px solid var(--color-light-gray);
+      padding: 60px 0;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .value-card {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .value-image-container {
+      width: 100%;
+      height: 180px;
+      background-color: var(--color-light-gray);
+      border-radius: var(--border-radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-caramel);
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+
+    .value-image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .value-title {
+      font-size: 18px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+
+    .value-desc {
+      font-size: 14px;
+      color: #6d5b50;
+      max-width: 300px;
+    }
+
+    @media (max-width: 768px) {
+      .values-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+    }
+
+
+
+    /* ----------------------------------------------------
+       5. SHOP & COLLECTIONS SECTION
+       ---------------------------------------------------- */
+    .shop-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .shop-title {
+      font-size: 44px;
+      margin-bottom: 12px;
+    }
+
+    .shop-desc {
+      font-size: 16px;
+      color: var(--color-caramel);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Filters System */
+    .filters-accordion-container {
+      margin-bottom: 40px;
+      border-bottom: 1px solid var(--color-light-gray);
+      padding-bottom: 20px;
+    }
+
+    .filters-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 20px;
+      background-color: var(--color-white);
+      border: 1px solid var(--color-light-gray);
+      border-radius: var(--border-radius);
+      color: var(--color-chocolate);
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      transition: all var(--transition-fast);
+    }
+
+    .filters-toggle-btn:hover {
+      border-color: var(--color-orange);
+      color: var(--color-orange);
+    }
+
+    .filters-dropdown {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-in-out;
+    }
+
+    .filters-dropdown.active {
+      max-height: 250px;
+    }
+
+    .filters-dropdown-content {
+      padding-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .filter-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--color-caramel);
+    }
+
+    .filter-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .filter-btn {
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      border: 1px solid var(--color-light-gray);
+      background-color: var(--color-white);
+      color: var(--color-chocolate);
+    }
+
+    .filter-btn:hover {
+      border-color: var(--color-caramel);
+    }
+
+    .filter-btn.active {
+      background-color: var(--color-chocolate);
+      border-color: var(--color-chocolate);
+      color: var(--color-bg);
+    }
+
+    /* Active Filters Tabs next to button */
+    .filters-trigger-row {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-bottom: 15px;
+    }
+
+    .active-filters-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .active-filter-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background-color: #FAF6F0;
+      color: var(--color-chocolate);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      border: 1px solid rgba(60, 42, 33, 0.1);
+      transition: all var(--transition-fast);
+      animation: fadeIn var(--transition-fast) ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(2px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .active-filter-tab:hover {
+      border-color: var(--color-orange);
+    }
+
+    .remove-filter-btn {
+      background: none;
+      border: none;
+      color: #9d8c80;
+      font-size: 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      line-height: 1;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      transition: background-color var(--transition-fast), color var(--transition-fast);
+    }
+
+    .remove-filter-btn:hover {
+      background-color: var(--color-orange);
+      color: var(--color-white);
+    }
+
+    /* Products Grid */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    /* Product Card */
+    .product-card {
+      background-color: var(--color-white);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      border: 1px solid var(--color-light-gray);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 20px rgba(60, 42, 33, 0.05);
+    }
+
+    .product-img-wrapper {
+      position: relative;
+      width: 100%;
+      background-color: var(--color-bg);
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .product-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+      transition: transform var(--transition-smooth);
+    }
+
+    /* Hover Zoom state from design framework */
+    .product-card:hover .product-img {
+      transform: scale(1.03);
+    }
+
+    .product-badges {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      z-index: 5;
+    }
+
+    .product-info {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      gap: 12px;
+    }
+
+    .product-category-meta {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--color-mint);
+    }
+
+    .product-card-title {
+      font-family: var(--font-body);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--color-chocolate);
+    }
+
+    .product-card-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px solid var(--color-light-gray);
+    }
+
+    .product-price {
+      font-family: var(--font-display);
+      font-size: 20px;
+      color: var(--color-chocolate);
+    }
+
+    .add-to-cart-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 6px;
+      background-color: transparent;
+      color: var(--color-caramel);
+      border: 2px dashed var(--color-caramel);
+      /* Running stitch border */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition-fast);
+      cursor: pointer;
+    }
+
+    .add-to-cart-btn:hover {
+      color: var(--color-orange);
+      border-color: var(--color-orange);
+      transform: translateY(-2px);
+    }
+
+    .add-to-cart-btn:disabled {
+      color: var(--color-light-gray);
+      border-color: var(--color-light-gray);
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* No Products State */
+    .no-products {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 20px;
+      background-color: var(--color-white);
+      border-radius: var(--border-radius);
+      border: 1px dashed var(--color-light-gray);
+    }
+
+    .no-products h3 {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    /* ----------------------------------------------------
+       6. OUR STORY SECTION
+       ---------------------------------------------------- */
+    .story-hero {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 60px;
+    }
+
+    .story-top-gallery-wrapper {
+      max-width: 750px;
+      width: 100%;
+      margin: 0 auto 40px;
+    }
+
+    .story-top-gallery {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 12px;
+      width: 100%;
+    }
+
+    .story-top-img-box {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(60, 42, 33, 0.08);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .story-top-img-box:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 8px 20px rgba(60, 42, 33, 0.15);
+    }
+
+    .story-top-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @media (max-width: 768px) {
+      .story-top-gallery {
+        gap: 6px;
+      }
+    }
+
+    .story-hero h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .story-hero p {
+      font-size: 17px;
+      line-height: 1.8;
+      color: var(--color-caramel);
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      margin-bottom: 80px;
+    }
+
+    .story-illustration-container {
+      background-color: #E2EBE5;
+      padding: 40px;
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .story-slideshow-container {
+      position: relative;
+      width: 100%;
+      height: 400px;
+      overflow: hidden;
+      padding: 0;
+      cursor: pointer;
+      background-color: var(--color-light-gray);
+      border-radius: 12px;
+    }
+
+    .story-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .story-slide.active {
+      opacity: 1;
+      position: relative;
+    }
+
+    .story-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+      transition: transform 0.5s ease;
+    }
+
+    .story-slideshow-container:hover img {
+      transform: scale(1.05);
+    }
+
+    .story-slideshow-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .slideshow-dots {
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+    }
+
+    .slideshow-dots .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: rgba(250, 246, 240, 0.5);
+      transition: background-color var(--transition-fast);
+      cursor: pointer;
+    }
+
+    .slideshow-dots .dot.active {
+      background-color: var(--color-orange);
+      width: 10px;
+      height: 10px;
+    }
+
+    /* Lightbox Modal */
+    .story-lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(30, 20, 15, 0.95);
+      z-index: 2500;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .story-lightbox.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .story-lightbox-close {
+      position: absolute;
+      top: 25px;
+      right: 30px;
+      font-size: 36px;
+      color: var(--color-bg);
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 2600;
+      transition: transform var(--transition-fast);
+    }
+
+    .story-lightbox-close:hover {
+      transform: scale(1.15) rotate(90deg);
+      color: var(--color-orange);
+    }
+
+    .story-lightbox-content {
+      width: 90%;
+      max-width: 900px;
+      height: 85%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+
+    .story-lightbox-main {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+
+    .story-lightbox-main img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .story-lightbox-nav {
+      position: absolute;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      pointer-events: none;
+      padding: 0 20px;
+    }
+
+    .story-lightbox-btn {
+      width: 50px;
+      height: 50px;
+      background-color: rgba(250, 246, 240, 0.1);
+      border: 1px solid rgba(250, 246, 240, 0.2);
+      border-radius: 50%;
+      color: var(--color-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 24px;
+      pointer-events: auto;
+      transition: all var(--transition-fast);
+    }
+
+    .story-lightbox-btn:hover {
+      background-color: var(--color-orange);
+      border-color: var(--color-orange);
+      transform: scale(1.05);
+    }
+
+    .story-lightbox-gallery {
+      width: 100%;
+      height: 90px;
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      justify-content: center;
+      scroll-behavior: smooth;
+    }
+
+    .story-lightbox-gallery::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .story-lightbox-gallery::-webkit-scrollbar-thumb {
+      background: rgba(250, 246, 240, 0.2);
+      border-radius: 3px;
+    }
+
+    .story-lightbox-thumb {
+      width: 70px;
+      height: 70px;
+      flex-shrink: 0;
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all var(--transition-fast);
+      opacity: 0.6;
+    }
+
+    .story-lightbox-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .story-lightbox-thumb.active {
+      border-color: var(--color-orange);
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
+    .story-text h2 {
+      font-size: 32px;
+      margin-bottom: 16px;
+    }
+
+    .story-text p {
+      margin-bottom: 16px;
+      color: #55443b;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 768px) {
+      .story-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .story-grid:nth-child(even) .story-illustration-container {
+        order: 2;
+      }
+    }
+
+
+
+    /* ----------------------------------------------------
+       8. SHOPPING BAG DRAWER
+       ---------------------------------------------------- */
+    .cart-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(60, 42, 33, 0.4);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-smooth);
+    }
+
+    .cart-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      max-width: 440px;
+      height: 100%;
+      background-color: var(--color-bg);
+      z-index: 1001;
+      transform: translateX(100%);
+      transition: transform var(--transition-smooth);
+      box-shadow: -10px 0 30px rgba(60, 42, 33, 0.15);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cart-overlay.active .cart-drawer {
+      transform: translateX(0);
+    }
+
+    .cart-header {
+      padding: 24px;
+      border-bottom: 1px solid var(--color-light-gray);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cart-header-title {
+      font-size: 24px;
+    }
+
+    .close-cart-btn {
+      font-size: 24px;
+      color: var(--color-chocolate);
+    }
+
+    .close-cart-btn:hover {
+      color: var(--color-orange);
+    }
+
+    .cart-items-container {
+      flex-grow: 1;
+      overflow-y: auto;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .cart-empty-state {
+      text-align: center;
+      padding: 60px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .cart-empty-state h4 {
+      font-size: 18px;
+    }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      gap: 16px;
+      align-items: center;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--color-light-gray);
+    }
+
+    .cart-item-img {
+      width: 80px;
+      height: 96px;
+      background-color: var(--color-light-gray);
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .cart-item-img svg,
+    .cart-item-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .cart-item-details {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .cart-item-title {
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .cart-item-meta {
+      font-size: 11px;
+      color: var(--color-caramel);
+    }
+
+    .cart-item-price {
+      font-family: var(--font-display);
+      font-size: 16px;
+      color: var(--color-chocolate);
+      margin-top: 4px;
+    }
+
+    .remove-item-btn {
+      font-size: 18px;
+      color: #a09088;
+      align-self: center;
+    }
+
+    .remove-item-btn:hover {
+      color: var(--color-orange);
+    }
+
+    .cart-footer {
+      padding: 24px;
+      background-color: var(--color-white);
+      border-top: 1px solid var(--color-light-gray);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .cart-subtotal-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .subtotal-label {
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    .subtotal-val {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    .checkout-btn {
+      width: 100%;
+      text-align: center;
+    }
+
+    /* Checkout Success Modal State */
+    .success-modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.9);
+      background-color: var(--color-white);
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 20px 50px rgba(60, 42, 33, 0.25);
+      z-index: 1100;
+      width: 90%;
+      max-width: 480px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: all var(--transition-smooth);
+    }
+
+    .success-modal.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .success-icon {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background-color: rgba(45, 66, 54, 0.1);
+      color: var(--color-forest);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+    }
+
+    .success-title {
+      font-size: 28px;
+    }
+
+    .success-desc {
+      font-size: 14px;
+      color: #6d5b50;
+    }
+
+    /* ----------------------------------------------------
+       9. PRODUCT DETAIL MODAL
+       ---------------------------------------------------- */
+    .detail-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(60, 42, 33, 0.4);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-smooth);
+    }
+
+    .detail-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .detail-modal {
+      background-color: var(--color-bg);
+      width: 75%;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      right: 0;
+      overflow-y: auto;
+      box-shadow: -10px 0 30px rgba(60, 42, 33, 0.15);
+      z-index: 1001;
+      transform: translateX(100%);
+      transition: transform var(--transition-smooth);
+    }
+
+    .detail-overlay.active .detail-modal {
+      transform: translateX(0);
+    }
+
+    @media (max-width: 992px) {
+      .detail-modal {
+        width: 100%;
+      }
+    }
+
+    .close-detail-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 28px;
+      color: var(--color-chocolate);
+      z-index: 10;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(250, 246, 240, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .close-detail-btn:hover {
+      background-color: var(--color-white);
+      color: var(--color-orange);
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+    }
+
+    @media (max-width: 768px) {
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .detail-gallery {
+      background-color: var(--color-light-gray);
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      min-height: 600px;
+    }
+
+    .detail-main-img {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      background-color: var(--color-bg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .detail-main-img svg,
+    .detail-main-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .detail-thumbs {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 5;
+    }
+
+    .detail-thumb {
+      width: 60px;
+      height: 72px;
+      border-radius: 4px;
+      border: 2px solid transparent;
+      overflow: hidden;
+      cursor: pointer;
+      background-color: var(--color-bg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .detail-thumb.active {
+      border-color: var(--color-orange);
+    }
+
+    .detail-thumb svg,
+    .detail-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .detail-content {
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .detail-category {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--color-mint);
+    }
+
+    .detail-title {
+      font-size: 32px;
+    }
+
+    .detail-price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--color-light-gray);
+      padding-bottom: 16px;
+    }
+
+    .detail-price {
+      font-family: var(--font-display);
+      font-size: 28px;
+    }
+
+    .detail-desc {
+      font-size: 14px;
+      color: #55443b;
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+
+    .detail-spec {
+      background-color: var(--color-white);
+      padding: 18px;
+      border-radius: var(--border-radius);
+      border: 1px solid var(--color-light-gray);
+      font-size: 13px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .detail-spec-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .spec-label {
+      font-weight: 700;
+      color: var(--color-caramel);
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 0.8px;
+      display: block;
+    }
+
+    .detail-add-btn {
+      width: 100%;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .detail-add-btn:disabled {
+      background-color: var(--color-light-gray);
+      border-color: var(--color-light-gray);
+      color: #9d8c80;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .detail-backstory {
+      grid-column: 1 / -1;
+      padding: 40px;
+      border-top: 1px solid var(--color-light-gray);
+      background-color: #FAF6F0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .detail-backstory-label {
+      font-family: var(--font-display);
+      font-size: 22px;
+      color: var(--color-brown);
+      margin: 0 0 4px 0;
+    }
+
+    .detail-backstory-text {
+      font-size: 14px;
+      color: #55443b;
+      line-height: 1.8;
+      margin: 0;
+      white-space: pre-line;
+      word-wrap: break-word;
+      word-break: break-word;
+      overflow-wrap: break-word;
+      min-width: 0;
+    }
+
+    /* ----------------------------------------------------
+       10.5. CONTACT / GET IN TOUCH SECTION
+       ---------------------------------------------------- */
+    .contact-card-section {
+      padding: 80px 0 20px 0;
+    }
+
+    .contact-card {
+      background-color: var(--color-forest);
+      color: var(--color-bg);
+      border-radius: 20px;
+      padding: 60px;
+      display: grid;
+      grid-template-columns: 0.9fr 1.5fr;
+      gap: 50px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(250, 246, 240, 0.10);
+      box-shadow: 0 8px 30px rgba(60, 42, 33, 0.08);
+    }
+
+    @media (max-width: 992px) {
+      .contact-card {
+        grid-template-columns: 1fr;
+        padding: 40px 24px;
+        gap: 40px;
+      }
+    }
+
+    .contact-info-side {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .contact-card-title {
+      font-size: 40px;
+      line-height: 1.2;
+      color: var(--color-bg);
+      font-family: var(--font-body);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .contact-card-title span {
+      color: var(--color-orange);
+      font-style: italic;
+    }
+
+    .contact-card-desc {
+      font-size: 14px;
+      color: var(--color-bg);
+      opacity: 0.9;
+      line-height: 1.7;
+      max-width: 500px;
+    }
+
+    .contact-form-card {
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto;
+      aspect-ratio: 717 / 470;
+      background-image: url('icons/bubble_blank_1.png');
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: transparent;
+      border: none;
+      border-radius: 0;
+      padding: calc(10% - 1cm) 25% calc(15% + 1cm) 25%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 24px;
+      box-sizing: border-box;
+    }
+
+    @media (max-width: 480px) {
+      .contact-form-card {
+        padding: calc(10% - 1cm) 15% calc(15% + 1cm) 15%;
+      }
+    }
+
+    .contact-role {
+      font-family: var(--font-nav);
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--color-caramel);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .contact-name {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 22px;
+      color: var(--color-forest);
+    }
+
+    .contact-fields-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .contact-field-row,
+    .contact-instagram-btn {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(45, 66, 54, 0.1);
+      padding-bottom: 12px;
+      font-size: 13px;
+    }
+
+    .contact-instagram-btn {
+      text-decoration: none;
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+
+    .contact-instagram-btn .instagram-label {
+      color: var(--color-forest) !important;
+    }
+
+    .contact-instagram-btn:hover .instagram-label,
+    .contact-instagram-btn:hover .contact-field-value {
+      color: var(--color-orange) !important;
+    }
+
+    .contact-field-label {
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--color-caramel);
+    }
+
+    .contact-field-value {
+      color: var(--color-forest);
+      text-align: right;
+    }
+
+    .contact-btn {
+      width: 100%;
+      background-color: var(--color-orange);
+      color: var(--color-bg);
+      border: 1px solid var(--color-orange);
+      padding: 14px;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all var(--transition-fast);
+    }
+
+    .contact-btn:hover {
+      background-color: var(--color-orange-hover);
+      border-color: var(--color-orange-hover);
+      color: var(--color-white);
+      transform: translateY(-2px);
+    }
+
+    /* ----------------------------------------------------
+       11. FOOTER SECTION
+       ---------------------------------------------------- */
+    .footer {
+      background-color: var(--color-forest);
+      color: var(--color-bg);
+      padding: 60px 0 30px;
+      border-top: 1px solid var(--color-light-gray);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-logo {
+      margin-bottom: 16px;
+    }
+
+    .footer-logo-img {
+      height: 54px;
+      width: auto;
+      display: block;
+    }
+
+    .footer-desc {
+      font-size: 13px;
+      color: var(--color-mint);
+      max-width: 320px;
+      margin-bottom: 20px;
+    }
+
+    .footer-title {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 20px;
+      color: var(--color-white);
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 13px;
+    }
+
+    .footer-links a:hover {
+      color: var(--color-orange);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(250, 246, 240, 0.1);
+      padding-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--color-mint);
+    }
+
+
+
+    @media (max-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ----------------------------------------------------
+       HEADER & NAVIGATION BAR
+       ---------------------------------------------------- -->
+  <header class="header">
+    <div class="container nav-container">
+      <a href="#home" onclick="navigateTo('home'); return false;" class="logo" id="logoLink">
+        <img src="icons/LOGONEW.png" alt="PIP & NOO Logo" class="logo-img">
+      </a>
+
+      <nav>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home" onclick="navigateTo('home'); return false;" class="nav-route" id="nav-home">Home</a></li>
+          <li><a href="#story" onclick="navigateTo('story'); return false;" class="nav-route" id="nav-story">Our
+              Story</a></li>
+          <li><a href="#collections" onclick="navigateTo('collections'); return false;" class="nav-route"
+              id="nav-collections">Collections</a></li>
+          <li><a href="#contact" onclick="navigateTo('contact'); return false;" class="nav-route"
+              id="nav-contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="cart-trigger" onclick="toggleCart(true)" aria-label="Open Shopping Bag">
+          <span>Bag</span>
+          <span class="cart-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            <span class="cart-count" id="cartCount">0</span>
+          </span>
+        </button>
+
+        <button class="menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle Navigation Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ----------------------------------------------------
+       PAGE SECTIONS
+       ---------------------------------------------------- -->
+  <main>
+
+    <!-- HOME SECTION -->
+    <section id="section-home" class="page-section active">
+
+      <div class="hero">
+        <div class="hero-content">
+          <h1 class="hero-title">Preloved, <br><span>Relove.</span><img src="icons/3and4.png" alt="Characters Icon" class="hero-title-icon"></h1>
+          <p class="hero-subtitle">At PIP&NOO, we're combating the culture of fast fashion by combining textiles and
+            hand craft into timeless, deeply loved, and completely unique pieces.</p>
+          <button class="btn" onclick="navigateTo('collections')">Shop the Collections</button>
+        </div>
+        <div class="hero-image-container" id="heroSlideshow" onclick="openStoryLightbox('hero', currentHeroSlideIndex)">
+          <div class="hero-slide active">
+            <img src="photos/ChatGPT Image Jun 24, 2026, 01_23_29 PM.png" alt="Preloved, Relove.">
+          </div>
+          <div class="hero-slide">
+            <img src="products2/20260614_161126.jpg" alt="Preloved, Relove 2">
+          </div>
+          <div class="hero-slide">
+            <img src="products2/20260614_151759.jpg" alt="Preloved, Relove 3">
+          </div>
+          <div class="hero-slide">
+            <img src="products2/20260614_151356.jpg" alt="Preloved, Relove 4">
+          </div>
+          <div class="hero-slide">
+            <img src="products2/20260614_152254.jpg" alt="Preloved, Relove 5">
+          </div>
+          <div class="hero-slide">
+            <img src="products2/20260614_154706.jpg" alt="Preloved, Relove 6">
+          </div>
+          <div class="slideshow-dots" id="heroSlideshowDots">
+            <span class="dot active" onclick="event.stopPropagation(); setHeroSlide(0)"></span>
+            <span class="dot" onclick="event.stopPropagation(); setHeroSlide(1)"></span>
+            <span class="dot" onclick="event.stopPropagation(); setHeroSlide(2)"></span>
+            <span class="dot" onclick="event.stopPropagation(); setHeroSlide(3)"></span>
+            <span class="dot" onclick="event.stopPropagation(); setHeroSlide(4)"></span>
+            <span class="dot" onclick="event.stopPropagation(); setHeroSlide(5)"></span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Core Values -->
+      <div class="values-section">
+        <div class="container">
+          <div class="values-grid">
+            <div class="value-card">
+              <div class="value-image-container">
+                <img src="photos/lunchbag.png" alt="100% Handmade">
+              </div>
+              <h3 class="value-title">100% Handmade</h3>
+              <p class="value-desc">Every seam, patch, and stitch is guided by Pipee's hands.</p>
+            </div>
+
+            <div class="value-card">
+              <h3 class="value-title">Upcycled</h3>
+              <p class="value-desc">Old textiles are given a second chance. Vintage curtains, old shirts and scrap
+                materials are transformed into unique items.</p>
+              <div class="value-image-container" style="margin-top: 8px; margin-bottom: 0;">
+                <img src="photos/mess.png" alt="Upcycled fabric mess">
+              </div>
+            </div>
+
+            <div class="value-card">
+              <div class="value-image-container">
+                <img src="photos/stall.png" alt="One-Of-A-Kind">
+              </div>
+              <h3 class="value-title">One-Of-A-Kind</h3>
+              <p class="value-desc">Most items will only be made once. Craft will never be mass produced.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Custom Pieces Request Section -->
+      <div class="custom-request-section">
+        <div class="container">
+          <div class="custom-request-card">
+            <div class="custom-request-badge-panel">
+              <img src="photos/EGGFACE.png" alt="Custom Piece Enquiries" class="custom-request-img">
+            </div>
+            <div class="custom-request-content">
+              <h2 class="custom-request-title">Request a Custom Piece</h2>
+              <p class="custom-request-desc">
+                Got a jumper that you can't bear to throw away? An old throw,
+                or a pair of jeans that's seen better days but still means something? Send it to us. We'll turn it into
+                something you'll wear again - a bag, a jacket, a piece that carries the memory forwards.
+              </p>
+              <button class="btn" onclick="navigateTo('contact')">Enquire About Custom Work</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Get in Touch Section -->
+      <div class="contact-card-section" id="home-contact">
+        <div class="container">
+          <div class="contact-card">
+            <div class="contact-info-side">
+              <h2 class="contact-card-title">Get in Touch</h2>
+              <p class="contact-card-desc">For questions about custom pieces, our upcycling process and any other
+                enquires, don't hesitate to get in touch with us!
+                Email us or send a message on our instagram, and we will get back to you as soon as possible.</p>
+            </div>
+
+            <div class="contact-form-card">
+              <div>
+
+                <h3 class="contact-name">Pip & Noo</h3>
+              </div>
+
+              <div class="contact-fields-list">
+                <a href="https://www.instagram.com/pipandnoo.london/" target="_blank" class="contact-instagram-btn">
+                  <span class="contact-field-label instagram-label">Instagram</span>
+                  <span class="contact-field-value">@pipandnoo.london</span>
+                </a>
+                <div class="contact-field-row">
+                  <span class="contact-field-label">Email</span>
+                  <span class="contact-field-value">hello@pipandnoo.com</span>
+                </div>
+
+              </div>
+
+              <button class="contact-btn" onclick="window.location.href='mailto:hello@pipandnoo.com'">
+                <span>Enquire now</span>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COLLECTIONS SECTION -->
+    <section id="section-collections" class="page-section">
+      <div class="container section-padding"
+        style="display: flex; justify-content: center; align-items: center; min-height: 50vh;">
+        <div
+          style="text-align: center; max-width: 600px; padding: 60px 40px; background-color: var(--color-bg); border: 1px solid var(--color-light-gray); border-radius: 12px; box-shadow: 0 8px 30px rgba(60, 42, 33, 0.02);">
+          <h1 class="shop-title"
+            style="font-size: 42px; margin-bottom: 20px; font-family: var(--font-display); color: var(--color-chocolate);">
+            Coming Soon</h1>
+          <p class="shop-desc"
+            style="font-size: 15px; color: var(--color-chocolate); line-height: 1.8; margin-bottom: 36px; max-width: 100%;">
+            Our website is currently under construction as we prepare our collections page. Check back soon for the full
+            launch, or reach out below with any enquiries!
+          </p>
+          <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+            <a href="#contact" onclick="navigateTo('contact'); return false;" class="btn">Get in Touch</a>
+            <a href="https://www.instagram.com/pipandnoo.london/" target="_blank" class="btn btn-secondary">Follow
+              Instagram</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OUR STORY SECTION -->
+    <section id="section-story" class="page-section">
+      <div class="container section-padding">
+
+        <div class="story-top-gallery-wrapper">
+          <div class="story-top-gallery">
+            <div class="story-top-img-box" onclick="openStoryLightbox('storyTop', 0)">
+              <img src="photos/kids_clothes_5.jpeg" alt="Story Feature 1">
+            </div>
+            <div class="story-top-img-box" onclick="openStoryLightbox('storyTop', 1)">
+              <img src="photos/kids_4.jpeg" alt="Story Feature 2">
+            </div>
+            <div class="story-top-img-box" onclick="openStoryLightbox('storyTop', 2)">
+              <img src="photos/kids_clothes_3.jpeg" alt="Story Feature 3">
+            </div>
+            <div class="story-top-img-box" onclick="openStoryLightbox('storyTop', 3)">
+              <img src="photos/bly_5.jpeg" alt="Story Feature 4">
+            </div>
+            <div class="story-top-img-box" onclick="openStoryLightbox('storyTop', 4)">
+              <img src="photos/kids_2.jpeg" alt="Story Feature 5">
+            </div>
+            <div class="story-top-img-box" onclick="openStoryLightbox('storyTop', 5)">
+              <img src="photos/bly_8.jpeg" alt="Story Feature 6">
+            </div>
+            <div class="story-top-img-box" onclick="openStoryLightbox('storyTop', 6)">
+              <img src="photos/bly_7.jpeg" alt="Story Feature 7">
+            </div>
+          </div>
+        </div>
+
+        <div class="story-hero">
+          <h1>Our Story</h1>
+          <p>It all started as a hobby, sewing clothes for my little daughter as she grew up.</p>
+          <p>I noticed how predictable children’s clothing was - blue for boys and pink for girls, the same patterns
+            over and over. I wanted to make something with more character, something that would express my ideas of
+            children clothes for her to wear.</p>
+        </div>
+
+        <div class="story-grid">
+          <div class="story-slideshow-wrapper">
+            <div class="story-slideshow-container" id="storySlideshow"
+              onclick="openStoryLightbox('beginnings', currentBeginningsSlideIndex)">
+              <div class="story-slide active">
+                <img src="photos/kids_clothes_8.jpeg" alt="Kids Clothes 1">
+              </div>
+              <div class="story-slide">
+                <img src="photos/bly_3.jpeg" alt="Kids Clothes 2">
+              </div>
+              <div class="story-slide">
+                <img src="photos/kids_clothes_2.jpeg" alt="Kids Clothes 3">
+              </div>
+              <div class="story-slide">
+                <img src="photos/kids_3.jpeg" alt="Kids Clothes 4">
+              </div>
+              <div class="story-slide">
+                <img src="photos/bly.jpeg" alt="Kids Clothes 5">
+              </div>
+              <div class="story-slide">
+                <img src="photos/kids_clothes_7.jpeg" alt="Kids Clothes 6">
+              </div>
+              <div class="story-slide">
+                <img src="photos/bly_4.jpeg" alt="Kids Clothes 7">
+              </div>
+              <div class="story-slide">
+                <img src="photos/kids_clothes_9.jpeg" alt="Kids Clothes 8">
+              </div>
+              <div class="story-slide">
+                <img src="photos/kids_1.jpeg" alt="Kids Clothes 9">
+              </div>
+              <div class="story-slide">
+                <img src="photos/bly_2.jpeg" alt="Kids Clothes 10">
+              </div>
+              <div class="story-slide">
+                <img src="photos/kids_clothes_6.jpeg" alt="Kids Clothes 11">
+              </div>
+              <div class="slideshow-dots" id="slideshowDots">
+                <span class="dot active" onclick="event.stopPropagation(); setBeginningsSlide(0)"></span>
+                <span class="dot" onclick="event.stopPropagation(); setBeginningsSlide(1)"></span>
+                <span class="dot" onclick="event.stopPropagation(); setBeginningsSlide(2)"></span>
+                <span class="dot" onclick="event.stopPropagation(); setBeginningsSlide(3)"></span>
+                <span class="dot" onclick="event.stopPropagation(); setBeginningsSlide(4)"></span>
+                <span class="dot" onclick="event.stopPropagation(); setBeginningsSlide(5)"></span>
+                <span class="dot" onclick="event.stopPropagation(); setBeginningsSlide(6)"></span>
+                <span class="dot" onclick="event.stopPropagation(); setBeginningsSlide(7)"></span>
+                <span class="dot" onclick="event.stopPropagation(); setBeginningsSlide(8)"></span>
+                <span class="dot" onclick="event.stopPropagation(); setBeginningsSlide(9)"></span>
+                <span class="dot" onclick="event.stopPropagation(); setBeginningsSlide(10)"></span>
+            </div>
+          </div>
+        </div>
+        <div class="story-text">
+            <h2 style="text-align: right;">Todds to Teens</h2>
+            <p>I made clothes for my children from toddlers all the way through to their teens, and today I still do. My
+              son always tells me his friends love the shirts I make him. As they grew up, my focus shifted too. I moved
+              away from children’s clothes and started exploring adult clothing, bags, homewear and accessories.</p>
+            <p>Having never attended a fashion school or taken any education related to fashion, I’m completely
+              self-taught. My sewing skills today come from years of practice and a lot of trial and error along the
+              way.</p>
+          </div>
+        </div>
+
+        <div class="story-grid">
+          <div class="story-text">
+            <h2>Charity Shop Roots</h2>
+            <p>For five years, I volunteered at a local charity shop. I made two collections of my own handmade pieces
+              and donated all of them for the events organized by the charity shop so they could raise some extra money.
+            </p>
+            <p>During all those years of volunteering, I realised that there were so many donated clothes and materials
+              that could have been given a second life, but instead they ended up in landfills. Around this time, I
+              started trying to live with less waste. Naturally, that crept into what I was making too. That’s really
+              where the idea of ‘preloved, relove’ came from.</p>
+          </div>
+          <div class="story-slideshow-container" id="rootsSlideshow"
+            onclick="openStoryLightbox('roots', currentRootsSlideIndex)">
+            <div class="story-slide active">
+              <img src="photos/age_uk.jpeg" alt="Charity Shop Roots 1">
+            </div>
+            <div class="story-slide">
+              <img src="photos/cs_collection.jpeg" alt="Charity Shop Roots 2">
+            </div>
+            <div class="slideshow-dots" id="rootsSlideshowDots">
+              <span class="dot active" onclick="event.stopPropagation(); setRootsSlide(0)"></span>
+              <span class="dot" onclick="event.stopPropagation(); setRootsSlide(1)"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="story-grid">
+          <div class="story-slideshow-container" id="presentSlideshow"
+            onclick="openStoryLightbox('present', currentPresentSlideIndex)">
+            <div class="story-slide active">
+              <img src="photos/kids_clothes_10.jpeg" alt="The Present 1">
+            </div>
+            <div class="story-slide">
+              <img src="photos/lunchbag.png" alt="The Present 2">
+            </div>
+            <div class="story-slide">
+              <img src="photos/stall.png" alt="The Present 3">
+            </div>
+            <div class="story-slide">
+              <img src="photos/WhatsApp Image 2026-05-17 at 13.11.25 (1).jpeg" alt="The Present 4">
+            </div>
+            <div class="slideshow-dots" id="presentSlideshowDots">
+              <span class="dot active" onclick="event.stopPropagation(); setPresentSlide(0)"></span>
+              <span class="dot" onclick="event.stopPropagation(); setPresentSlide(1)"></span>
+              <span class="dot" onclick="event.stopPropagation(); setPresentSlide(2)"></span>
+              <span class="dot" onclick="event.stopPropagation(); setPresentSlide(3)"></span>
+            </div>
+          </div>
+          <div class="story-text">
+            <h2 style="text-align: right;">The Present</h2>
+            <p>After that, I started sourcing differently. Car boot sales, charity shops, second hand textiles wherever
+              I could find them, rather than buying new fabric.</p>
+            <p>Now, almost 100% I make combines pieces from my own textile collection with things I've sourced second
+              hand. I love bright, cheerful colours, and adding little details to otherwise plain fabrics. Cross
+              hatchings, visible stitching, small touches that make every piece a little more one of a kind.</p>
+          </div>
+        </div>
+
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ----------------------------------------------------
+       FOOTER
+       ---------------------------------------------------- -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo"><img src="icons/LOGONEWwhite.png" alt="PIP & NOO Logo" class="footer-logo-img"></div>
+          <p class="footer-desc">Crafting a definitive alternative to fast fashion by converting textile waste into
+            timeless, highly unique handmade pieces.</p>
+        </div>
+        <div>
+          <h4 class="footer-title">Explore</h4>
+          <ul class="footer-links">
+            <li><a href="#home" onclick="navigateTo('home'); return false;">Home</a></li>
+            <li><a href="#story" onclick="navigateTo('story'); return false;">Our Story</a></li>
+            <li><a href="#collections" onclick="navigateTo('collections'); return false;">Collections</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-title">Studio Hours</h4>
+          <p class="footer-desc" style="margin-bottom: 8px;">Monday - Friday: 9am - 5pm</p>
+          <p class="footer-desc" style="margin-bottom: 8px;">Based in the UK. Born in Thailand.</p>
+          <p class="footer-desc" style="margin-bottom: 16px;">hello@pipandnoo.com</p>
+          <p class="footer-desc" style="font-style: italic; font-size: 12px; line-height: 1.4;">Pieces are made one at a
+            time, so dispatch may take a little longer than big stores!</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ----------------------------------------------------
+       SHOPPING BAG SIDE-DRAWER
+       ---------------------------------------------------- -->
+  <div class="cart-overlay" id="cartOverlay" onclick="closeCartOutside(event)">
+    <div class="cart-drawer" onclick="event.stopPropagation()">
+      <div class="cart-header">
+        <h3 class="cart-header-title">Your Bag</h3>
+        <button class="close-cart-btn" onclick="toggleCart(false)" aria-label="Close Bag">&times;</button>
+      </div>
+
+      <div class="cart-items-container" id="cartItemsList">
+        <!-- Dynamic JS Cart Items -->
+      </div>
+
+      <div class="cart-footer">
+        <div class="cart-subtotal-row">
+          <span class="subtotal-label">Subtotal</span>
+          <span class="subtotal-val" id="cartSubtotal">£0.00</span>
+        </div>
+        <button class="btn checkout-btn" id="checkoutBtn" onclick="checkout()">Checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHECKOUT SUCCESS MODAL -->
+  <div class="success-modal" id="successModal">
+    <div class="success-icon">&#10003;</div>
+    <h3 class="success-title">Order Placed!</h3>
+    <p class="success-desc">Thank you for supporting slow fashion. Your one-of-a-kind piece is being prepared for
+      shipment. Your purchase has been moved to the Brand Archive.</p>
+    <button class="btn" onclick="toggleSuccessModal(false)">Back to Shop</button>
+  </div>
+
+  <!-- STORY GALLERY LIGHTBOX MODAL -->
+  <div class="story-lightbox" id="storyLightbox" onclick="closeStoryLightboxOutside(event)">
+    <button class="story-lightbox-close" onclick="closeStoryLightbox()">&times;</button>
+    <div class="story-lightbox-content" onclick="event.stopPropagation()">
+      <div class="story-lightbox-main">
+        <img id="storyLightboxMainImg" src="photos/kids_clothes.jpeg" alt="Expanded Kids Clothes">
+        <div class="story-lightbox-nav">
+          <button class="story-lightbox-btn" onclick="navigateStoryLightbox(-1)">&#8249;</button>
+          <button class="story-lightbox-btn" onclick="navigateStoryLightbox(1)">&#8250;</button>
+        </div>
+      </div>
+      <div class="story-lightbox-gallery" id="storyLightboxGallery">
+        <!-- Gallery thumbnails injected dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ----------------------------------------------------
+       PRODUCT DETAIL MODAL
+       ---------------------------------------------------- -->
+  <div class="detail-overlay" id="detailOverlay" onclick="closeDetailOutside(event)">
+    <div class="detail-modal" onclick="event.stopPropagation()">
+      <button class="close-detail-btn" onclick="toggleDetailModal(false)"
+        aria-label="Close Detail Modal">&times;</button>
+      <div class="detail-grid" id="detailModalGrid">
+        <!-- Dynamic JS Injection -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // State Variables
+    let cart = [];
+
+    // Story Beginnings Slideshow State
+    const beginningsImages = [
+      'photos/kids_clothes_8.jpeg',
+      'photos/bly_3.jpeg',
+      'photos/kids_clothes_2.jpeg',
+      'photos/kids_3.jpeg',
+      'photos/bly.jpeg',
+      'photos/kids_clothes_7.jpeg',
+      'photos/bly_4.jpeg',
+      'photos/kids_clothes_9.jpeg',
+      'photos/kids_1.jpeg',
+      'photos/bly_2.jpeg',
+      'photos/kids_clothes_6.jpeg'
+    ];
+    let currentBeginningsSlideIndex = 0;
+    let beginningsSlideshowInterval = null;
+
+    // Charity Shop Roots Slideshow State
+    const rootsImages = [
+      'photos/age_uk.jpeg',
+      'photos/cs_collection.jpeg'
+    ];
+    let currentRootsSlideIndex = 0;
+    let rootsSlideshowInterval = null;
+
+    // The Present Slideshow State
+    const presentImages = [
+      'photos/kids_clothes_10.jpeg',
+      'photos/lunchbag.png',
+      'photos/stall.png',
+      'photos/WhatsApp Image 2026-05-17 at 13.11.25 (1).jpeg'
+    ];
+    let currentPresentSlideIndex = 0;
+    let presentSlideshowInterval = null;
+
+    // Home Hero Slideshow State
+    const heroImages = [
+      'photos/ChatGPT Image Jun 24, 2026, 01_23_29 PM.png',
+      'products2/20260614_161126.jpg',
+      'products2/20260614_151759.jpg',
+      'products2/20260614_151356.jpg',
+      'products2/20260614_152254.jpg',
+      'products2/20260614_154706.jpg'
+    ];
+    let currentHeroSlideIndex = 0;
+    let heroSlideshowInterval = null;
+
+    // Story Top Gallery State
+    const storyTopImages = [
+      'photos/kids_clothes_5.jpeg',
+      'photos/kids_4.jpeg',
+      'photos/kids_clothes_3.jpeg',
+      'photos/bly_5.jpeg',
+      'photos/kids_2.jpeg',
+      'photos/bly_8.jpeg',
+      'photos/bly_7.jpeg'
+    ];
+
+    // Reusable Lightbox state
+    let activeLightboxImages = [];
+    let currentLightboxIndex = 0;
+
+    function initBeginningsSlideshow() {
+      if (beginningsSlideshowInterval) clearInterval(beginningsSlideshowInterval);
+      beginningsSlideshowInterval = setInterval(() => {
+        const newIndex = (currentBeginningsSlideIndex + 1) % beginningsImages.length;
+        setBeginningsSlide(newIndex);
+      }, 3000);
+    }
+
+    function setBeginningsSlide(index) {
+      currentBeginningsSlideIndex = index;
+      const slideshow = document.getElementById('storySlideshow');
+      if (!slideshow) return;
+
+      const slides = slideshow.querySelectorAll('.story-slide');
+      const dots = slideshow.querySelectorAll('.slideshow-dots .dot');
+
+      slides.forEach((slide, idx) => {
+        slide.classList.toggle('active', idx === index);
+      });
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === index);
+      });
+      initBeginningsSlideshow();
+    }
+
+    function initRootsSlideshow() {
+      if (rootsSlideshowInterval) clearInterval(rootsSlideshowInterval);
+      rootsSlideshowInterval = setInterval(() => {
+        const newIndex = (currentRootsSlideIndex + 1) % rootsImages.length;
+        setRootsSlide(newIndex);
+      }, 3000);
+    }
+
+    function setRootsSlide(index) {
+      currentRootsSlideIndex = index;
+      const slideshow = document.getElementById('rootsSlideshow');
+      if (!slideshow) return;
+
+      const slides = slideshow.querySelectorAll('.story-slide');
+      const dots = slideshow.querySelectorAll('.slideshow-dots .dot');
+
+      slides.forEach((slide, idx) => {
+        slide.classList.toggle('active', idx === index);
+      });
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === index);
+      });
+      initRootsSlideshow();
+    }
+
+    function initPresentSlideshow() {
+      if (presentSlideshowInterval) clearInterval(presentSlideshowInterval);
+      presentSlideshowInterval = setInterval(() => {
+        const newIndex = (currentPresentSlideIndex + 1) % presentImages.length;
+        setPresentSlide(newIndex);
+      }, 3000);
+    }
+
+    function setPresentSlide(index) {
+      currentPresentSlideIndex = index;
+      const slideshow = document.getElementById('presentSlideshow');
+      if (!slideshow) return;
+
+      const slides = slideshow.querySelectorAll('.story-slide');
+      const dots = slideshow.querySelectorAll('.slideshow-dots .dot');
+
+      slides.forEach((slide, idx) => {
+        slide.classList.toggle('active', idx === index);
+      });
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === index);
+      });
+      initPresentSlideshow();
+    }
+
+    function initHeroSlideshow() {
+      if (heroSlideshowInterval) clearInterval(heroSlideshowInterval);
+      heroSlideshowInterval = setInterval(() => {
+        const newIndex = (currentHeroSlideIndex + 1) % heroImages.length;
+        setHeroSlide(newIndex);
+      }, 3000);
+    }
+
+    function setHeroSlide(index) {
+      currentHeroSlideIndex = index;
+      const slideshow = document.getElementById('heroSlideshow');
+      if (!slideshow) return;
+
+      const slides = slideshow.querySelectorAll('.hero-slide');
+      const dots = slideshow.querySelectorAll('.hero-slideshow-dots .dot');
+
+      slides.forEach((slide, idx) => {
+        slide.classList.toggle('active', idx === index);
+      });
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === index);
+      });
+      initHeroSlideshow();
+    }
+
+    function openStoryLightbox(imageSet, index) {
+      if (imageSet === 'beginnings') {
+        activeLightboxImages = beginningsImages;
+      } else if (imageSet === 'roots') {
+        activeLightboxImages = rootsImages;
+      } else if (imageSet === 'present') {
+        activeLightboxImages = presentImages;
+      } else if (imageSet === 'hero') {
+        activeLightboxImages = heroImages;
+      } else if (imageSet === 'storyTop') {
+        activeLightboxImages = storyTopImages;
+      } else if (Array.isArray(imageSet)) {
+        activeLightboxImages = imageSet;
+      }
+      currentLightboxIndex = index;
+
+      const lightbox = document.getElementById('storyLightbox');
+      if (!lightbox) return;
+
+      updateStoryLightboxImage();
+      renderStoryLightboxGallery();
+
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeStoryLightbox() {
+      const lightbox = document.getElementById('storyLightbox');
+      if (lightbox) {
+        lightbox.classList.remove('active');
+      }
+      document.body.style.overflow = '';
+    }
+
+    function closeStoryLightboxOutside(e) {
+      if (e.target === document.getElementById('storyLightbox')) {
+        closeStoryLightbox();
+      }
+    }
+
+    function navigateStoryLightbox(direction) {
+      let newIndex = currentLightboxIndex + direction;
+      if (newIndex < 0) {
+        newIndex = activeLightboxImages.length - 1;
+      } else if (newIndex >= activeLightboxImages.length) {
+        newIndex = 0;
+      }
+      currentLightboxIndex = newIndex;
+      updateStoryLightboxImage();
+
+      const thumbs = document.querySelectorAll('.story-lightbox-thumb');
+      thumbs.forEach((thumb, idx) => {
+        if (idx === newIndex) {
+          thumb.classList.add('active');
+          thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        } else {
+          thumb.classList.remove('active');
+        }
+      });
+    }
+
+    function updateStoryLightboxImage() {
+      const mainImg = document.getElementById('storyLightboxMainImg');
+      if (mainImg) {
+        mainImg.src = activeLightboxImages[currentLightboxIndex];
+      }
+    }
+
+    function renderStoryLightboxGallery() {
+      const container = document.getElementById('storyLightboxGallery');
+      if (!container) return;
+
+      container.innerHTML = '';
+      activeLightboxImages.forEach((imgSrc, idx) => {
+        const thumb = document.createElement('div');
+        thumb.className = `story-lightbox-thumb ${idx === currentLightboxIndex ? 'active' : ''}`;
+        thumb.onclick = () => {
+          currentLightboxIndex = idx;
+          updateStoryLightboxImage();
+
+          container.querySelectorAll('.story-lightbox-thumb').forEach((t, i) => {
+            t.classList.toggle('active', i === idx);
+          });
+        };
+
+        thumb.innerHTML = `<img src="${imgSrc}" alt="Thumbnail ${idx + 1}">`;
+        container.appendChild(thumb);
+      });
+    }
+
+    // Initialize the app
+    window.addEventListener('DOMContentLoaded', () => {
+      // Load cart from localStorage
+      const storedCart = localStorage.getItem('pn_cart');
+      if (storedCart) {
+        cart = JSON.parse(storedCart);
+      }
+
+      // Initialize story slideshow auto scroll
+      initBeginningsSlideshow();
+      initRootsSlideshow();
+      initPresentSlideshow();
+      initHeroSlideshow();
+
+      // SPA Hash router listener
+      window.addEventListener('hashchange', handleHashRouting);
+      // Run on initial load
+      handleHashRouting();
+
+      // Intersection Observer for Contact Section on Home Page
+      const observerOptions = {
+        root: null,
+        rootMargin: '-50% 0px -50% 0px',
+        threshold: 0
+      };
+
+      const contactObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const isHomeActive = document.getElementById('section-home').classList.contains('active');
+          if (!isHomeActive) return;
+
+          const navContact = document.getElementById('nav-contact');
+          const navHome = document.getElementById('nav-home');
+
+          if (entry.isIntersecting) {
+            navContact.classList.add('active');
+            navHome.classList.remove('active');
+          } else {
+            navContact.classList.remove('active');
+            navHome.classList.add('active');
+          }
+        });
+      }, observerOptions);
+
+      const contactEl = document.getElementById('home-contact');
+      if (contactEl) {
+        contactObserver.observe(contactEl);
+      }
+    });
+
+    // ----------------------------------------------------
+    // SPA ROUTING
+    // ----------------------------------------------------
+    function handleHashRouting() {
+      const hash = window.location.hash.substring(1) || 'home';
+      // Map hash to section ids
+      const validRoutes = ['home', 'collections', 'story', 'contact'];
+      let targetRoute = validRoutes.includes(hash) ? hash : 'home';
+
+      const isContact = targetRoute === 'contact';
+      if (isContact) {
+        targetRoute = 'home';
+      }
+
+      // Update UI active links
+      document.querySelectorAll('.nav-route').forEach(link => {
+        if (isContact && link.id === 'nav-contact') {
+          link.classList.add('active');
+        } else if (!isContact && link.id === `nav-${targetRoute}`) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+
+      // Display correct section
+      document.querySelectorAll('.page-section').forEach(section => {
+        if (section.id === `section-${targetRoute}`) {
+          section.classList.add('active');
+        } else {
+          section.classList.remove('active');
+        }
+      });
+
+      // Handle custom scroll behavior
+      if (isContact) {
+        setTimeout(() => {
+          const contactSection = document.getElementById('home-contact');
+          if (contactSection) {
+            const header = document.querySelector('.header');
+            const headerHeight = header ? header.offsetHeight : 80;
+            const targetPos = contactSection.getBoundingClientRect().top + window.scrollY - headerHeight - 20;
+            window.scrollTo({ top: targetPos, behavior: 'smooth' });
+          }
+        }, 100);
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      // Close mobile menu if active
+      document.getElementById('navLinks').classList.remove('active');
+    }
+
+    function navigateTo(route) {
+      if (window.location.hash === '#' + route) {
+        handleHashRouting();
+      } else {
+        window.location.hash = route;
+        handleHashRouting();
+      }
+    }
+
+    function toggleMobileMenu() {
+      const nav = document.getElementById('navLinks');
+      nav.classList.toggle('active');
+    }
+
+    function toggleCart(isOpen) {
+      const overlay = document.getElementById('cartOverlay');
+      if (isOpen) {
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      } else {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function closeCartOutside(e) {
+      if (e.target === document.getElementById('cartOverlay')) {
+        toggleCart(false);
+      }
+    }
+
+    function toggleSuccessModal(show) {
+      const modal = document.getElementById('successModal');
+      if (show) {
+        modal.classList.add('active');
+      } else {
+        modal.classList.remove('active');
+      }
+    }
+
+    function toggleDetailModal(show) {
+      const overlay = document.getElementById('detailOverlay');
+      if (show) {
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      } else {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function closeDetailOutside(e) {
+      if (e.target === document.getElementById('detailOverlay')) {
+        toggleDetailModal(false);
+      }
+    }
+  </script>
+</body>
+
+</html>
