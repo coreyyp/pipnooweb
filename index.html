@@ -24,7 +24,7 @@
       /* Brand Color Palette */
       --color-bg: #FAF6F0;
       /* Warm Off-White */
-      --color-chocolate: #3C2A21;
+      --color-chocolate: #6D4539;
       /* Dark Chocolate Brown */
       --color-caramel: #8F6240;
       /* Caramel Brown */
@@ -1368,6 +1368,56 @@
       transform: scale(1.05);
     }
 
+    /* Lightbox Slides styling */
+    .story-lightbox-slides {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .story-lightbox-slide {
+      display: none;
+      width: 100%;
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .story-lightbox-slide.active {
+      display: flex;
+    }
+
+    @media (max-width: 768px) {
+      .story-lightbox-content {
+        height: 90% !important;
+      }
+      .story-lightbox-main {
+        margin-bottom: 0 !important;
+      }
+      .story-lightbox-slides {
+        display: flex !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        -webkit-overflow-scrolling: touch !important;
+        scroll-behavior: auto !important;
+      }
+      .story-lightbox-slide {
+        display: flex !important;
+        flex: 0 0 100% !important;
+        width: 100% !important;
+        height: 100% !important;
+        scroll-snap-align: start !important;
+        box-sizing: border-box !important;
+        padding: 0 10px !important;
+      }
+      .story-lightbox-nav {
+        display: none !important;
+      }
+      .story-lightbox-gallery {
+        display: none !important;
+      }
+    }
+
     .story-text h2 {
       font-size: 32px;
       margin-bottom: 16px;
@@ -2191,7 +2241,7 @@
   <header class="header">
     <div class="container nav-container">
       <a href="#home" onclick="navigateTo('home'); return false;" class="logo" id="logoLink">
-        <img src="icons/LOGONEW.png" alt="PIP & NOO Logo" class="logo-img">
+        <img src="icons/pic logo.png" alt="PIP & NOO Logo" class="logo-img">
       </a>
 
       <nav>
@@ -2200,7 +2250,7 @@
           <li><a href="#story" onclick="navigateTo('story'); return false;" class="nav-route" id="nav-story">Our
               Story</a></li>
           <li><a href="#collections" onclick="navigateTo('collections'); return false;" class="nav-route"
-              id="nav-collections">Collections</a></li>
+              id="nav-collections">Relove</a></li>
           <li><a href="#contact" onclick="navigateTo('contact'); return false;" class="nav-route"
               id="nav-contact">Contact</a></li>
         </ul>
@@ -2246,22 +2296,25 @@
         </div>
         <div class="hero-image-container" id="heroSlideshow" onclick="openStoryLightbox('hero', currentHeroSlideIndex)">
           <div class="hero-slide active">
-            <img src="photos/ChatGPT Image Jun 24, 2026, 01_23_29 PM.png" alt="Preloved, Relove.">
+            <img src="products3/WhatsApp Image 2026-06-25 at 10.35.15 (1).jpeg" alt="Preloved, Relove 1">
           </div>
           <div class="hero-slide">
-            <img src="products2/20260614_161126.jpg" alt="Preloved, Relove 2">
+            <img src="products3/WhatsApp Image 2026-06-25 at 10.34.11.jpeg" alt="Preloved, Relove 2">
           </div>
           <div class="hero-slide">
-            <img src="products2/20260614_151759.jpg" alt="Preloved, Relove 3">
+            <img src="products3/WhatsApp Image 2026-06-25 at 10.35.19 (7).jpeg" alt="Preloved, Relove 3">
           </div>
           <div class="hero-slide">
-            <img src="products2/20260614_151356.jpg" alt="Preloved, Relove 4">
+            <img src="products3/WhatsApp Image 2026-06-25 at 10.34.10 (1).jpeg" alt="Preloved, Relove 4">
           </div>
           <div class="hero-slide">
-            <img src="products2/20260614_152254.jpg" alt="Preloved, Relove 5">
+            <img src="products3/WhatsApp Image 2026-06-25 at 10.35.15 (3).jpeg" alt="Preloved, Relove 5">
           </div>
           <div class="hero-slide">
-            <img src="products2/20260614_154706.jpg" alt="Preloved, Relove 6">
+            <img src="products3/WhatsApp Image 2026-06-25 at 10.35.19 (8).jpeg" alt="Preloved, Relove 6">
+          </div>
+          <div class="hero-slide">
+            <img src="products3/WhatsApp Image 2026-06-25 at 10.34.11 (1).jpeg" alt="Preloved, Relove 7">
           </div>
           <div class="slideshow-dots" id="heroSlideshowDots">
             <span class="dot active" onclick="event.stopPropagation(); setHeroSlide(0)"></span>
@@ -2270,6 +2323,7 @@
             <span class="dot" onclick="event.stopPropagation(); setHeroSlide(3)"></span>
             <span class="dot" onclick="event.stopPropagation(); setHeroSlide(4)"></span>
             <span class="dot" onclick="event.stopPropagation(); setHeroSlide(5)"></span>
+            <span class="dot" onclick="event.stopPropagation(); setHeroSlide(6)"></span>
           </div>
         </div>
       </div>
@@ -2564,7 +2618,7 @@
     <div class="container">
       <div class="footer-grid">
         <div>
-          <div class="footer-logo"><img src="icons/LOGONEWwhite.png" alt="PIP & NOO Logo" class="footer-logo-img"></div>
+          <div class="footer-logo"><img src="icons/pic logo white.png" alt="PIP & NOO Logo" class="footer-logo-img"></div>
           <p class="footer-desc">Crafting a definitive alternative to fast fashion by converting textile waste into
             timeless, highly unique handmade pieces.</p>
         </div>
@@ -2573,7 +2627,7 @@
           <ul class="footer-links">
             <li><a href="#home" onclick="navigateTo('home'); return false;">Home</a></li>
             <li><a href="#story" onclick="navigateTo('story'); return false;">Our Story</a></li>
-            <li><a href="#collections" onclick="navigateTo('collections'); return false;">Collections</a></li>
+            <li><a href="#collections" onclick="navigateTo('collections'); return false;">Relove</a></li>
           </ul>
         </div>
         <div>
@@ -2626,7 +2680,9 @@
     <button class="story-lightbox-close" onclick="closeStoryLightbox()">&times;</button>
     <div class="story-lightbox-content" onclick="event.stopPropagation()">
       <div class="story-lightbox-main">
-        <img id="storyLightboxMainImg" src="photos/kids_clothes.jpeg" alt="Expanded Kids Clothes">
+        <div class="story-lightbox-slides" id="storyLightboxSlides">
+          <!-- Gallery slides injected dynamically -->
+        </div>
         <div class="story-lightbox-nav">
           <button class="story-lightbox-btn" onclick="navigateStoryLightbox(-1)">&#8249;</button>
           <button class="story-lightbox-btn" onclick="navigateStoryLightbox(1)">&#8250;</button>
@@ -2692,12 +2748,13 @@
 
     // Home Hero Slideshow State
     const heroImages = [
-      'photos/ChatGPT Image Jun 24, 2026, 01_23_29 PM.png',
-      'products2/20260614_161126.jpg',
-      'products2/20260614_151759.jpg',
-      'products2/20260614_151356.jpg',
-      'products2/20260614_152254.jpg',
-      'products2/20260614_154706.jpg'
+      'products3/WhatsApp Image 2026-06-25 at 10.35.15 (1).jpeg',
+      'products3/WhatsApp Image 2026-06-25 at 10.34.11.jpeg',
+      'products3/WhatsApp Image 2026-06-25 at 10.35.19 (7).jpeg',
+      'products3/WhatsApp Image 2026-06-25 at 10.34.10 (1).jpeg',
+      'products3/WhatsApp Image 2026-06-25 at 10.35.15 (3).jpeg',
+      'products3/WhatsApp Image 2026-06-25 at 10.35.19 (8).jpeg',
+      'products3/WhatsApp Image 2026-06-25 at 10.34.11 (1).jpeg'
     ];
     let currentHeroSlideIndex = 0;
     let heroSlideshowInterval = null;
@@ -2806,7 +2863,7 @@
       if (!slideshow) return;
 
       const slides = slideshow.querySelectorAll('.hero-slide');
-      const dots = slideshow.querySelectorAll('.hero-slideshow-dots .dot');
+      const dots = slideshow.querySelectorAll('.slideshow-dots .dot');
 
       slides.forEach((slide, idx) => {
         slide.classList.toggle('active', idx === index);
@@ -2836,11 +2893,35 @@
       const lightbox = document.getElementById('storyLightbox');
       if (!lightbox) return;
 
+      const slidesContainer = document.getElementById('storyLightboxSlides');
+      if (slidesContainer) {
+        slidesContainer.innerHTML = activeLightboxImages.map((imgSrc, idx) => `
+          <div class="story-lightbox-slide ${idx === currentLightboxIndex ? 'active' : ''}">
+            <img src="${imgSrc}" alt="Expanded Image ${idx + 1}">
+          </div>
+        `).join('');
+
+        // Setup scroll listener to sync index on swipe (on mobile)
+        slidesContainer.onscroll = () => {
+          const idx = Math.round(slidesContainer.scrollLeft / slidesContainer.clientWidth);
+          if (idx >= 0 && idx < activeLightboxImages.length) {
+            currentLightboxIndex = idx;
+          }
+        };
+      }
+
       updateStoryLightboxImage();
       renderStoryLightboxGallery();
 
       lightbox.classList.add('active');
       document.body.style.overflow = 'hidden';
+
+      // Set scroll position for mobile if open
+      if (window.innerWidth <= 768 && slidesContainer) {
+        setTimeout(() => {
+          slidesContainer.scrollLeft = currentLightboxIndex * slidesContainer.clientWidth;
+        }, 50);
+      }
     }
 
     function closeStoryLightbox() {
@@ -2879,9 +2960,12 @@
     }
 
     function updateStoryLightboxImage() {
-      const mainImg = document.getElementById('storyLightboxMainImg');
-      if (mainImg) {
-        mainImg.src = activeLightboxImages[currentLightboxIndex];
+      const slidesContainer = document.getElementById('storyLightboxSlides');
+      if (slidesContainer) {
+        const slides = slidesContainer.querySelectorAll('.story-lightbox-slide');
+        slides.forEach((slide, idx) => {
+          slide.classList.toggle('active', idx === currentLightboxIndex);
+        });
       }
     }
 

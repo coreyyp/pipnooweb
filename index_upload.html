@@ -24,7 +24,7 @@
       /* Brand Color Palette */
       --color-bg: #FAF6F0;
       /* Warm Off-White */
-      --color-chocolate: #3C2A21;
+      --color-chocolate: #6D4539;
       /* Dark Chocolate Brown */
       --color-caramel: #8F6240;
       /* Caramel Brown */
@@ -1368,6 +1368,61 @@
       transform: scale(1.05);
     }
 
+    /* Lightbox Slides styling */
+    .story-lightbox-slides {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .story-lightbox-slide {
+      display: none;
+      width: 100%;
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .story-lightbox-slide.active {
+      display: flex;
+    }
+
+    @media (max-width: 768px) {
+      .story-lightbox-content {
+        height: 90% !important;
+      }
+
+      .story-lightbox-main {
+        margin-bottom: 0 !important;
+      }
+
+      .story-lightbox-slides {
+        display: flex !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        -webkit-overflow-scrolling: touch !important;
+        scroll-behavior: auto !important;
+      }
+
+      .story-lightbox-slide {
+        display: flex !important;
+        flex: 0 0 100% !important;
+        width: 100% !important;
+        height: 100% !important;
+        scroll-snap-align: start !important;
+        box-sizing: border-box !important;
+        padding: 0 10px !important;
+      }
+
+      .story-lightbox-nav {
+        display: none !important;
+      }
+
+      .story-lightbox-gallery {
+        display: none !important;
+      }
+    }
+
     .story-text h2 {
       font-size: 32px;
       margin-bottom: 16px;
@@ -2191,7 +2246,7 @@
   <header class="header">
     <div class="container nav-container">
       <a href="#home" onclick="navigateTo('home'); return false;" class="logo" id="logoLink">
-        <img src="icons/LOGONEW.png" alt="PIP & NOO Logo" class="logo-img">
+        <img src="icons/pic logo.png" alt="PIP & NOO Logo" class="logo-img">
       </a>
 
       <nav>
@@ -2200,7 +2255,7 @@
           <li><a href="#story" onclick="navigateTo('story'); return false;" class="nav-route" id="nav-story">Our
               Story</a></li>
           <li><a href="#collections" onclick="navigateTo('collections'); return false;" class="nav-route"
-              id="nav-collections">Collections</a></li>
+              id="nav-collections">Relove</a></li>
           <li><a href="#contact" onclick="navigateTo('contact'); return false;" class="nav-route"
               id="nav-contact">Contact</a></li>
         </ul>
@@ -2239,29 +2294,34 @@
 
       <div class="hero">
         <div class="hero-content">
-          <h1 class="hero-title">Preloved, <br><span>Relove.</span><img src="icons/3and4.png" alt="Characters Icon" class="hero-title-icon"></h1>
-          <p class="hero-subtitle">At PIP&NOO, we're combating the culture of fast fashion by combining textiles and
-            hand craft into timeless, deeply loved, and completely unique pieces.</p>
-          <button class="btn" onclick="navigateTo('collections')">Shop the Collections</button>
+          <h1 class="hero-title">Preloved, <br><span>Relove.</span><img src="icons/3and4.png" alt="Characters Icon"
+              class="hero-title-icon"></h1>
+          <p class="hero-subtitle">At Pip & Noo, we're offering an alternative to the culture of fast fashion by
+            combining textiles and
+            hand craft into timeless, deeply loved unique pieces.</p>
+          <button class="btn" onclick="navigateTo('collections')">Find your relove</button>
         </div>
         <div class="hero-image-container" id="heroSlideshow" onclick="openStoryLightbox('hero', currentHeroSlideIndex)">
           <div class="hero-slide active">
-            <img src="photos/ChatGPT Image Jun 24, 2026, 01_23_29 PM.png" alt="Preloved, Relove.">
+            <img src="products3/WhatsApp Image 2026-06-25 at 10.35.15 (1).jpeg" alt="Preloved, Relove 1">
           </div>
           <div class="hero-slide">
-            <img src="products2/20260614_161126.jpg" alt="Preloved, Relove 2">
+            <img src="products3/WhatsApp Image 2026-06-25 at 10.34.11.jpeg" alt="Preloved, Relove 2">
           </div>
           <div class="hero-slide">
-            <img src="products2/20260614_151759.jpg" alt="Preloved, Relove 3">
+            <img src="products3/WhatsApp Image 2026-06-25 at 10.35.19 (7).jpeg" alt="Preloved, Relove 3">
           </div>
           <div class="hero-slide">
-            <img src="products2/20260614_151356.jpg" alt="Preloved, Relove 4">
+            <img src="products3/WhatsApp Image 2026-06-25 at 10.34.10 (1).jpeg" alt="Preloved, Relove 4">
           </div>
           <div class="hero-slide">
-            <img src="products2/20260614_152254.jpg" alt="Preloved, Relove 5">
+            <img src="products3/WhatsApp Image 2026-06-25 at 10.35.15 (3).jpeg" alt="Preloved, Relove 5">
           </div>
           <div class="hero-slide">
-            <img src="products2/20260614_154706.jpg" alt="Preloved, Relove 6">
+            <img src="products3/WhatsApp Image 2026-06-25 at 10.35.19 (8).jpeg" alt="Preloved, Relove 6">
+          </div>
+          <div class="hero-slide">
+            <img src="products3/WhatsApp Image 2026-06-25 at 10.34.11 (1).jpeg" alt="Preloved, Relove 7">
           </div>
           <div class="slideshow-dots" id="heroSlideshowDots">
             <span class="dot active" onclick="event.stopPropagation(); setHeroSlide(0)"></span>
@@ -2270,6 +2330,7 @@
             <span class="dot" onclick="event.stopPropagation(); setHeroSlide(3)"></span>
             <span class="dot" onclick="event.stopPropagation(); setHeroSlide(4)"></span>
             <span class="dot" onclick="event.stopPropagation(); setHeroSlide(5)"></span>
+            <span class="dot" onclick="event.stopPropagation(); setHeroSlide(6)"></span>
           </div>
         </div>
       </div>
@@ -2288,7 +2349,7 @@
             </div>
 
             <div class="value-card">
-              <h3 class="value-title">Upcycled</h3>
+              <h3 class="value-title">Then, Now</h3>
               <p class="value-desc">Old textiles are given a second chance. Vintage curtains, old shirts and scrap
                 materials are transformed into unique items.</p>
               <div class="value-image-container" style="margin-top: 8px; margin-bottom: 0;">
@@ -2301,7 +2362,7 @@
                 <img src="photos/stall.png" alt="One-Of-A-Kind">
               </div>
               <h3 class="value-title">One-Of-A-Kind</h3>
-              <p class="value-desc">Most items will only be made once. Craft will never be mass produced.</p>
+              <p class="value-desc">Most items will only be made once as resources and materials are limited.</p>
             </div>
           </div>
         </div>
@@ -2315,10 +2376,10 @@
               <img src="photos/EGGFACE.png" alt="Custom Piece Enquiries" class="custom-request-img">
             </div>
             <div class="custom-request-content">
-              <h2 class="custom-request-title">Request a Custom Piece</h2>
+              <h2 class="custom-request-title">Request a Keepsake Memory Piece</h2>
               <p class="custom-request-desc">
-                Got a jumper that you can't bear to throw away? An old throw,
-                or a pair of jeans that's seen better days but still means something? Send it to us. We'll turn it into
+                Got a jumper that you can't bear to throw away? An old jumper, jacket, top, blouse, shorts, shirt, scarf
+                or dress? Send it to us. We'll turn it into
                 something you'll wear again - a bag, a jacket, a piece that carries the memory forwards.
               </p>
               <button class="btn" onclick="navigateTo('contact')">Enquire About Custom Work</button>
@@ -2427,8 +2488,8 @@
           <h1>Our Story</h1>
           <p>It all started as a hobby, sewing clothes for my little daughter as she grew up.</p>
           <p>I noticed how predictable children’s clothing was - blue for boys and pink for girls, the same patterns
-            over and over. I wanted to make something with more character, something that would express my ideas of
-            children clothes for her to wear.</p>
+            over and over. I wanted to make something with more character, something that would express my concept of
+            children clothing for her to wear.</p>
         </div>
 
         <div class="story-grid">
@@ -2480,10 +2541,10 @@
                 <span class="dot" onclick="event.stopPropagation(); setBeginningsSlide(8)"></span>
                 <span class="dot" onclick="event.stopPropagation(); setBeginningsSlide(9)"></span>
                 <span class="dot" onclick="event.stopPropagation(); setBeginningsSlide(10)"></span>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="story-text">
+          <div class="story-text">
             <h2 style="text-align: right;">Todds to Teens</h2>
             <p>I made clothes for my children from toddlers all the way through to their teens, and today I still do. My
               son always tells me his friends love the shirts I make him. As they grew up, my focus shifted too. I moved
@@ -2503,7 +2564,7 @@
             <p>During all those years of volunteering, I realised that there were so many donated clothes and materials
               that could have been given a second life, but instead they ended up in landfills. Around this time, I
               started trying to live with less waste. Naturally, that crept into what I was making too. That’s really
-              where the idea of ‘preloved, relove’ came from.</p>
+              where the concept of ‘preloved, relove’ came from.</p>
           </div>
           <div class="story-slideshow-container" id="rootsSlideshow"
             onclick="openStoryLightbox('roots', currentRootsSlideIndex)">
@@ -2546,9 +2607,10 @@
             <h2 style="text-align: right;">The Present</h2>
             <p>After that, I started sourcing differently. Car boot sales, charity shops, second hand textiles wherever
               I could find them, rather than buying new fabric.</p>
-            <p>Now, almost 100% I make combines pieces from my own textile collection with things I've sourced second
-              hand. I love bright, cheerful colours, and adding little details to otherwise plain fabrics. Cross
-              hatchings, visible stitching, small touches that make every piece a little more one of a kind.</p>
+            <p>Now, the majority of what I make combines pieces from my own textile collection with things I've sourced
+              second
+              hand. I love embroidery, applique and adding little details to otherwise plain fabrics. Cross
+              stitching and small touches that make every piece a little more one of a kind.</p>
           </div>
         </div>
 
@@ -2564,16 +2626,17 @@
     <div class="container">
       <div class="footer-grid">
         <div>
-          <div class="footer-logo"><img src="icons/LOGONEWwhite.png" alt="PIP & NOO Logo" class="footer-logo-img"></div>
+          <div class="footer-logo"><img src="icons/pic logo white.png" alt="PIP & NOO Logo" class="footer-logo-img">
+          </div>
           <p class="footer-desc">Crafting a definitive alternative to fast fashion by converting textile waste into
-            timeless, highly unique handmade pieces.</p>
+            timeless handmade pieces.</p>
         </div>
         <div>
           <h4 class="footer-title">Explore</h4>
           <ul class="footer-links">
             <li><a href="#home" onclick="navigateTo('home'); return false;">Home</a></li>
             <li><a href="#story" onclick="navigateTo('story'); return false;">Our Story</a></li>
-            <li><a href="#collections" onclick="navigateTo('collections'); return false;">Collections</a></li>
+            <li><a href="#collections" onclick="navigateTo('collections'); return false;">Relove</a></li>
           </ul>
         </div>
         <div>
@@ -2626,7 +2689,9 @@
     <button class="story-lightbox-close" onclick="closeStoryLightbox()">&times;</button>
     <div class="story-lightbox-content" onclick="event.stopPropagation()">
       <div class="story-lightbox-main">
-        <img id="storyLightboxMainImg" src="photos/kids_clothes.jpeg" alt="Expanded Kids Clothes">
+        <div class="story-lightbox-slides" id="storyLightboxSlides">
+          <!-- Gallery slides injected dynamically -->
+        </div>
         <div class="story-lightbox-nav">
           <button class="story-lightbox-btn" onclick="navigateStoryLightbox(-1)">&#8249;</button>
           <button class="story-lightbox-btn" onclick="navigateStoryLightbox(1)">&#8250;</button>
@@ -2692,12 +2757,13 @@
 
     // Home Hero Slideshow State
     const heroImages = [
-      'photos/ChatGPT Image Jun 24, 2026, 01_23_29 PM.png',
-      'products2/20260614_161126.jpg',
-      'products2/20260614_151759.jpg',
-      'products2/20260614_151356.jpg',
-      'products2/20260614_152254.jpg',
-      'products2/20260614_154706.jpg'
+      'products3/WhatsApp Image 2026-06-25 at 10.35.15 (1).jpeg',
+      'products3/WhatsApp Image 2026-06-25 at 10.34.11.jpeg',
+      'products3/WhatsApp Image 2026-06-25 at 10.35.19 (7).jpeg',
+      'products3/WhatsApp Image 2026-06-25 at 10.34.10 (1).jpeg',
+      'products3/WhatsApp Image 2026-06-25 at 10.35.15 (3).jpeg',
+      'products3/WhatsApp Image 2026-06-25 at 10.35.19 (8).jpeg',
+      'products3/WhatsApp Image 2026-06-25 at 10.34.11 (1).jpeg'
     ];
     let currentHeroSlideIndex = 0;
     let heroSlideshowInterval = null;
@@ -2806,7 +2872,7 @@
       if (!slideshow) return;
 
       const slides = slideshow.querySelectorAll('.hero-slide');
-      const dots = slideshow.querySelectorAll('.hero-slideshow-dots .dot');
+      const dots = slideshow.querySelectorAll('.slideshow-dots .dot');
 
       slides.forEach((slide, idx) => {
         slide.classList.toggle('active', idx === index);
@@ -2836,11 +2902,35 @@
       const lightbox = document.getElementById('storyLightbox');
       if (!lightbox) return;
 
+      const slidesContainer = document.getElementById('storyLightboxSlides');
+      if (slidesContainer) {
+        slidesContainer.innerHTML = activeLightboxImages.map((imgSrc, idx) => `
+          <div class="story-lightbox-slide ${idx === currentLightboxIndex ? 'active' : ''}">
+            <img src="${imgSrc}" alt="Expanded Image ${idx + 1}">
+          </div>
+        `).join('');
+
+        // Setup scroll listener to sync index on swipe (on mobile)
+        slidesContainer.onscroll = () => {
+          const idx = Math.round(slidesContainer.scrollLeft / slidesContainer.clientWidth);
+          if (idx >= 0 && idx < activeLightboxImages.length) {
+            currentLightboxIndex = idx;
+          }
+        };
+      }
+
       updateStoryLightboxImage();
       renderStoryLightboxGallery();
 
       lightbox.classList.add('active');
       document.body.style.overflow = 'hidden';
+
+      // Set scroll position for mobile if open
+      if (window.innerWidth <= 768 && slidesContainer) {
+        setTimeout(() => {
+          slidesContainer.scrollLeft = currentLightboxIndex * slidesContainer.clientWidth;
+        }, 50);
+      }
     }
 
     function closeStoryLightbox() {
@@ -2879,9 +2969,12 @@
     }
 
     function updateStoryLightboxImage() {
-      const mainImg = document.getElementById('storyLightboxMainImg');
-      if (mainImg) {
-        mainImg.src = activeLightboxImages[currentLightboxIndex];
+      const slidesContainer = document.getElementById('storyLightboxSlides');
+      if (slidesContainer) {
+        const slides = slidesContainer.querySelectorAll('.story-lightbox-slide');
+        slides.forEach((slide, idx) => {
+          slide.classList.toggle('active', idx === currentLightboxIndex);
+        });
       }
     }
 
