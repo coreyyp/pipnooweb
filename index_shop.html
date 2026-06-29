@@ -3460,6 +3460,7 @@
         const decrementPromises = cart.map(cartItem => {
           return fetch(url, {
             method: 'POST',
+            credentials: 'omit',
             headers: { 'Content-Type': 'text/plain' },
             body: JSON.stringify({
               action: 'decrement',
@@ -4062,6 +4063,7 @@
         // Send a verification request (simulate a save call for ID 0, which is ignored by the Apps Script save logic)
         const res = await fetch(url, {
           method: 'POST',
+          credentials: 'omit',
           headers: { 'Content-Type': 'text/plain' },
           body: JSON.stringify({
             action: 'save',
@@ -4114,7 +4116,9 @@
       }
 
       try {
-        const res = await fetch(url);
+        const res = await fetch(url, {
+          credentials: 'omit'
+        });
         if (res.ok) {
           shopProducts = await res.json();
           localStorage.setItem('pn_products', JSON.stringify(shopProducts));
@@ -4288,6 +4292,7 @@
       try {
         const res = await fetch(url, {
           method: 'POST',
+          credentials: 'omit',
           headers: { 'Content-Type': 'text/plain' },
           body: JSON.stringify({
             action: 'save',
@@ -4363,6 +4368,7 @@
       try {
         const res = await fetch(url, {
           method: 'POST',
+          credentials: 'omit',
           headers: { 'Content-Type': 'text/plain' },
           body: JSON.stringify({
             action: 'save',
@@ -4419,6 +4425,7 @@
       try {
         const res = await fetch(url, {
           method: 'POST',
+          credentials: 'omit',
           headers: { 'Content-Type': 'text/plain' },
           body: JSON.stringify({
             action: 'delete',
