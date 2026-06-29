@@ -1,26 +1,5 @@
 [
   {
-    "id": 1,
-    "title": "Earthy Patchwork Jacket",
-    "price": 50,
-    "category": "Clothes",
-    "color": "Brown",
-    "images": [
-      "products3/WhatsApp Image 2026-06-25 at 10.35.15 (1).jpeg",
-      "products3/WhatsApp Image 2026-06-25 at 10.35.15 (2).jpeg",
-      "products3/WhatsApp Image 2026-06-25 at 10.35.15 (3).jpeg"
-    ],
-    "description": "A beautifully textured, relaxed-fit patchwork jacket crafted entirely from vintage heavyweight linens and second-hand cotton twill. Featuring custom visible hand-stitching and two large front pockets.",
-    "backstory": "This jacket was built using cuttings of vintage curtains from a community center in North London combined with scraps of utility trousers. Every line of stitching has been reinforced by hand in our studio.",
-    "spec": {
-      "size": "Medium (M)",
-      "dimensions": "Chest: 56cm, Length: 68cm, Sleeve: 62cm",
-      "materials": "100% Upcycled Linen & Cotton",
-      "care": "Hand wash cold, dry flat"
-    },
-    "inventory": 1
-  },
-  {
     "id": 2,
     "title": "Forest Green Applique Tote",
     "price": 45,
