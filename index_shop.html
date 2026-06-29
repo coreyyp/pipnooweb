@@ -3278,12 +3278,15 @@
         ` : '';
 
         const upcycleHtml = p.then && p.now ? `
-          <div class="product-card-upcycle" style="font-size: 11px; margin-top: 5px; display: flex; gap: 4px; flex-wrap: wrap; align-items: center;">
-            <span style="color: var(--color-caramel); font-weight: 700; text-transform: uppercase; font-size: 9px; letter-spacing: 0.5px;">Then:</span>
-            <span style="color: var(--color-chocolate); opacity: 0.85; font-size: 11px;">${p.then}</span>
-            <span style="color: var(--color-mint); font-weight: bold; margin: 0 1px;">➔</span>
-            <span style="color: var(--color-caramel); font-weight: 700; text-transform: uppercase; font-size: 9px; letter-spacing: 0.5px;">Now:</span>
-            <span style="color: var(--color-chocolate); font-weight: 600; font-size: 11px;">${p.now}</span>
+          <div class="product-card-upcycle" style="font-size: 11px; margin-top: 5px; display: flex; flex-direction: column; gap: 2px; align-items: flex-start; line-height: 1.2;">
+            <div>
+              <span style="color: var(--color-caramel); font-weight: 700; text-transform: uppercase; font-size: 9px; letter-spacing: 0.5px; margin-right: 2px;">Then:</span>
+              <span style="color: var(--color-chocolate); opacity: 0.85; font-size: 11px;">${p.then}</span>
+            </div>
+            <div>
+              <span style="color: var(--color-caramel); font-weight: 700; text-transform: uppercase; font-size: 9px; letter-spacing: 0.5px; margin-right: 2px;">Now:</span>
+              <span style="color: var(--color-chocolate); font-weight: 600; font-size: 11px;">${p.now}</span>
+            </div>
           </div>
         ` : '';
 
