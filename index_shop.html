@@ -4010,7 +4010,7 @@
     // GOOGLE SHEETS INTEGRATION CONFIGURATION
     // ----------------------------------------------------
     // Paste your deployed Google Apps Script Web App URL here to make it permanent for all public visitors:
-    const GOOGLE_SHEET_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbRWeqfTfYoaIxGkOvfpEdGZ9fO9PU8iTgokHOgBRKBH5sbQU3ewjHdf9yTINjjSOb3Dg/exec";
+    const GOOGLE_SHEET_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzCUi5SR8ZySa-zsvJYvVY2yQZpoMwSQRVazDWSG6Mp4Ra9kGQBKQYXNQ6hTNjF5wyWEA/exec";
 
     function checkAdminLoginState() {
       const url = GOOGLE_SHEET_WEB_APP_URL || localStorage.getItem('pn_sheet_url');
@@ -4027,10 +4027,10 @@
         if (loginCard) loginCard.style.display = 'block';
         if (dashboard) dashboard.style.display = 'none';
         
-        // Populate fields with stored config if available
+        // Populate fields with stored config if available (prioritize hardcoded URL)
         const urlInput = document.getElementById('admin-sheet-url');
         const passInput = document.getElementById('admin-sheet-password');
-        if (urlInput) urlInput.value = localStorage.getItem('pn_sheet_url') || GOOGLE_SHEET_WEB_APP_URL || '';
+        if (urlInput) urlInput.value = GOOGLE_SHEET_WEB_APP_URL || localStorage.getItem('pn_sheet_url') || '';
         if (passInput) passInput.value = localStorage.getItem('pn_sheet_password') || '';
       }
     }
