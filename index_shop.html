@@ -949,32 +949,40 @@
 
     /* Product Card */
     .product-card {
-      background-color: var(--color-white);
-      border-radius: var(--border-radius);
-      overflow: hidden;
-      border: 1px solid var(--color-light-gray);
+      position: relative;
+      aspect-ratio: 1749 / 2481;
+      background-image: url('icons/prodcard.svg');
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      background-color: transparent;
+      border: none;
       display: flex;
       flex-direction: column;
-      position: relative;
-      transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+      overflow: visible;
+      transition: transform var(--transition-smooth);
+      filter: drop-shadow(0 6px 15px rgba(60, 42, 33, 0.05));
     }
 
     .product-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 20px rgba(60, 42, 33, 0.05);
+      transform: translateY(-6px);
+      filter: drop-shadow(0 12px 24px rgba(60, 42, 33, 0.1));
     }
 
     .product-img-wrapper {
-      position: relative;
-      width: 100%;
-      background-color: var(--color-bg);
+      position: absolute;
+      top: 6.3%;
+      left: 9.3%;
+      width: 81.3%;
+      height: 58.2%;
       overflow: hidden;
       cursor: pointer;
+      background-color: var(--color-bg);
+      border-radius: 4px;
     }
 
     .product-img {
       width: 100%;
-      height: auto;
+      height: 100%;
       display: block;
       object-fit: cover;
       transition: transform var(--transition-smooth);
@@ -987,8 +995,8 @@
 
     .product-badges {
       position: absolute;
-      top: 12px;
-      left: 12px;
+      top: 8px;
+      left: 8px;
       display: flex;
       flex-direction: column;
       gap: 6px;
@@ -996,15 +1004,20 @@
     }
 
     .product-info {
-      padding: 20px;
+      position: absolute;
+      top: 66%;
+      left: 9.3%;
+      right: 9.4%;
+      bottom: 5%;
+      padding: 0;
       display: flex;
       flex-direction: column;
-      flex-grow: 1;
-      gap: 12px;
+      justify-content: space-between;
+      box-sizing: border-box;
     }
 
     .product-category-meta {
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 1px;
@@ -1013,29 +1026,34 @@
 
     .product-card-title {
       font-family: var(--font-body);
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 600;
       color: var(--color-chocolate);
+      margin: 0;
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     .product-card-bottom {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: auto;
-      padding-top: 12px;
+      padding-top: 8px;
       border-top: 1px solid var(--color-light-gray);
     }
 
     .product-price {
       font-family: var(--font-display);
-      font-size: 20px;
+      font-size: 18px;
       color: var(--color-chocolate);
     }
 
     .add-to-cart-btn {
-      width: 42px;
-      height: 42px;
+      width: 36px;
+      height: 36px;
       border-radius: 6px;
       background-color: transparent;
       color: var(--color-caramel);
@@ -1391,9 +1409,11 @@
       .story-lightbox-content {
         height: 90% !important;
       }
+
       .story-lightbox-main {
         margin-bottom: 0 !important;
       }
+
       .story-lightbox-slides {
         display: flex !important;
         overflow-x: auto !important;
@@ -1401,6 +1421,7 @@
         -webkit-overflow-scrolling: touch !important;
         scroll-behavior: auto !important;
       }
+
       .story-lightbox-slide {
         display: flex !important;
         flex: 0 0 100% !important;
@@ -1410,9 +1431,11 @@
         box-sizing: border-box !important;
         padding: 0 10px !important;
       }
+
       .story-lightbox-nav {
         display: none !important;
       }
+
       .story-lightbox-gallery {
         display: none !important;
       }
@@ -1999,7 +2022,7 @@
     }
 
     .contact-card-desc {
-      font-size: 14px;
+      font-size: 17px;
       color: var(--color-bg);
       opacity: 0.9;
       line-height: 1.7;
@@ -2048,12 +2071,13 @@
       font-weight: 700;
       font-size: 22px;
       color: var(--color-forest);
+      margin: 0 0 28px 0;
     }
 
     .contact-fields-list {
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 12px;
     }
 
     .contact-field-row,
@@ -2061,8 +2085,8 @@
       display: flex;
       justify-content: space-between;
       border-bottom: 1px solid rgba(45, 66, 54, 0.1);
-      padding-bottom: 12px;
-      font-size: 13px;
+      padding-bottom: 16px;
+      font-size: 16px;
     }
 
     .contact-instagram-btn {
@@ -2202,6 +2226,8 @@
         flex-direction: column;
         align-items: flex-start;
         gap: 4px;
+        font-size: 14px;
+        padding-bottom: 10px;
       }
 
       .contact-field-value {
@@ -2228,6 +2254,255 @@
       .value-image-container {
         order: 3;
         margin: 0 !important;
+      }
+    }
+
+    /* Admin Portal Styles */
+    .admin-card {
+      background-color: var(--color-white);
+      border-radius: var(--border-radius);
+      border: 1px solid var(--color-light-gray);
+      padding: 40px;
+      max-width: 500px;
+      margin: 60px auto;
+      box-shadow: 0 4px 20px rgba(60, 42, 33, 0.05);
+      text-align: center;
+    }
+
+    .admin-card h2 {
+      font-family: var(--font-body);
+      font-weight: 700;
+      color: var(--color-chocolate);
+      margin-bottom: 12px;
+      font-size: 24px;
+    }
+
+    .admin-card p {
+      font-size: 14px;
+      color: var(--color-caramel);
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    .admin-help-text {
+      margin-top: 20px;
+      font-size: 12px !important;
+      color: #888 !important;
+    }
+
+    .form-group {
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--color-forest);
+      margin-bottom: 8px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 14px;
+      font-family: var(--font-body);
+      border: 1px solid var(--color-light-gray);
+      border-radius: 6px;
+      background-color: var(--color-white);
+      color: var(--color-chocolate);
+      box-sizing: border-box;
+      transition: border-color var(--transition-fast);
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--color-forest);
+    }
+
+    .admin-dashboard {
+      background-color: var(--color-white);
+      border-radius: var(--border-radius);
+      border: 1px solid var(--color-light-gray);
+      padding: 30px;
+      margin-top: 20px;
+      box-shadow: 0 4px 20px rgba(60, 42, 33, 0.05);
+    }
+
+    .admin-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      border-bottom: 1px solid rgba(45, 66, 54, 0.1);
+      padding-bottom: 20px;
+    }
+
+    .admin-header-row h2 {
+      font-family: var(--font-body);
+      font-weight: 700;
+      color: var(--color-chocolate);
+      font-size: 28px;
+      margin-bottom: 4px;
+    }
+
+    .admin-header-row p {
+      font-size: 14px;
+      color: var(--color-caramel);
+    }
+
+    .admin-header-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn-secondary {
+      background-color: var(--color-forest) !important;
+      border-color: var(--color-forest) !important;
+    }
+
+    .btn-outline {
+      background-color: transparent !important;
+      border: 1px solid var(--color-light-gray) !important;
+      color: var(--color-chocolate) !important;
+    }
+
+    .btn-outline:hover {
+      background-color: var(--color-light-gray) !important;
+    }
+
+    .admin-table-container {
+      overflow-x: auto;
+    }
+
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    .admin-table th {
+      padding: 14px 16px;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--color-caramel);
+      border-bottom: 2px solid rgba(45, 66, 54, 0.1);
+    }
+
+    .admin-table td {
+      padding: 16px;
+      font-size: 14px;
+      color: var(--color-chocolate);
+      border-bottom: 1px solid var(--color-light-gray);
+      vertical-align: middle;
+    }
+
+    .admin-thumb {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 4px;
+      background-color: var(--color-bg);
+    }
+
+    .admin-badge {
+      display: inline-block;
+      padding: 4px 8px;
+      font-size: 11px;
+      font-weight: 600;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .admin-badge.active {
+      background-color: #e2f0d9;
+      color: #385723;
+    }
+
+    .admin-badge.archived {
+      background-color: #fce4d6;
+      color: #c65911;
+    }
+
+    .admin-actions-cell {
+      display: flex;
+      gap: 8px;
+    }
+
+    .admin-action-btn {
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 4px;
+      cursor: pointer;
+      border: 1px solid rgba(45, 66, 54, 0.2);
+      background-color: var(--color-white);
+      color: var(--color-forest);
+      transition: all var(--transition-fast);
+    }
+
+    .admin-action-btn:hover {
+      background-color: var(--color-forest);
+      color: var(--color-white);
+    }
+
+    .admin-action-btn.archive-btn {
+      color: #c65911;
+      border-color: rgba(198, 89, 17, 0.3);
+    }
+
+    .admin-action-btn.archive-btn:hover {
+      background-color: #c65911;
+      color: var(--color-white);
+    }
+
+    .admin-action-btn.delete-btn {
+      color: #c00000;
+      border-color: rgba(192, 0, 0, 0.3);
+    }
+
+    .admin-action-btn.delete-btn:hover {
+      background-color: #c00000;
+      color: var(--color-white);
+    }
+
+    .admin-modal-content {
+      max-width: 650px;
+      padding: 30px 40px !important;
+      overflow-y: auto;
+      box-sizing: border-box;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      border-top: 1px solid var(--color-light-gray);
+      padding-top: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      .admin-header-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
       }
     }
   </style>
@@ -2289,7 +2564,8 @@
 
       <div class="hero">
         <div class="hero-content">
-          <h1 class="hero-title">Preloved, <br><span>Relove.</span><img src="icons/3and4.png" alt="Characters Icon" class="hero-title-icon"></h1>
+          <h1 class="hero-title">Preloved, <br><span>Relove.</span><img src="icons/3and4.png" alt="Characters Icon"
+              class="hero-title-icon"></h1>
           <p class="hero-subtitle">At PIP&NOO, we're combating the culture of fast fashion by combining textiles and
             hand craft into timeless, deeply loved, and completely unique pieces.</p>
           <button class="btn" onclick="navigateTo('collections')">Shop the Collections</button>
@@ -2371,9 +2647,8 @@
             <div class="custom-request-content">
               <h2 class="custom-request-title">Request a Custom Piece</h2>
               <p class="custom-request-desc">
-                Got a jumper that you can't bear to throw away? An old throw,
-                or a pair of jeans that's seen better days but still means something? Send it to us. We'll turn it into
-                something you'll wear again - a bag, a jacket, a piece that carries the memory forwards.
+                Got an old jummper that you don't want to throw out? An old shirt, skirt, curtain, blanket,
+                cloth or more? Get in touch with us to discuss turning your preloved into an item you can relove.
               </p>
               <button class="btn" onclick="navigateTo('contact')">Enquire About Custom Work</button>
             </div>
@@ -2409,7 +2684,7 @@
                 </div>
 
               </div>
-              
+
             </div>
           </div>
         </div>
@@ -2419,44 +2694,57 @@
     <!-- COLLECTIONS SECTION -->
     <section id="section-collections" class="page-section">
       <div class="container section-padding">
-        
+
         <div class="shop-header">
           <h1 class="shop-title">Relove Collections</h1>
-          <p class="shop-desc">One-of-a-kind upcycled creations, handcrafted from textile waste to bring character and history into your wardrobe.</p>
+          <p class="shop-desc">Explore our Relove collection.</p>
         </div>
 
         <div class="filters-accordion-container">
           <div class="filters-trigger-row">
             <button class="filters-toggle-btn" onclick="toggleFiltersAccordion()">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right: 4px; vertical-align: middle;"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                style="margin-right: 4px; vertical-align: middle;">
+                <path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z" />
+              </svg>
               Filters
             </button>
             <div class="active-filters-tabs" id="activeFiltersTabs">
               <!-- Active filters dynamically injected -->
             </div>
           </div>
-          
+
           <div class="filters-dropdown" id="filtersDropdown">
             <div class="filters-dropdown-content">
               <!-- Filter Group: Type -->
               <div class="filter-group">
                 <span class="filter-label">Type:</span>
                 <div class="filter-options">
-                  <button class="filter-btn" data-filter-type="category" data-filter-value="Clothes" onclick="toggleFilter(this)">Clothes</button>
-                  <button class="filter-btn" data-filter-type="category" data-filter-value="Accessories" onclick="toggleFilter(this)">Accessories</button>
-                  <button class="filter-btn" data-filter-type="category" data-filter-value="Bags" onclick="toggleFilter(this)">Bags</button>
+                  <button class="filter-btn" data-filter-type="category" data-filter-value="Clothes"
+                    onclick="toggleFilter(this)">Clothes</button>
+                  <button class="filter-btn" data-filter-type="category" data-filter-value="Accessories"
+                    onclick="toggleFilter(this)">Accessories</button>
+                  <button class="filter-btn" data-filter-type="category" data-filter-value="Bags"
+                    onclick="toggleFilter(this)">Bags</button>
                 </div>
               </div>
-              
+
               <!-- Filter Group: Color -->
               <div class="filter-group">
                 <span class="filter-label">Color:</span>
                 <div class="filter-options">
-                  <button class="filter-btn" data-filter-type="color" data-filter-value="Green" onclick="toggleFilter(this)">Green</button>
-                  <button class="filter-btn" data-filter-type="color" data-filter-value="Brown" onclick="toggleFilter(this)">Brown</button>
-                  <button class="filter-btn" data-filter-type="color" data-filter-value="Orange" onclick="toggleFilter(this)">Orange</button>
-                  <button class="filter-btn" data-filter-type="color" data-filter-value="Cream" onclick="toggleFilter(this)">Cream</button>
-                  <button class="filter-btn" data-filter-type="color" data-filter-value="Blue" onclick="toggleFilter(this)">Blue</button>
+                  <button class="filter-btn" data-filter-type="color" data-filter-value="Green"
+                    onclick="toggleFilter(this)">Green</button>
+                  <button class="filter-btn" data-filter-type="color" data-filter-value="Brown"
+                    onclick="toggleFilter(this)">Brown</button>
+                  <button class="filter-btn" data-filter-type="color" data-filter-value="Orange"
+                    onclick="toggleFilter(this)">Orange</button>
+                  <button class="filter-btn" data-filter-type="color" data-filter-value="Cream"
+                    onclick="toggleFilter(this)">Cream</button>
+                  <button class="filter-btn" data-filter-type="color" data-filter-value="Blue"
+                    onclick="toggleFilter(this)">Blue</button>
+                  <button class="filter-btn" data-filter-type="color" data-filter-value="Red"
+                    onclick="toggleFilter(this)">Red</button>
                 </div>
               </div>
             </div>
@@ -2554,10 +2842,10 @@
                 <span class="dot" onclick="event.stopPropagation(); setBeginningsSlide(8)"></span>
                 <span class="dot" onclick="event.stopPropagation(); setBeginningsSlide(9)"></span>
                 <span class="dot" onclick="event.stopPropagation(); setBeginningsSlide(10)"></span>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="story-text">
+          <div class="story-text">
             <h2 style="text-align: right;">Todds to Teens</h2>
             <p>I made clothes for my children from toddlers all the way through to their teens, and today I still do. My
               son always tells me his friends love the shirts I make him. As they grew up, my focus shifted too. I moved
@@ -2629,6 +2917,59 @@
 
       </div>
     </section>
+
+    <!-- ADMIN SECTION -->
+    <section id="section-admin" class="page-section">
+      <div class="container section-padding">
+        <!-- Admin login card -->
+        <div id="admin-login-card" class="admin-card">
+          <h2>Admin Login</h2>
+          <p>Please enter your GitHub Personal Access Token (PAT) to manage the product catalog.</p>
+          <div class="form-group">
+            <label for="admin-pat-input">GitHub Access Token</label>
+            <input type="password" id="admin-pat-input" placeholder="ghp_..." class="form-control">
+          </div>
+          <button class="btn" onclick="loginAdmin()">Login</button>
+          <p class="admin-help-text">Don't have a token? Generate a token on GitHub with <code>repo</code> write scope.
+          </p>
+        </div>
+
+        <!-- Admin Dashboard (Initially hidden) -->
+        <div id="admin-dashboard" class="admin-dashboard" style="display: none;">
+          <div class="admin-header-row">
+            <div>
+              <h2>Catalog Dashboard</h2>
+              <p>Adding and editing products in <code>products.json</code> directly on GitHub.</p>
+            </div>
+            <div class="admin-header-actions">
+              <button class="btn btn-secondary" onclick="showAddProductForm()">+ Add New Product</button>
+              <button class="btn btn-outline" onclick="logoutAdmin()">Logout</button>
+            </div>
+          </div>
+
+          <div class="admin-table-container">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Title</th>
+                  <th>Price</th>
+                  <th>Category</th>
+                  <th>Color</th>
+                  <th>Stock</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-products-table-body">
+                <!-- Injected via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+
+      </div>
+    </section>
   </main>
 
   <!-- ----------------------------------------------------
@@ -2638,7 +2979,8 @@
     <div class="container">
       <div class="footer-grid">
         <div>
-          <div class="footer-logo"><img src="icons/pic logo white.png" alt="PIP & NOO Logo" class="footer-logo-img"></div>
+          <div class="footer-logo"><img src="icons/pic logo white.png" alt="PIP & NOO Logo" class="footer-logo-img">
+          </div>
           <p class="footer-desc">Crafting a definitive alternative to fast fashion by converting textile waste into
             timeless, highly unique handmade pieces.</p>
         </div>
@@ -2727,6 +3069,94 @@
     </div>
   </div>
 
+  <!-- Add/Edit Product Modal Form -->
+  <div id="admin-product-modal" class="detail-overlay" style="z-index: 10000;"
+    onclick="closeAdminProductModalOutside(event)">
+    <div class="detail-modal admin-modal-content" onclick="event.stopPropagation()">
+      <button class="close-detail-btn" onclick="closeAdminProductModal()">&times;</button>
+      <h3 id="admin-modal-title"
+        style="margin-bottom: 20px; font-family: var(--font-body); font-weight: 700; color: var(--color-chocolate);">Add
+        New Product</h3>
+
+      <form id="admin-product-form" onsubmit="saveProduct(event)">
+        <input type="hidden" id="edit-product-id">
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="form-title">Product Title</label>
+            <input type="text" id="form-title" class="form-control" required>
+          </div>
+
+          <div class="form-group">
+            <label for="form-price">Price (£)</label>
+            <input type="number" id="form-price" step="0.01" class="form-control" required>
+          </div>
+
+          <div class="form-group">
+            <label for="form-category">Category (Product Type for Filters)</label>
+            <select id="form-category" class="form-control" required>
+              <option value="Clothes">Clothes</option>
+              <option value="Bags">Bags</option>
+              <option value="Accessories">Accessories</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="form-tag">Visual Tag (Optional)</label>
+            <input type="text" id="form-tag" class="form-control" placeholder="e.g. Special, Stitch, New...">
+          </div>
+
+          <div class="form-group">
+            <label for="form-color">Color</label>
+            <input type="text" id="form-color" class="form-control" placeholder="Green, Red, Blue..." required>
+          </div>
+
+          <div class="form-group">
+            <label for="form-size">Size</label>
+            <input type="text" id="form-size" class="form-control" placeholder="Medium (M)" required>
+          </div>
+
+          <div class="form-group">
+            <label for="form-dimensions">Dimensions</label>
+            <input type="text" id="form-dimensions" class="form-control" placeholder="Chest: 50cm, Length: 60cm"
+              required>
+          </div>
+
+          <div class="form-group">
+            <label for="form-materials">Materials</label>
+            <input type="text" id="form-materials" class="form-control" placeholder="Upcycled Linen & Cotton" required>
+          </div>
+
+          <div class="form-group">
+            <label for="form-care">Care Instructions</label>
+            <input type="text" id="form-care" class="form-control" placeholder="Gentle hand wash cold" required>
+          </div>
+
+          <div class="form-group" style="grid-column: 1 / -1;">
+            <label for="form-images">Images (Comma separated paths, e.g. products1/image.jpg)</label>
+            <input type="text" id="form-images" class="form-control"
+              placeholder="products1/20260614_151200.jpg, products1/20260614_151233.jpg" required>
+          </div>
+
+          <div class="form-group" style="grid-column: 1 / -1;">
+            <label for="form-desc">Product Description</label>
+            <textarea id="form-desc" class="form-control" rows="3" required></textarea>
+          </div>
+
+          <div class="form-group" style="grid-column: 1 / -1;">
+            <label for="form-backstory">Maker's Backstory</label>
+            <textarea id="form-backstory" class="form-control" rows="3" required></textarea>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary" onclick="closeAdminProductModal()">Cancel</button>
+          <button type="submit" class="btn">Save Product</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <script>
     // State Variables
     let cart = [];
@@ -2736,130 +3166,7 @@
       color: []
     };
 
-    // Curated products database
-    const products = [
-      {
-        id: 1,
-        title: "Earthy Patchwork Jacket",
-        price: 85.00,
-        category: "Clothes",
-        color: "Brown",
-        images: [
-          'products3/WhatsApp Image 2026-06-25 at 10.35.15 (1).jpeg',
-          'products3/WhatsApp Image 2026-06-25 at 10.35.15 (2).jpeg',
-          'products3/WhatsApp Image 2026-06-25 at 10.35.15 (3).jpeg'
-        ],
-        description: "A beautifully textured, relaxed-fit patchwork jacket crafted entirely from vintage heavyweight linens and second-hand cotton twill. Featuring custom visible hand-stitching and two large front pockets.",
-        backstory: "This jacket was built using cuttings of vintage curtains from a community center in North London combined with scraps of utility trousers. Every line of stitching has been reinforced by hand in our studio.",
-        spec: {
-          size: "Medium (M)",
-          dimensions: "Chest: 56cm, Length: 68cm, Sleeve: 62cm",
-          materials: "100% Upcycled Linen & Cotton",
-          care: "Hand wash cold, dry flat"
-        },
-        inventory: 1
-      },
-      {
-        id: 2,
-        title: "Forest Green Applique Tote",
-        price: 45.00,
-        category: "Bags",
-        color: "Green",
-        images: [
-          'products3/WhatsApp Image 2026-06-25 at 10.34.11.jpeg',
-          'products3/WhatsApp Image 2026-06-25 at 10.34.11 (1).jpeg'
-        ],
-        description: "A sturdy, fully lined tote bag adorned with whimsical embroidered applique leaf motifs. Features durable wide straps for comfortable shoulder carry.",
-        backstory: "The body of this bag was cut from a heavy forest-green canvas army surplus duffel, and the leaves were appliqued using floral-patterned scrap fabrics collected from local upholstery workshops.",
-        spec: {
-          size: "One Size",
-          dimensions: "40cm x 38cm, Strap Drop: 30cm",
-          materials: "Canvas body, Cotton applique linings",
-          care: "Gentle machine wash cold"
-        },
-        inventory: 1
-      },
-      {
-        id: 3,
-        title: "Retro Orange Sun Hat",
-        price: 32.00,
-        category: "Accessories",
-        color: "Orange",
-        images: [
-          'products3/WhatsApp Image 2026-06-25 at 10.35.19 (7).jpeg',
-          'products3/WhatsApp Image 2026-06-25 at 10.35.19 (8).jpeg'
-        ],
-        description: "A soft, reversible bucket-style sun hat in a vibrant retro orange check pattern on one side, and warm cream canvas on the other.",
-        backstory: "Crafted from a pair of deadstock 1970s gingham trousers that had damaged cuffs. We saved the top sections to form the outer shell of this playful piece.",
-        spec: {
-          size: "One Size (58cm circumference)",
-          dimensions: "Brim width: 7cm",
-          materials: "100% Upcycled Cotton",
-          care: "Spot clean or hand wash only"
-        },
-        inventory: 1
-      },
-      {
-        id: 4,
-        title: "Ocean Blue Denim Waistcoat",
-        price: 65.00,
-        category: "Clothes",
-        color: "Blue",
-        images: [
-          'products3/WhatsApp Image 2026-06-25 at 10.34.10 (1).jpeg',
-          'products3/WhatsApp Image 2026-06-25 at 10.34.10.jpeg'
-        ],
-        description: "An open waistcoat constructed from varying shades of light and dark preloved denim, with cross-hatch hand embroidery adding decorative tactile details.",
-        backstory: "Created from three pairs of discarded jeans that were too worn out at the knees to salvage as trousers. We stitched the cleanest panels together in a clean mosaic.",
-        spec: {
-          size: "Small/Medium (S/M)",
-          dimensions: "Chest: 48cm, Length: 52cm",
-          materials: "Upcycled Denim & Cotton Lining",
-          care: "Machine wash cold inside out"
-        },
-        inventory: 1
-      },
-      {
-        id: 5,
-        title: "Cream Crochet Trim Pouch",
-        price: 28.00,
-        category: "Accessories",
-        color: "Cream",
-        images: [
-          'products3/WhatsApp Image 2026-06-25 at 10.35.15 (3).jpeg',
-          'products3/WhatsApp Image 2026-06-25 at 10.35.15 (4).jpeg'
-        ],
-        description: "A delicate zippered pouch with vintage crochet trims and a hand-stamped label, perfect for holding small daily essentials or toiletries.",
-        backstory: "Features laces rescued from an old tablecloth and lined with soft cream brushed cotton from a vintage bedsheet.",
-        spec: {
-          size: "One Size",
-          dimensions: "22cm x 15cm",
-          materials: "Cotton shell, Metal zipper, Lace trim",
-          care: "Hand wash with mild detergent"
-        },
-        inventory: 1
-      },
-      {
-        id: 6,
-        title: "Patchwork Denim Messenger Bag",
-        price: 58.00,
-        category: "Bags",
-        color: "Blue",
-        images: [
-          'products3/WhatsApp Image 2026-06-25 at 10.35.08.jpeg',
-          'products3/WhatsApp Image 2026-06-25 at 10.35.08 (1).jpeg'
-        ],
-        description: "A rugged messenger bag with an adjustable crossbody strap, custom internal pockets, and a vintage button closure.",
-        backstory: "Constructed from repurposed denim work jackets and vintage plaid flannel shirts, giving it a strong structure and cozy lining.",
-        spec: {
-          size: "One Size",
-          dimensions: "32cm x 26cm x 8cm",
-          materials: "Denim and Flannel Upholstery thread",
-          care: "Wash cold, hang dry"
-        },
-        inventory: 1
-      }
-    ];
+
 
     // Filter toggle accordion
     function toggleFiltersAccordion() {
@@ -2873,7 +3180,7 @@
     function toggleFilter(button) {
       const type = button.getAttribute('data-filter-type');
       const value = button.getAttribute('data-filter-value');
-      
+
       const idx = activeFilters[type].indexOf(value);
       if (idx > -1) {
         activeFilters[type].splice(idx, 1);
@@ -2882,7 +3189,7 @@
         activeFilters[type].push(value);
         button.classList.add('active');
       }
-      
+
       renderActiveFilterTabs();
       renderProducts();
     }
@@ -2891,9 +3198,9 @@
     function renderActiveFilterTabs() {
       const container = document.getElementById('activeFiltersTabs');
       if (!container) return;
-      
+
       container.innerHTML = '';
-      
+
       Object.keys(activeFilters).forEach(type => {
         activeFilters[type].forEach(value => {
           const tab = document.createElement('div');
@@ -2913,11 +3220,11 @@
       if (idx > -1) {
         activeFilters[type].splice(idx, 1);
       }
-      
+
       // Update UI button state
       const buttons = document.querySelectorAll(`.filter-btn[data-filter-type="${type}"][data-filter-value="${value}"]`);
       buttons.forEach(btn => btn.classList.remove('active'));
-      
+
       renderActiveFilterTabs();
       renderProducts();
     }
@@ -2926,24 +3233,19 @@
     function renderProducts() {
       const grid = document.getElementById('productsGrid');
       if (!grid) return;
-      
+
       grid.innerHTML = '';
-      
+
       // Filter list: only show items with inventory > 0
       const filtered = shopProducts.filter(p => {
         if (p.inventory <= 0) return false;
-        
-        if (activeFilters.category.length > 0 && !activeFilters.category.includes(p.category)) {
-          return false;
-        }
-        
-        if (activeFilters.color.length > 0 && !activeFilters.color.includes(p.color)) {
-          return false;
-        }
-        
-        return true;
+
+        const categoryMatch = activeFilters.category.length === 0 || activeFilters.category.includes(p.category);
+        const colorMatch = activeFilters.color.length === 0 || activeFilters.color.includes(p.color);
+
+        return categoryMatch && colorMatch;
       });
-      
+
       if (filtered.length === 0) {
         grid.innerHTML = `
           <div class="no-products">
@@ -2953,19 +3255,23 @@
         `;
         return;
       }
-      
+
       filtered.forEach(p => {
         const card = document.createElement('div');
         card.className = 'product-card';
-        
+
         const isInCart = cart.some(item => item.id === p.id);
-        
+
+        const tagBadge = p.tag ? `
+          <div class="product-badges">
+            <span class="product-category-meta" style="background-color: var(--color-white); padding: 4px 8px; border-radius: 4px; font-size: 10px;">${p.tag}</span>
+          </div>
+        ` : '';
+
         card.innerHTML = `
           <div class="product-img-wrapper" onclick="openProductDetail(${p.id})">
             <img class="product-img" src="${p.images[0]}" alt="${p.title}">
-            <div class="product-badges">
-              <span class="product-category-meta" style="background-color: var(--color-white); padding: 4px 8px; border-radius: 4px; font-size: 10px;">${p.category}</span>
-            </div>
+            ${tagBadge}
           </div>
           <div class="product-info">
             <h3 class="product-card-title">${p.title}</h3>
@@ -2985,12 +3291,12 @@
     function openProductDetail(id) {
       const p = shopProducts.find(item => item.id === id);
       if (!p) return;
-      
+
       const grid = document.getElementById('detailModalGrid');
       if (!grid) return;
-      
+
       const isInCart = cart.some(item => item.id === p.id);
-      
+
       grid.innerHTML = `
         <div class="detail-gallery">
           <div class="detail-main-img">
@@ -3005,7 +3311,7 @@
           </div>
         </div>
         <div class="detail-content">
-          <span class="detail-category">${p.category}</span>
+          ${p.tag ? `<span class="detail-category">${p.tag}</span>` : ''}
           <h2 class="detail-title font-display">${p.title}</h2>
           <div class="detail-price-row">
             <span class="detail-price">£${p.price.toFixed(2)}</span>
@@ -3037,11 +3343,11 @@
         </div>
         
         <div class="detail-backstory">
-          <h3 class="detail-backstory-label">The Maker's Backstory</h3>
+          <h3 class="detail-backstory-label">*backstory title*<h3>
           <p class="detail-backstory-text">${p.backstory}</p>
         </div>
       `;
-      
+
       toggleDetailModal(true);
     }
 
@@ -3051,7 +3357,7 @@
       if (mainImg) {
         mainImg.src = imgSrc;
       }
-      
+
       const thumbs = document.querySelectorAll('.detail-thumb');
       thumbs.forEach(t => t.classList.remove('active'));
       thumbEl.classList.add('active');
@@ -3061,12 +3367,12 @@
     function addToCart(productId) {
       const p = shopProducts.find(item => item.id === productId);
       if (!p) return;
-      
+
       if (cart.some(item => item.id === productId)) return;
-      
+
       cart.push(p);
       localStorage.setItem('pn_cart', JSON.stringify(cart));
-      
+
       renderCart();
       renderProducts();
       toggleCart(true);
@@ -3076,7 +3382,7 @@
     function removeFromCart(productId) {
       cart = cart.filter(item => item.id !== productId);
       localStorage.setItem('pn_cart', JSON.stringify(cart));
-      
+
       renderCart();
       renderProducts();
     }
@@ -3087,24 +3393,24 @@
       const subtotalEl = document.getElementById('cartSubtotal');
       const headerTitle = document.querySelector('.cart-header-title');
       const checkoutBtn = document.getElementById('checkoutBtn');
-      
+
       if (!list || !subtotalEl) return;
-      
+
       list.innerHTML = '';
-      
+
       const cartCount = cart.length;
       if (headerTitle) {
         headerTitle.innerText = `Your Bag (${cartCount})`;
       }
-      
+
       const navBagCount = document.getElementById('cartCount');
       if (navBagCount) {
         navBagCount.innerText = cartCount;
         navBagCount.style.display = cartCount > 0 ? 'inline-flex' : 'none';
       }
-      
+
       let subtotal = 0;
-      
+
       if (cart.length === 0) {
         list.innerHTML = `
           <div style="text-align: center; padding: 40px 20px; color: var(--color-caramel);">
@@ -3116,9 +3422,9 @@
         if (checkoutBtn) checkoutBtn.disabled = true;
         return;
       }
-      
+
       if (checkoutBtn) checkoutBtn.disabled = false;
-      
+
       cart.forEach(item => {
         subtotal += item.price;
         const itemEl = document.createElement('div');
@@ -3136,29 +3442,29 @@
         `;
         list.appendChild(itemEl);
       });
-      
+
       subtotalEl.innerText = `£${subtotal.toFixed(2)}`;
     }
 
     // Checkout flow: marks items out of stock and archives them
     function checkout() {
       if (cart.length === 0) return;
-      
+
       cart.forEach(cartItem => {
         const prod = shopProducts.find(p => p.id === cartItem.id);
         if (prod) {
           prod.inventory = 0;
         }
       });
-      
+
       localStorage.setItem('pn_products', JSON.stringify(shopProducts));
-      
+
       cart = [];
       localStorage.setItem('pn_cart', JSON.stringify(cart));
-      
+
       toggleCart(false);
       toggleSuccessModal(true);
-      
+
       renderCart();
       renderProducts();
     }
@@ -3443,20 +3749,53 @@
     }
 
     // Initialize the app
-    window.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('DOMContentLoaded', initApp);
+
+    async function initApp() {
       // Load cart from localStorage
       const storedCart = localStorage.getItem('pn_cart');
       if (storedCart) {
         cart = JSON.parse(storedCart);
       }
 
-      // Initialize products state
-      const storedProducts = localStorage.getItem('pn_products');
-      if (storedProducts) {
-        shopProducts = JSON.parse(storedProducts);
-      } else {
-        shopProducts = [...products];
-        localStorage.setItem('pn_products', JSON.stringify(shopProducts));
+      // Load products database from products.json
+      try {
+        const response = await fetch('products.json');
+        const defaultProducts = await response.json();
+
+        // Initialize products state
+        const storedProducts = localStorage.getItem('pn_products');
+        let needsReset = false;
+        if (storedProducts) {
+          try {
+            shopProducts = JSON.parse(storedProducts);
+            if (shopProducts.length !== defaultProducts.length) {
+              needsReset = true;
+            } else {
+              for (let i = 0; i < defaultProducts.length; i++) {
+                if (!shopProducts.some(sp => sp.id === defaultProducts[i].id)) {
+                  needsReset = true;
+                  break;
+                }
+              }
+            }
+          } catch (e) {
+            needsReset = true;
+          }
+        } else {
+          needsReset = true;
+        }
+
+        if (needsReset) {
+          shopProducts = JSON.parse(JSON.stringify(defaultProducts));
+          localStorage.setItem('pn_products', JSON.stringify(shopProducts));
+        }
+      } catch (error) {
+        console.error("Failed to load products database:", error);
+        const storedProducts = localStorage.getItem('pn_products');
+        if (storedProducts) {
+          shopProducts = JSON.parse(storedProducts);
+        }
       }
 
       // Render initial shop products and cart
@@ -3503,7 +3842,7 @@
       if (contactEl) {
         contactObserver.observe(contactEl);
       }
-    });
+    }
 
     // ----------------------------------------------------
     // SPA ROUTING
@@ -3511,12 +3850,16 @@
     function handleHashRouting() {
       const hash = window.location.hash.substring(1) || 'home';
       // Map hash to section ids
-      const validRoutes = ['home', 'collections', 'story', 'contact'];
+      const validRoutes = ['home', 'collections', 'story', 'contact', 'admin'];
       let targetRoute = validRoutes.includes(hash) ? hash : 'home';
 
       const isContact = targetRoute === 'contact';
       if (isContact) {
         targetRoute = 'home';
+      }
+
+      if (targetRoute === 'admin') {
+        checkAdminLoginState();
       }
 
       // Update UI active links
@@ -3613,6 +3956,378 @@
       if (e.target === document.getElementById('detailOverlay')) {
         toggleDetailModal(false);
       }
+    }
+
+    // ----------------------------------------------------
+    // ADMIN PORTAL LOGIC (GitHub REST API Git-based CMS)
+    // ----------------------------------------------------
+    let adminProductsSha = null;
+
+    function getGitHubHeaders() {
+      const pat = sessionStorage.getItem('pn_github_pat');
+      return {
+        'Authorization': `token ${pat}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/vnd.github.v3+json'
+      };
+    }
+
+    function checkAdminLoginState() {
+      const pat = sessionStorage.getItem('pn_github_pat');
+      const loginCard = document.getElementById('admin-login-card');
+      const dashboard = document.getElementById('admin-dashboard');
+
+      if (pat) {
+        if (loginCard) loginCard.style.display = 'none';
+        if (dashboard) dashboard.style.display = 'block';
+        loadAdminProducts();
+      } else {
+        if (loginCard) loginCard.style.display = 'block';
+        if (dashboard) dashboard.style.display = 'none';
+      }
+    }
+
+    async function loginAdmin() {
+      const patInput = document.getElementById('admin-pat-input');
+      if (!patInput) return;
+      const pat = patInput.value.trim();
+
+      if (!pat) {
+        alert('Please enter a GitHub Access Token.');
+        return;
+      }
+
+      // Verify the token by calling the GitHub User API
+      try {
+        const res = await fetch('https://api.github.com/user', {
+          headers: { 'Authorization': `token ${pat}` }
+        });
+        if (res.ok) {
+          sessionStorage.setItem('pn_github_pat', pat);
+          patInput.value = '';
+          checkAdminLoginState();
+        } else {
+          alert('Invalid GitHub Access Token. Please make sure it has the correct permissions.');
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Connection error. Failed to verify token.');
+      }
+    }
+
+    function logoutAdmin() {
+      sessionStorage.removeItem('pn_github_pat');
+      navigateTo('home');
+    }
+
+    async function loadAdminProducts() {
+      const tableBody = document.getElementById('admin-products-table-body');
+      if (tableBody) {
+        tableBody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 30px;">Loading catalog from GitHub...</td></tr>';
+      }
+
+      try {
+        // Fetch metadata to get the current file SHA with cache-busting query param to avoid CORS issues
+        const cacheBustUrl = `https://api.github.com/repos/coreyyp/pipnooweb/contents/products.json?t=${Date.now()}`;
+        const res = await fetch(cacheBustUrl, {
+          headers: getGitHubHeaders()
+        });
+
+        if (res.ok) {
+          const fileData = await res.json();
+          adminProductsSha = fileData.sha;
+
+          // Decode content
+          const decodedContent = decodeURIComponent(escape(atob(fileData.content.replace(/\s/g, ''))));
+          shopProducts = JSON.parse(decodedContent);
+
+          // Sync with local storage
+          localStorage.setItem('pn_products', JSON.stringify(shopProducts));
+
+          renderAdminProductsTable();
+          renderProducts(); // Update public shop view too
+        } else if (res.status === 404) {
+          // File does not exist yet on remote repo. Setup for initial commit creation.
+          console.log("products.json not found on GitHub. Initializing with local data.");
+          adminProductsSha = null;
+
+          const storedProducts = localStorage.getItem('pn_products');
+          if (storedProducts) {
+            shopProducts = JSON.parse(storedProducts);
+          }
+
+          renderAdminProductsTable();
+          renderProducts();
+        } else {
+          const errorData = await res.json();
+          if (tableBody) {
+            tableBody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 30px; color: red;">Failed to retrieve products.json: ${errorData.message || res.statusText}</td></tr>`;
+          }
+        }
+      } catch (err) {
+        console.error("Fetch catalog error:", err);
+        if (tableBody) {
+          tableBody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 30px; color: red;">Error fetching catalog from GitHub. See console for details.</td></tr>';
+        }
+      }
+    }
+
+    function renderAdminProductsTable() {
+      const tableBody = document.getElementById('admin-products-table-body');
+      if (!tableBody) return;
+      tableBody.innerHTML = '';
+
+      if (shopProducts.length === 0) {
+        tableBody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 30px;">No products found in the catalog.</td></tr>';
+        return;
+      }
+
+      shopProducts.forEach(p => {
+        const tr = document.createElement('tr');
+
+        const isArchived = p.inventory <= 0;
+        const statusBadge = isArchived
+          ? '<span class="admin-badge archived">Sold Out</span>'
+          : '<span class="admin-badge active">In Stock</span>';
+
+        const archiveActionLabel = isArchived ? 'Re-stock' : 'Archive';
+
+        tr.innerHTML = `
+          <td><img src="${p.images[0]}" class="admin-thumb" alt="${p.title}"></td>
+          <td style="font-weight: 600;">${p.title}</td>
+          <td>£${p.price.toFixed(2)}</td>
+          <td>${p.category}</td>
+          <td>${p.color}</td>
+          <td>${statusBadge}</td>
+          <td>
+            <div class="admin-actions-cell">
+              <button class="admin-action-btn" onclick="editProduct(${p.id})">Edit</button>
+              <button class="admin-action-btn archive-btn" onclick="toggleProductArchive(${p.id})">${archiveActionLabel}</button>
+              <button class="admin-action-btn delete-btn" onclick="deleteProduct(${p.id})">Delete</button>
+            </div>
+          </td>
+        `;
+        tableBody.appendChild(tr);
+      });
+    }
+
+    function showAddProductForm() {
+      const modal = document.getElementById('admin-product-modal');
+      const form = document.getElementById('admin-product-form');
+      const title = document.getElementById('admin-modal-title');
+
+      if (!modal || !form || !title) return;
+
+      title.innerText = 'Add New Product';
+      form.reset();
+      document.getElementById('edit-product-id').value = '';
+      document.getElementById('form-tag').value = '';
+
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function editProduct(id) {
+      const modal = document.getElementById('admin-product-modal');
+      const title = document.getElementById('admin-modal-title');
+      if (!modal || !title) return;
+
+      const p = shopProducts.find(item => item.id === id);
+      if (!p) return;
+
+      title.innerText = 'Edit Product';
+
+      document.getElementById('edit-product-id').value = p.id;
+      document.getElementById('form-title').value = p.title;
+      document.getElementById('form-price').value = p.price;
+      document.getElementById('form-category').value = p.category;
+      document.getElementById('form-tag').value = p.tag || '';
+      document.getElementById('form-color').value = p.color;
+      document.getElementById('form-size').value = (p.spec && p.spec.size) || '';
+      document.getElementById('form-dimensions').value = (p.spec && p.spec.dimensions) || '';
+      document.getElementById('form-materials').value = (p.spec && p.spec.materials) || '';
+      document.getElementById('form-care').value = (p.spec && p.spec.care) || '';
+      document.getElementById('form-images').value = p.images ? p.images.join(', ') : '';
+      document.getElementById('form-desc').value = p.description || '';
+      document.getElementById('form-backstory').value = p.backstory || '';
+
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeAdminProductModal() {
+      const modal = document.getElementById('admin-product-modal');
+      if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function closeAdminProductModalOutside(e) {
+      if (e.target === document.getElementById('admin-product-modal')) {
+        closeAdminProductModal();
+      }
+    }
+
+    async function commitCatalogUpdate(updatedProducts, commitMessage) {
+      const modal = document.getElementById('admin-product-modal');
+      const saveBtn = modal ? modal.querySelector('button[type="submit"]') : null;
+      const originalBtnText = saveBtn ? saveBtn.innerText : 'Save Product';
+
+      if (saveBtn) {
+        saveBtn.innerText = 'Syncing with GitHub...';
+        saveBtn.disabled = true;
+      }
+
+      const jsonStr = JSON.stringify(updatedProducts, null, 2);
+      // UTF-8 safe base64 encoding
+      const base64Content = btoa(unescape(encodeURIComponent(jsonStr)));
+
+      try {
+        const bodyPayload = {
+          message: commitMessage,
+          content: base64Content
+        };
+
+        if (adminProductsSha) {
+          bodyPayload.sha = adminProductsSha;
+        }
+
+        const res = await fetch('https://api.github.com/repos/coreyyp/pipnooweb/contents/products.json', {
+          method: 'PUT',
+          headers: getGitHubHeaders(),
+          body: JSON.stringify(bodyPayload)
+        });
+
+        if (res.ok) {
+          const resData = await res.json();
+          adminProductsSha = resData.content.sha; // Update global SHA to avoid conflicts next time
+          shopProducts = updatedProducts;
+          localStorage.setItem('pn_products', JSON.stringify(shopProducts));
+
+          closeAdminProductModal();
+          renderAdminProductsTable();
+          renderProducts();
+          alert('Successfully synchronized changes directly to GitHub!');
+        } else {
+          const errorData = await res.json();
+          alert(`Failed to save to GitHub: ${errorData.message || 'Unknown error'}`);
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Connection error. Failed to push changes to GitHub.');
+      } finally {
+        if (saveBtn) {
+          saveBtn.innerText = originalBtnText;
+          saveBtn.disabled = false;
+        }
+      }
+    }
+
+    function saveProduct(event) {
+      event.preventDefault();
+
+      const idVal = document.getElementById('edit-product-id').value;
+      const title = document.getElementById('form-title').value.trim();
+      const price = parseFloat(document.getElementById('form-price').value);
+      const category = document.getElementById('form-category').value;
+      const tag = document.getElementById('form-tag').value.trim();
+      const color = document.getElementById('form-color').value.trim();
+      const size = document.getElementById('form-size').value.trim();
+      const dimensions = document.getElementById('form-dimensions').value.trim();
+      const materials = document.getElementById('form-materials').value.trim();
+      const care = document.getElementById('form-care').value.trim();
+      const imagesStr = document.getElementById('form-images').value.trim();
+      const description = document.getElementById('form-desc').value.trim();
+      const backstory = document.getElementById('form-backstory').value.trim();
+
+      const images = imagesStr.split(',').map(s => s.trim()).filter(Boolean);
+
+      if (images.length === 0) {
+        alert('Please specify at least one product image path.');
+        return;
+      }
+
+      let updatedProducts = [...shopProducts];
+      let commitMessage = '';
+
+      if (idVal) {
+        // Edit existing product
+        const id = parseInt(idVal);
+        const idx = updatedProducts.findIndex(p => p.id === id);
+        if (idx > -1) {
+          const originalProd = updatedProducts[idx];
+          updatedProducts[idx] = {
+            ...originalProd,
+            title,
+            price,
+            category,
+            tag,
+            color,
+            images,
+            description,
+            backstory,
+            spec: { size, dimensions, materials, care }
+          };
+          commitMessage = `admin: update product "${title}" (ID: ${id})`;
+        }
+      } else {
+        // Add new product
+        const nextId = shopProducts.length > 0 ? Math.max(...shopProducts.map(p => p.id)) + 1 : 1;
+        const newProduct = {
+          id: nextId,
+          title,
+          price,
+          category,
+          tag,
+          color,
+          images,
+          description,
+          backstory,
+          spec: { size, dimensions, materials, care },
+          inventory: 1
+        };
+        updatedProducts.push(newProduct);
+        commitMessage = `admin: add product "${title}" (ID: ${nextId})`;
+      }
+
+      commitCatalogUpdate(updatedProducts, commitMessage);
+    }
+
+    function toggleProductArchive(id) {
+      const p = shopProducts.find(item => item.id === id);
+      if (!p) return;
+
+      const isArchived = p.inventory <= 0;
+      const newInventory = isArchived ? 1 : 0;
+      const actionText = isArchived ? 'restock' : 'archive';
+
+      if (!confirm(`Are you sure you want to ${actionText} "${p.title}"?`)) {
+        return;
+      }
+
+      const updatedProducts = shopProducts.map(item => {
+        if (item.id === id) {
+          return { ...item, inventory: newInventory };
+        }
+        return item;
+      });
+
+      const commitMessage = `admin: ${actionText} product "${p.title}" (ID: ${id})`;
+      commitCatalogUpdate(updatedProducts, commitMessage);
+    }
+
+    function deleteProduct(id) {
+      const p = shopProducts.find(item => item.id === id);
+      if (!p) return;
+
+      if (!confirm(`Are you sure you want to permanently delete "${p.title}"? This cannot be undone and will commit the changes directly to GitHub.`)) {
+        return;
+      }
+
+      const updatedProducts = shopProducts.filter(item => item.id !== id);
+      const commitMessage = `admin: permanently delete product "${p.title}" (ID: ${id})`;
+      commitCatalogUpdate(updatedProducts, commitMessage);
     }
   </script>
 </body>
