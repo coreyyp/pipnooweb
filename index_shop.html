@@ -2754,6 +2754,8 @@
                     onclick="toggleFilter(this)">Blue</button>
                   <button class="filter-btn" data-filter-type="color" data-filter-value="Red"
                     onclick="toggleFilter(this)">Red</button>
+                  <button class="filter-btn" data-filter-type="color" data-filter-value="Multiple"
+                    onclick="toggleFilter(this)">Multiple</button>
                 </div>
               </div>
             </div>
@@ -3268,7 +3270,10 @@
         if (p.inventory <= 0) return false;
 
         const categoryMatch = activeFilters.category.length === 0 || activeFilters.category.includes(p.category);
-        const colorMatch = activeFilters.color.length === 0 || activeFilters.color.includes(p.color);
+        const productColors = p.color ? p.color.split(',').map(c => c.trim().toLowerCase()) : [];
+        const colorMatch = activeFilters.color.length === 0 || activeFilters.color.some(filterColor => {
+          return productColors.includes(filterColor.toLowerCase());
+        });
 
         return categoryMatch && colorMatch;
       });
