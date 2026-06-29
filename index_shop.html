@@ -4318,7 +4318,22 @@
           alert(`Server responded with error status: ${res.status}`);
         }
       } catch (err) {
-        console.error(err);
+        console.warn("Save request met network/redirect error, verifying if it succeeded anyway...", err);
+        
+        // Wait 1.5 seconds and fetch latest catalog to verify if the save actually succeeded (self-healing verification)
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        try {
+          await loadAdminProducts();
+          const verifiedProduct = shopProducts.find(p => p.id === id);
+          if (verifiedProduct && verifiedProduct.title === title) {
+            closeAdminProductModal();
+            alert('Successfully saved and synchronized directly to Google Sheet!');
+            return;
+          }
+        } catch (verifyErr) {
+          console.error("Self-healing verification fetch failed too:", verifyErr);
+        }
+        
         alert('Connection error. Failed to save product to Google Sheet.');
       } finally {
         if (saveBtn) {
@@ -4372,7 +4387,20 @@
           alert(`Failed to connect. Status: ${res.status}`);
         }
       } catch (err) {
-        console.error(err);
+        console.warn("Archive toggle met redirect error, verifying if it succeeded anyway...", err);
+        
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        try {
+          await loadAdminProducts();
+          const verifiedProduct = shopProducts.find(p => p.id === id);
+          if (verifiedProduct && verifiedProduct.inventory === newInventory) {
+            alert(`Product "${p.title}" successfully ${actionText}ed in Google Sheet!`);
+            return;
+          }
+        } catch (verifyErr) {
+          console.error("Self-healing verification fetch failed too:", verifyErr);
+        }
+        
         alert(`Connection error. Failed to ${actionText} product.`);
       }
     }
@@ -4415,7 +4443,20 @@
           alert(`Failed to connect. Status: ${res.status}`);
         }
       } catch (err) {
-        console.error(err);
+        console.warn("Delete met redirect error, verifying if it succeeded anyway...", err);
+        
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        try {
+          await loadAdminProducts();
+          const verifiedProduct = shopProducts.find(p => p.id === id);
+          if (!verifiedProduct) {
+            alert(`Product "${p.title}" permanently deleted from Google Sheet!`);
+            return;
+          }
+        } catch (verifyErr) {
+          console.error("Self-healing verification fetch failed too:", verifyErr);
+        }
+        
         alert('Connection error. Failed to delete product.');
       }
     }
