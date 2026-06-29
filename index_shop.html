@@ -3148,6 +3148,16 @@
             <input type="text" id="form-care" class="form-control" placeholder="Gentle hand wash cold" required>
           </div>
 
+          <div class="form-group">
+            <label for="form-then">Upcycling - THEN (Optional)</label>
+            <input type="text" id="form-then" class="form-control" placeholder="e.g. Vintage tablecloth">
+          </div>
+
+          <div class="form-group">
+            <label for="form-now">Upcycling - NOW (Optional)</label>
+            <input type="text" id="form-now" class="form-control" placeholder="e.g. Summer picnic dress">
+          </div>
+
           <div class="form-group" style="grid-column: 1 / -1;">
             <label for="form-images">Images (Comma separated paths, e.g. products1/image.jpg)</label>
             <input type="text" id="form-images" class="form-control"
@@ -3287,6 +3297,16 @@
           </div>
         ` : '';
 
+        const upcycleHtml = p.then && p.now ? `
+          <div class="product-card-upcycle" style="font-size: 11px; margin-top: 5px; display: flex; gap: 4px; flex-wrap: wrap; align-items: center;">
+            <span style="color: var(--color-caramel); font-weight: 700; text-transform: uppercase; font-size: 9px; letter-spacing: 0.5px;">Then:</span>
+            <span style="color: var(--color-chocolate); opacity: 0.85; font-size: 11px;">${p.then}</span>
+            <span style="color: var(--color-mint); font-weight: bold; margin: 0 1px;">➔</span>
+            <span style="color: var(--color-caramel); font-weight: 700; text-transform: uppercase; font-size: 9px; letter-spacing: 0.5px;">Now:</span>
+            <span style="color: var(--color-chocolate); font-weight: 600; font-size: 11px;">${p.now}</span>
+          </div>
+        ` : '';
+
         card.innerHTML = `
           <div class="product-img-wrapper">
             <img class="product-img" src="${p.images[0]}" alt="${p.title}">
@@ -3296,6 +3316,7 @@
             <div class="product-info-top">
               <span class="product-price">£${p.price.toFixed(2)}</span>
               <h3 class="product-card-title">${p.title}</h3>
+              ${upcycleHtml}
             </div>
             <div class="product-card-bottom" style="justify-content: flex-end;">
               <button class="add-to-cart-btn" onclick="event.stopPropagation(); addToCart(${p.id})" ${isInCart ? 'disabled' : ''} aria-label="Add to Bag">
@@ -3337,6 +3358,13 @@
           <div class="detail-price-row">
             <span class="detail-price">£${p.price.toFixed(2)}</span>
           </div>
+          ${p.then && p.now ? `
+            <div class="detail-upcycle" style="margin-bottom: 20px; padding: 12px 16px; background-color: #f7faf9; border-left: 3px solid var(--color-mint); font-size: 13px; display: flex; gap: 15px; align-items: center; border-radius: 0 4px 4px 0; border-top: 1px dashed rgba(0,0,0,0.05); border-bottom: 1px dashed rgba(0,0,0,0.05);">
+              <div><strong style="color: var(--color-caramel); text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; margin-right: 4px;">Then:</strong> <span style="color: var(--color-chocolate);">${p.then}</span></div>
+              <div style="color: var(--color-mint); font-weight: bold;">➔</div>
+              <div><strong style="color: var(--color-chocolate); text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; margin-right: 4px;">Now:</strong> <span style="color: var(--color-chocolate); font-weight: 600;">${p.now}</span></div>
+            </div>
+          ` : ''}
           <p class="detail-desc">${p.description}</p>
           
           <div class="detail-spec">
@@ -4203,6 +4231,8 @@
       form.reset();
       document.getElementById('edit-product-id').value = '';
       document.getElementById('form-tag').value = '';
+      document.getElementById('form-then').value = '';
+      document.getElementById('form-now').value = '';
 
       modal.classList.add('active');
       document.body.style.overflow = 'hidden';
@@ -4231,6 +4261,8 @@
       document.getElementById('form-images').value = p.images ? p.images.join(', ') : '';
       document.getElementById('form-desc').value = p.description || '';
       document.getElementById('form-backstory').value = p.backstory || '';
+      document.getElementById('form-then').value = p.then || '';
+      document.getElementById('form-now').value = p.now || '';
 
       modal.classList.add('active');
       document.body.style.overflow = 'hidden';
@@ -4266,6 +4298,8 @@
       const imagesStr = document.getElementById('form-images').value.trim();
       const description = document.getElementById('form-desc').value.trim();
       const backstory = document.getElementById('form-backstory').value.trim();
+      const then = document.getElementById('form-then').value.trim();
+      const now = document.getElementById('form-now').value.trim();
 
       const images = imagesStr.split(',').map(s => s.trim()).filter(Boolean);
 
@@ -4290,6 +4324,8 @@
         description,
         backstory,
         spec: { size, dimensions, materials, care },
+        then,
+        now,
         inventory: 1
       };
 
