@@ -2738,26 +2738,7 @@
                 </div>
               </div>
 
-              <!-- Filter Group: Color -->
-              <div class="filter-group">
-                <span class="filter-label">Color:</span>
-                <div class="filter-options">
-                  <button class="filter-btn" data-filter-type="color" data-filter-value="Green"
-                    onclick="toggleFilter(this)">Green</button>
-                  <button class="filter-btn" data-filter-type="color" data-filter-value="Brown"
-                    onclick="toggleFilter(this)">Brown</button>
-                  <button class="filter-btn" data-filter-type="color" data-filter-value="Orange"
-                    onclick="toggleFilter(this)">Orange</button>
-                  <button class="filter-btn" data-filter-type="color" data-filter-value="Cream"
-                    onclick="toggleFilter(this)">Cream</button>
-                  <button class="filter-btn" data-filter-type="color" data-filter-value="Blue"
-                    onclick="toggleFilter(this)">Blue</button>
-                  <button class="filter-btn" data-filter-type="color" data-filter-value="Red"
-                    onclick="toggleFilter(this)">Red</button>
-                  <button class="filter-btn" data-filter-type="color" data-filter-value="Multiple"
-                    onclick="toggleFilter(this)">Multiple</button>
-                </div>
-              </div>
+
             </div>
           </div>
         </div>
@@ -3190,8 +3171,7 @@
     let cart = [];
     let shopProducts = [];
     let activeFilters = {
-      category: [],
-      color: []
+      category: []
     };
 
 
@@ -3270,12 +3250,8 @@
         if (p.inventory <= 0) return false;
 
         const categoryMatch = activeFilters.category.length === 0 || activeFilters.category.includes(p.category);
-        const productColors = p.color ? p.color.split(',').map(c => c.trim().toLowerCase()) : [];
-        const colorMatch = activeFilters.color.length === 0 || activeFilters.color.some(filterColor => {
-          return productColors.includes(filterColor.toLowerCase());
-        });
 
-        return categoryMatch && colorMatch;
+        return categoryMatch;
       });
 
       if (filtered.length === 0) {
