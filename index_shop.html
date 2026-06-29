@@ -2924,13 +2924,17 @@
         <!-- Admin login card -->
         <div id="admin-login-card" class="admin-card">
           <h2>Admin Login</h2>
-          <p>Please enter your GitHub Personal Access Token (PAT) to manage the product catalog.</p>
-          <div class="form-group">
-            <label for="admin-pat-input">GitHub Access Token</label>
-            <input type="password" id="admin-pat-input" placeholder="ghp_..." class="form-control">
+          <p>Please enter your Google Web App URL and Admin Password to manage the product catalog.</p>
+          <div class="form-group" style="margin-bottom: 15px;">
+            <label for="admin-sheet-url">Google Web App URL</label>
+            <input type="text" id="admin-sheet-url" placeholder="https://script.google.com/macros/s/.../exec" class="form-control">
+          </div>
+          <div class="form-group" style="margin-bottom: 20px;">
+            <label for="admin-sheet-password">Admin Password (API Secret)</label>
+            <input type="password" id="admin-sheet-password" placeholder="Enter your secret password" class="form-control">
           </div>
           <button class="btn" onclick="loginAdmin()">Login</button>
-          <p class="admin-help-text">Don't have a token? Generate a token on GitHub with <code>repo</code> write scope.
+          <p class="admin-help-text">Deploy your Apps Script as a Web App (access: "Anyone", execute: "Me") and paste its URL above along with your password.
           </p>
         </div>
 
@@ -2939,7 +2943,7 @@
           <div class="admin-header-row">
             <div>
               <h2>Catalog Dashboard</h2>
-              <p>Adding and editing products in <code>products.json</code> directly on GitHub.</p>
+              <p>Adding and editing products dynamically inside your Google Sheet.</p>
             </div>
             <div class="admin-header-actions">
               <button class="btn btn-secondary" onclick="showAddProductForm()">+ Add New Product</button>
@@ -3450,6 +3454,26 @@
     function checkout() {
       if (cart.length === 0) return;
 
+      const url = GOOGLE_SHEET_WEB_APP_URL || localStorage.getItem('pn_sheet_url');
+      if (url) {
+        // Send decrement requests in parallel for all items in cart to update Google Sheet stock
+        const decrementPromises = cart.map(cartItem => {
+          return fetch(url, {
+            method: 'POST',
+            body: JSON.stringify({
+              action: 'decrement',
+              id: cartItem.id
+            })
+          }).catch(err => console.error("Failed to decrement inventory on Sheet:", err));
+        });
+
+        // Silently reload catalog after Google Sheets update completes to align public shop
+        Promise.all(decrementPromises).then(() => {
+          loadAdminProducts();
+        });
+      }
+
+      // Decrement locally immediately for instant UI feedback
       cart.forEach(cartItem => {
         const prod = shopProducts.find(p => p.id === cartItem.id);
         if (prod) {
@@ -3758,43 +3782,62 @@
         cart = JSON.parse(storedCart);
       }
 
-      // Load products database from products.json
-      try {
-        const response = await fetch('products.json');
-        const defaultProducts = await response.json();
+      // Resolve Web App URL: constant first, then localStorage (for admin setup)
+      const webAppUrl = GOOGLE_SHEET_WEB_APP_URL || localStorage.getItem('pn_sheet_url');
 
-        // Initialize products state
-        const storedProducts = localStorage.getItem('pn_products');
-        let needsReset = false;
-        if (storedProducts) {
-          try {
+      if (webAppUrl) {
+        try {
+          const response = await fetch(webAppUrl);
+          if (response.ok) {
+            shopProducts = await response.json();
+            localStorage.setItem('pn_products', JSON.stringify(shopProducts));
+          } else {
+            throw new Error('Google Sheet Web App responded with error status: ' + response.status);
+          }
+        } catch (error) {
+          console.error("Failed to load products from Google Sheet. Using cached local storage backup:", error);
+          const storedProducts = localStorage.getItem('pn_products');
+          if (storedProducts) {
             shopProducts = JSON.parse(storedProducts);
-            if (shopProducts.length !== defaultProducts.length) {
-              needsReset = true;
-            } else {
-              for (let i = 0; i < defaultProducts.length; i++) {
-                if (!shopProducts.some(sp => sp.id === defaultProducts[i].id)) {
-                  needsReset = true;
-                  break;
+          }
+        }
+      } else {
+        // Fallback to local products.json database if Google Sheets integration is not configured yet
+        try {
+          const response = await fetch('products.json');
+          const defaultProducts = await response.json();
+          const storedProducts = localStorage.getItem('pn_products');
+          let needsReset = false;
+          if (storedProducts) {
+            try {
+              shopProducts = JSON.parse(storedProducts);
+              if (shopProducts.length !== defaultProducts.length) {
+                needsReset = true;
+              } else {
+                for (let i = 0; i < defaultProducts.length; i++) {
+                  if (!shopProducts.some(sp => sp.id === defaultProducts[i].id)) {
+                    needsReset = true;
+                    break;
+                  }
                 }
               }
+            } catch (e) {
+              needsReset = true;
             }
-          } catch (e) {
+          } else {
             needsReset = true;
           }
-        } else {
-          needsReset = true;
-        }
 
-        if (needsReset) {
-          shopProducts = JSON.parse(JSON.stringify(defaultProducts));
-          localStorage.setItem('pn_products', JSON.stringify(shopProducts));
-        }
-      } catch (error) {
-        console.error("Failed to load products database:", error);
-        const storedProducts = localStorage.getItem('pn_products');
-        if (storedProducts) {
-          shopProducts = JSON.parse(storedProducts);
+          if (needsReset) {
+            shopProducts = JSON.parse(JSON.stringify(defaultProducts));
+            localStorage.setItem('pn_products', JSON.stringify(shopProducts));
+          }
+        } catch (error) {
+          console.error("Failed to load default local products.json database:", error);
+          const storedProducts = localStorage.getItem('pn_products');
+          if (storedProducts) {
+            shopProducts = JSON.parse(storedProducts);
+          }
         }
       }
 
@@ -3961,113 +4004,129 @@
     // ----------------------------------------------------
     // ADMIN PORTAL LOGIC (GitHub REST API Git-based CMS)
     // ----------------------------------------------------
-    let adminProductsSha = null;
-
-    function getGitHubHeaders() {
-      const pat = sessionStorage.getItem('pn_github_pat');
-      return {
-        'Authorization': `token ${pat}`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/vnd.github.v3+json'
-      };
-    }
+    // ----------------------------------------------------
+    // GOOGLE SHEETS INTEGRATION CONFIGURATION
+    // ----------------------------------------------------
+    // Paste your deployed Google Apps Script Web App URL here to make it permanent for all public visitors:
+    const GOOGLE_SHEET_WEB_APP_URL = "";
 
     function checkAdminLoginState() {
-      const pat = sessionStorage.getItem('pn_github_pat');
+      const url = GOOGLE_SHEET_WEB_APP_URL || localStorage.getItem('pn_sheet_url');
+      const password = localStorage.getItem('pn_sheet_password');
+      
       const loginCard = document.getElementById('admin-login-card');
       const dashboard = document.getElementById('admin-dashboard');
 
-      if (pat) {
+      if (url && password) {
         if (loginCard) loginCard.style.display = 'none';
         if (dashboard) dashboard.style.display = 'block';
         loadAdminProducts();
       } else {
         if (loginCard) loginCard.style.display = 'block';
         if (dashboard) dashboard.style.display = 'none';
+        
+        // Populate fields with stored config if available
+        const urlInput = document.getElementById('admin-sheet-url');
+        const passInput = document.getElementById('admin-sheet-password');
+        if (urlInput) urlInput.value = localStorage.getItem('pn_sheet_url') || GOOGLE_SHEET_WEB_APP_URL || '';
+        if (passInput) passInput.value = localStorage.getItem('pn_sheet_password') || '';
       }
     }
 
     async function loginAdmin() {
-      const patInput = document.getElementById('admin-pat-input');
-      if (!patInput) return;
-      const pat = patInput.value.trim();
+      const urlInput = document.getElementById('admin-sheet-url');
+      const passInput = document.getElementById('admin-sheet-password');
+      if (!urlInput || !passInput) return;
+      
+      const url = urlInput.value.trim();
+      const password = passInput.value.trim();
 
-      if (!pat) {
-        alert('Please enter a GitHub Access Token.');
+      if (!url) {
+        alert('Please enter your Google Web App URL.');
+        return;
+      }
+      if (!password) {
+        alert('Please enter your Admin Password.');
         return;
       }
 
-      // Verify the token by calling the GitHub User API
+      const loginBtn = document.querySelector('#admin-login-card button');
+      const originalBtnText = loginBtn ? loginBtn.innerText : 'Login';
+      if (loginBtn) {
+        loginBtn.innerText = 'Verifying with Google Sheets...';
+        loginBtn.disabled = true;
+      }
+
       try {
-        const res = await fetch('https://api.github.com/user', {
-          headers: { 'Authorization': `token ${pat}` }
+        // Send a verification request (simulate a save call for ID 0, which is ignored by the Apps Script save logic)
+        const res = await fetch(url, {
+          method: 'POST',
+          body: JSON.stringify({
+            action: 'save',
+            secret: password,
+            product: { id: 0, title: "verification-probe", price: 0 }
+          })
         });
+
         if (res.ok) {
-          sessionStorage.setItem('pn_github_pat', pat);
-          patInput.value = '';
-          checkAdminLoginState();
+          const data = await res.json();
+          if (data.success) {
+            localStorage.setItem('pn_sheet_url', url);
+            localStorage.setItem('pn_sheet_password', password);
+            checkAdminLoginState();
+          } else {
+            alert(`Authentication failed: ${data.error || 'Incorrect Password'}`);
+          }
         } else {
-          alert('Invalid GitHub Access Token. Please make sure it has the correct permissions.');
+          alert(`Failed to connect to Google Sheets Web App. Status: ${res.status}`);
         }
       } catch (err) {
         console.error(err);
-        alert('Connection error. Failed to verify token.');
+        alert('Connection error. Please verify your Google Web App URL (ends with /exec) and ensure you deployed it with "Anyone" access.');
+      } finally {
+        if (loginBtn) {
+          loginBtn.innerText = originalBtnText;
+          loginBtn.disabled = false;
+        }
       }
     }
 
     function logoutAdmin() {
-      sessionStorage.removeItem('pn_github_pat');
+      localStorage.removeItem('pn_sheet_password');
+      checkAdminLoginState();
       navigateTo('home');
     }
 
     async function loadAdminProducts() {
       const tableBody = document.getElementById('admin-products-table-body');
       if (tableBody) {
-        tableBody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 30px;">Loading catalog from GitHub...</td></tr>';
+        tableBody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 30px;">Loading catalog from Google Sheets...</td></tr>';
+      }
+
+      const url = GOOGLE_SHEET_WEB_APP_URL || localStorage.getItem('pn_sheet_url');
+      if (!url) {
+        if (tableBody) {
+          tableBody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 30px; color: orange;">Google Sheet Web App URL not configured.</td></tr>';
+        }
+        return;
       }
 
       try {
-        // Fetch metadata to get the current file SHA with cache-busting query param to avoid CORS issues
-        const cacheBustUrl = `https://api.github.com/repos/coreyyp/pipnooweb/contents/products.json?t=${Date.now()}`;
-        const res = await fetch(cacheBustUrl, {
-          headers: getGitHubHeaders()
-        });
-
+        const res = await fetch(url);
         if (res.ok) {
-          const fileData = await res.json();
-          adminProductsSha = fileData.sha;
-
-          // Decode content
-          const decodedContent = decodeURIComponent(escape(atob(fileData.content.replace(/\s/g, ''))));
-          shopProducts = JSON.parse(decodedContent);
-
-          // Sync with local storage
+          shopProducts = await res.json();
           localStorage.setItem('pn_products', JSON.stringify(shopProducts));
-
           renderAdminProductsTable();
           renderProducts(); // Update public shop view too
-        } else if (res.status === 404) {
-          // File does not exist yet on remote repo. Setup for initial commit creation.
-          console.log("products.json not found on GitHub. Initializing with local data.");
-          adminProductsSha = null;
-
-          const storedProducts = localStorage.getItem('pn_products');
-          if (storedProducts) {
-            shopProducts = JSON.parse(storedProducts);
-          }
-
-          renderAdminProductsTable();
-          renderProducts();
         } else {
-          const errorData = await res.json();
           if (tableBody) {
-            tableBody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 30px; color: red;">Failed to retrieve products.json: ${errorData.message || res.statusText}</td></tr>`;
+            tableBody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 30px; color: red;">Failed to retrieve catalog from Google Sheets. Status: ${res.status}</td></tr>`;
           }
         }
       } catch (err) {
         console.error("Fetch catalog error:", err);
         if (tableBody) {
-          tableBody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 30px; color: red;">Error fetching catalog from GitHub. See console for details.</td></tr>';
+          tableBody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 30px; color: red;">Error fetching catalog from Google Sheets. Check web app URL and access permissions.</td></tr>';
         }
       }
     }
@@ -4169,64 +4228,9 @@
       }
     }
 
-    async function commitCatalogUpdate(updatedProducts, commitMessage) {
-      const modal = document.getElementById('admin-product-modal');
-      const saveBtn = modal ? modal.querySelector('button[type="submit"]') : null;
-      const originalBtnText = saveBtn ? saveBtn.innerText : 'Save Product';
-
-      if (saveBtn) {
-        saveBtn.innerText = 'Syncing with GitHub...';
-        saveBtn.disabled = true;
-      }
-
-      const jsonStr = JSON.stringify(updatedProducts, null, 2);
-      // UTF-8 safe base64 encoding
-      const base64Content = btoa(unescape(encodeURIComponent(jsonStr)));
-
-      try {
-        const bodyPayload = {
-          message: commitMessage,
-          content: base64Content
-        };
-
-        if (adminProductsSha) {
-          bodyPayload.sha = adminProductsSha;
-        }
-
-        const res = await fetch('https://api.github.com/repos/coreyyp/pipnooweb/contents/products.json', {
-          method: 'PUT',
-          headers: getGitHubHeaders(),
-          body: JSON.stringify(bodyPayload)
-        });
-
-        if (res.ok) {
-          const resData = await res.json();
-          adminProductsSha = resData.content.sha; // Update global SHA to avoid conflicts next time
-          shopProducts = updatedProducts;
-          localStorage.setItem('pn_products', JSON.stringify(shopProducts));
-
-          closeAdminProductModal();
-          renderAdminProductsTable();
-          renderProducts();
-          alert('Successfully synchronized changes directly to GitHub!');
-        } else {
-          const errorData = await res.json();
-          alert(`Failed to save to GitHub: ${errorData.message || 'Unknown error'}`);
-        }
-      } catch (err) {
-        console.error(err);
-        alert('Connection error. Failed to push changes to GitHub.');
-      } finally {
-        if (saveBtn) {
-          saveBtn.innerText = originalBtnText;
-          saveBtn.disabled = false;
-        }
-      }
-    }
-
-    function saveProduct(event) {
+    async function saveProduct(event) {
       event.preventDefault();
-
+      
       const idVal = document.getElementById('edit-product-id').value;
       const title = document.getElementById('form-title').value.trim();
       const price = parseFloat(document.getElementById('form-price').value);
@@ -4248,53 +4252,80 @@
         return;
       }
 
-      let updatedProducts = [...shopProducts];
-      let commitMessage = '';
-
-      if (idVal) {
-        // Edit existing product
-        const id = parseInt(idVal);
-        const idx = updatedProducts.findIndex(p => p.id === id);
-        if (idx > -1) {
-          const originalProd = updatedProducts[idx];
-          updatedProducts[idx] = {
-            ...originalProd,
-            title,
-            price,
-            category,
-            tag,
-            color,
-            images,
-            description,
-            backstory,
-            spec: { size, dimensions, materials, care }
-          };
-          commitMessage = `admin: update product "${title}" (ID: ${id})`;
-        }
-      } else {
-        // Add new product
-        const nextId = shopProducts.length > 0 ? Math.max(...shopProducts.map(p => p.id)) + 1 : 1;
-        const newProduct = {
-          id: nextId,
-          title,
-          price,
-          category,
-          tag,
-          color,
-          images,
-          description,
-          backstory,
-          spec: { size, dimensions, materials, care },
-          inventory: 1
-        };
-        updatedProducts.push(newProduct);
-        commitMessage = `admin: add product "${title}" (ID: ${nextId})`;
+      let id = idVal ? parseInt(idVal) : null;
+      if (!id) {
+        id = shopProducts.length > 0 ? Math.max(...shopProducts.map(p => p.id)) + 1 : 1;
       }
 
-      commitCatalogUpdate(updatedProducts, commitMessage);
+      const product = {
+        id,
+        title,
+        price,
+        category,
+        tag,
+        color,
+        images,
+        description,
+        backstory,
+        spec: { size, dimensions, materials, care },
+        inventory: 1
+      };
+
+      const modal = document.getElementById('admin-product-modal');
+      const saveBtn = modal ? modal.querySelector('button[type="submit"]') : null;
+      const originalBtnText = saveBtn ? saveBtn.innerText : 'Save Product';
+
+      if (saveBtn) {
+        saveBtn.innerText = 'Saving to Google Sheets...';
+        saveBtn.disabled = true;
+      }
+
+      const url = GOOGLE_SHEET_WEB_APP_URL || localStorage.getItem('pn_sheet_url');
+      const password = localStorage.getItem('pn_sheet_password');
+
+      try {
+        const res = await fetch(url, {
+          method: 'POST',
+          body: JSON.stringify({
+            action: 'save',
+            secret: password,
+            product: product
+          })
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          if (data.success) {
+            const idx = shopProducts.findIndex(p => p.id === id);
+            if (idx > -1) {
+              shopProducts[idx] = product;
+            } else {
+              shopProducts.push(product);
+            }
+            localStorage.setItem('pn_products', JSON.stringify(shopProducts));
+            
+            closeAdminProductModal();
+            renderAdminProductsTable();
+            renderProducts();
+            alert('Successfully saved and synchronized directly to Google Sheet!');
+          } else {
+            alert(`Failed to save: ${data.error || 'Unauthorized'}`);
+          }
+        } else {
+          alert(`Server responded with error status: ${res.status}`);
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Connection error. Failed to save product to Google Sheet.');
+      } finally {
+        if (saveBtn) {
+          saveBtn.innerText = originalBtnText;
+          saveBtn.disabled = false;
+        }
+      }
     }
 
-    function toggleProductArchive(id) {
+    async function toggleProductArchive(id) {
       const p = shopProducts.find(item => item.id === id);
       if (!p) return;
 
@@ -4306,28 +4337,82 @@
         return;
       }
 
-      const updatedProducts = shopProducts.map(item => {
-        if (item.id === id) {
-          return { ...item, inventory: newInventory };
-        }
-        return item;
-      });
+      const updatedProduct = { ...p, inventory: newInventory };
+      
+      const url = GOOGLE_SHEET_WEB_APP_URL || localStorage.getItem('pn_sheet_url');
+      const password = localStorage.getItem('pn_sheet_password');
 
-      const commitMessage = `admin: ${actionText} product "${p.title}" (ID: ${id})`;
-      commitCatalogUpdate(updatedProducts, commitMessage);
+      try {
+        const res = await fetch(url, {
+          method: 'POST',
+          body: JSON.stringify({
+            action: 'save',
+            secret: password,
+            product: updatedProduct
+          })
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          if (data.success) {
+            shopProducts = shopProducts.map(item => item.id === id ? updatedProduct : item);
+            localStorage.setItem('pn_products', JSON.stringify(shopProducts));
+            
+            renderAdminProductsTable();
+            renderProducts();
+            alert(`Product "${p.title}" successfully ${actionText}ed in Google Sheet!`);
+          } else {
+            alert(`Failed to ${actionText} product: ${data.error || 'Unauthorized'}`);
+          }
+        } else {
+          alert(`Failed to connect. Status: ${res.status}`);
+        }
+      } catch (err) {
+        console.error(err);
+        alert(`Connection error. Failed to ${actionText} product.`);
+      }
     }
 
-    function deleteProduct(id) {
+    async function deleteProduct(id) {
       const p = shopProducts.find(item => item.id === id);
       if (!p) return;
 
-      if (!confirm(`Are you sure you want to permanently delete "${p.title}"? This cannot be undone and will commit the changes directly to GitHub.`)) {
+      if (!confirm(`Are you sure you want to permanently delete "${p.title}"? This cannot be undone and will delete the row in your Google Sheet.`)) {
         return;
       }
 
-      const updatedProducts = shopProducts.filter(item => item.id !== id);
-      const commitMessage = `admin: permanently delete product "${p.title}" (ID: ${id})`;
-      commitCatalogUpdate(updatedProducts, commitMessage);
+      const url = GOOGLE_SHEET_WEB_APP_URL || localStorage.getItem('pn_sheet_url');
+      const password = localStorage.getItem('pn_sheet_password');
+
+      try {
+        const res = await fetch(url, {
+          method: 'POST',
+          body: JSON.stringify({
+            action: 'delete',
+            secret: password,
+            id: id
+          })
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          if (data.success) {
+            shopProducts = shopProducts.filter(item => item.id !== id);
+            localStorage.setItem('pn_products', JSON.stringify(shopProducts));
+            
+            renderAdminProductsTable();
+            renderProducts();
+            alert(`Product "${p.title}" permanently deleted from Google Sheet!`);
+          } else {
+            alert(`Failed to delete: ${data.error || 'Unauthorized'}`);
+          }
+        } else {
+          alert(`Failed to connect. Status: ${res.status}`);
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Connection error. Failed to delete product.');
+      }
     }
   </script>
 </body>
