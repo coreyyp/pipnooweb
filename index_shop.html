@@ -3083,17 +3083,17 @@
         <div class="form-grid">
           <div class="form-group">
             <label for="form-title">Product Title</label>
-            <input type="text" id="form-title" class="form-control" required>
+            <input type="text" id="form-title" class="form-control">
           </div>
 
           <div class="form-group">
             <label for="form-price">Price (£)</label>
-            <input type="number" id="form-price" step="0.01" class="form-control" required>
+            <input type="number" id="form-price" step="0.01" class="form-control">
           </div>
 
           <div class="form-group">
             <label for="form-category">Category (Product Type for Filters)</label>
-            <select id="form-category" class="form-control" required>
+            <select id="form-category" class="form-control">
               <option value="Clothes">Clothes</option>
               <option value="Bags">Bags</option>
               <option value="Accessories">Accessories</option>
@@ -3101,60 +3101,59 @@
           </div>
 
           <div class="form-group">
-            <label for="form-tag">Visual Tag (Optional)</label>
+            <label for="form-tag">Visual Tag</label>
             <input type="text" id="form-tag" class="form-control" placeholder="e.g. Special, Stitch, New...">
           </div>
 
           <div class="form-group">
             <label for="form-color">Color</label>
-            <input type="text" id="form-color" class="form-control" placeholder="Green, Red, Blue..." required>
+            <input type="text" id="form-color" class="form-control" placeholder="Green, Red, Blue...">
           </div>
 
           <div class="form-group">
             <label for="form-size">Size</label>
-            <input type="text" id="form-size" class="form-control" placeholder="Medium (M)" required>
+            <input type="text" id="form-size" class="form-control" placeholder="Medium (M)">
           </div>
 
           <div class="form-group">
             <label for="form-dimensions">Dimensions</label>
-            <input type="text" id="form-dimensions" class="form-control" placeholder="Chest: 50cm, Length: 60cm"
-              required>
+            <input type="text" id="form-dimensions" class="form-control" placeholder="Chest: 50cm, Length: 60cm">
           </div>
 
           <div class="form-group">
             <label for="form-materials">Materials</label>
-            <input type="text" id="form-materials" class="form-control" placeholder="Upcycled Linen & Cotton" required>
+            <input type="text" id="form-materials" class="form-control" placeholder="Upcycled Linen & Cotton">
           </div>
 
           <div class="form-group">
             <label for="form-care">Care Instructions</label>
-            <input type="text" id="form-care" class="form-control" placeholder="Gentle hand wash cold" required>
+            <input type="text" id="form-care" class="form-control" placeholder="Gentle hand wash cold">
           </div>
 
           <div class="form-group">
-            <label for="form-then">Upcycling - THEN (Optional)</label>
+            <label for="form-then">Upcycling - THEN</label>
             <input type="text" id="form-then" class="form-control" placeholder="e.g. Vintage tablecloth">
           </div>
 
           <div class="form-group">
-            <label for="form-now">Upcycling - NOW (Optional)</label>
+            <label for="form-now">Upcycling - NOW</label>
             <input type="text" id="form-now" class="form-control" placeholder="e.g. Summer picnic dress">
           </div>
 
           <div class="form-group" style="grid-column: 1 / -1;">
             <label for="form-images">Images (Comma separated paths, e.g. products1/image.jpg)</label>
             <input type="text" id="form-images" class="form-control"
-              placeholder="products1/20260614_151200.jpg, products1/20260614_151233.jpg" required>
+              placeholder="products1/20260614_151200.jpg, products1/20260614_151233.jpg">
           </div>
 
           <div class="form-group" style="grid-column: 1 / -1;">
             <label for="form-desc">Product Description</label>
-            <textarea id="form-desc" class="form-control" rows="3" required></textarea>
+            <textarea id="form-desc" class="form-control" rows="3"></textarea>
           </div>
 
           <div class="form-group" style="grid-column: 1 / -1;">
             <label for="form-backstory">Maker's Backstory</label>
-            <textarea id="form-backstory" class="form-control" rows="3" required></textarea>
+            <textarea id="form-backstory" class="form-control" rows="3"></textarea>
           </div>
         </div>
 
@@ -4282,12 +4281,7 @@
       const then = document.getElementById('form-then').value.trim();
       const now = document.getElementById('form-now').value.trim();
 
-      const images = imagesStr.split(',').map(s => s.trim()).filter(Boolean);
-
-      if (images.length === 0) {
-        alert('Please specify at least one product image path.');
-        return;
-      }
+      const images = imagesStr ? imagesStr.split(',').map(s => s.trim()).filter(Boolean) : [];
 
       let id = idVal ? parseInt(idVal) : null;
       if (!id) {
@@ -4296,14 +4290,14 @@
 
       const product = {
         id,
-        title,
-        price,
-        category,
-        tag,
-        color,
-        images,
-        description,
-        backstory,
+        title: title || 'Untitled Product',
+        price: isNaN(price) ? 0.00 : price,
+        category: category || 'Clothes',
+        tag: tag || '',
+        color: color || '',
+        images: images.length > 0 ? images : ['products1/20260614_151200.jpg'],
+        description: description || '',
+        backstory: backstory || '',
         spec: { size, dimensions, materials, care },
         then,
         now,
