@@ -3342,9 +3342,8 @@
             <span class="detail-price">£${p.price.toFixed(2)}</span>
           </div>
           ${p.then && p.now ? `
-            <div class="detail-upcycle" style="margin-bottom: 20px; padding: 12px 16px; background-color: #f7faf9; border-left: 3px solid var(--color-mint); font-size: 13px; display: flex; gap: 15px; align-items: center; border-radius: 0 4px 4px 0; border-top: 1px dashed rgba(0,0,0,0.05); border-bottom: 1px dashed rgba(0,0,0,0.05);">
+            <div class="detail-upcycle" style="margin-bottom: 20px; padding: 12px 16px; background-color: #f7faf9; border-left: 3px solid var(--color-mint); font-size: 13px; display: flex; flex-direction: column; gap: 6px; border-radius: 0 4px 4px 0; border-top: 1px dashed rgba(0,0,0,0.05); border-bottom: 1px dashed rgba(0,0,0,0.05);">
               <div><strong style="color: var(--color-caramel); text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; margin-right: 4px;">Then:</strong> <span style="color: var(--color-chocolate);">${p.then}</span></div>
-              <div style="color: var(--color-mint); font-weight: bold;">➔</div>
               <div><strong style="color: var(--color-chocolate); text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; margin-right: 4px;">Now:</strong> <span style="color: var(--color-chocolate);">${p.now}</span></div>
             </div>
           ` : ''}
