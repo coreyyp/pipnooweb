@@ -79,6 +79,10 @@ module.exports = async (req, res) => {
     // Create a secure Stripe checkout session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
+      billing_address_collection: 'required',
+      shipping_address_collection: {
+        allowed_countries: ['GB', 'US', 'CA', 'IE', 'FR', 'DE', 'NL', 'BE', 'IT', 'ES', 'AU', 'NZ'],
+      },
       line_items: lineItems,
       mode: 'payment',
       success_url: successUrl,
