@@ -279,7 +279,7 @@
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 1px;
-      display: none !important;
+      display: flex;
       align-items: center;
       gap: 6px;
       padding: 8px 12px;
@@ -949,32 +949,40 @@
 
     /* Product Card */
     .product-card {
-      background-color: var(--color-white);
-      border-radius: var(--border-radius);
-      overflow: hidden;
-      border: 1px solid var(--color-light-gray);
+      position: relative;
+      aspect-ratio: 1749 / 2481;
+      background-image: url('icons/prodcard.svg');
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      background-color: transparent;
+      border: none;
       display: flex;
       flex-direction: column;
-      position: relative;
-      transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+      overflow: visible;
+      transition: transform var(--transition-smooth);
+      filter: drop-shadow(0 6px 15px rgba(60, 42, 33, 0.05));
     }
 
     .product-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 20px rgba(60, 42, 33, 0.05);
+      transform: translateY(-6px);
+      filter: drop-shadow(0 12px 24px rgba(60, 42, 33, 0.1));
     }
 
     .product-img-wrapper {
-      position: relative;
-      width: 100%;
-      background-color: var(--color-bg);
+      position: absolute;
+      top: 6.3%;
+      left: 9.3%;
+      width: 81.3%;
+      height: 58.2%;
       overflow: hidden;
       cursor: pointer;
+      background-color: var(--color-bg);
+      border-radius: 4px;
     }
 
     .product-img {
       width: 100%;
-      height: auto;
+      height: 100%;
       display: block;
       object-fit: cover;
       transition: transform var(--transition-smooth);
@@ -987,8 +995,8 @@
 
     .product-badges {
       position: absolute;
-      top: 12px;
-      left: 12px;
+      top: 8px;
+      left: 8px;
       display: flex;
       flex-direction: column;
       gap: 6px;
@@ -996,19 +1004,32 @@
     }
 
     .product-info {
-      padding: 20px;
+      position: absolute;
+      top: 66%;
+      left: 9.3%;
+      right: 9.4%;
+      bottom: 5%;
+      padding: 0;
       display: flex;
       flex-direction: column;
-      flex-grow: 1;
-      gap: 12px;
+      justify-content: space-between;
+      box-sizing: border-box;
     }
 
     .product-category-meta {
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 1px;
       color: var(--color-mint);
+    }
+
+    .product-info-top {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      align-items: flex-start;
+      width: 100%;
     }
 
     .product-card-title {
@@ -1016,26 +1037,32 @@
       font-size: 16px;
       font-weight: 600;
       color: var(--color-chocolate);
+      margin: 0;
+      line-height: 1.2;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     .product-card-bottom {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: auto;
-      padding-top: 12px;
+      padding-top: 8px;
       border-top: 1px solid var(--color-light-gray);
+      width: 100%;
     }
 
     .product-price {
       font-family: var(--font-display);
-      font-size: 20px;
+      font-size: 17px;
       color: var(--color-chocolate);
     }
 
     .add-to-cart-btn {
-      width: 42px;
-      height: 42px;
+      width: 36px;
+      height: 36px;
       border-radius: 6px;
       background-color: transparent;
       color: var(--color-caramel);
@@ -1391,9 +1418,11 @@
       .story-lightbox-content {
         height: 90% !important;
       }
+
       .story-lightbox-main {
         margin-bottom: 0 !important;
       }
+
       .story-lightbox-slides {
         display: flex !important;
         overflow-x: auto !important;
@@ -1401,6 +1430,7 @@
         -webkit-overflow-scrolling: touch !important;
         scroll-behavior: auto !important;
       }
+
       .story-lightbox-slide {
         display: flex !important;
         flex: 0 0 100% !important;
@@ -1410,9 +1440,11 @@
         box-sizing: border-box !important;
         padding: 0 10px !important;
       }
+
       .story-lightbox-nav {
         display: none !important;
       }
+
       .story-lightbox-gallery {
         display: none !important;
       }
@@ -1854,6 +1886,7 @@
     }
 
     .detail-title {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
       font-size: 32px;
     }
 
@@ -1866,11 +1899,12 @@
     }
 
     .detail-price {
-      font-family: var(--font-display);
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
       font-size: 28px;
     }
 
     .detail-desc {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
       font-size: 14px;
       color: #55443b;
       line-height: 1.7;
@@ -1907,12 +1941,21 @@
       width: 100%;
       text-align: center;
       margin-top: 10px;
+      background-color: var(--color-forest) !important;
+      border-color: var(--color-forest) !important;
+      color: var(--color-bg) !important;
+    }
+
+    .detail-add-btn:hover {
+      background-color: var(--color-mint) !important;
+      border-color: var(--color-mint) !important;
+      color: var(--color-bg) !important;
     }
 
     .detail-add-btn:disabled {
-      background-color: var(--color-light-gray);
-      border-color: var(--color-light-gray);
-      color: #9d8c80;
+      background-color: var(--color-light-gray) !important;
+      border-color: var(--color-light-gray) !important;
+      color: #9d8c80 !important;
       cursor: not-allowed;
       transform: none;
     }
@@ -1929,13 +1972,14 @@
     }
 
     .detail-backstory-label {
-      font-family: var(--font-display);
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
       font-size: 22px;
       color: var(--color-brown);
       margin: 0 0 4px 0;
     }
 
     .detail-backstory-text {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
       font-size: 14px;
       color: #55443b;
       line-height: 1.8;
@@ -1999,7 +2043,7 @@
     }
 
     .contact-card-desc {
-      font-size: 14px;
+      font-size: 17px;
       color: var(--color-bg);
       opacity: 0.9;
       line-height: 1.7;
@@ -2048,12 +2092,13 @@
       font-weight: 700;
       font-size: 22px;
       color: var(--color-forest);
+      margin: 0 0 28px 0;
     }
 
     .contact-fields-list {
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 12px;
     }
 
     .contact-field-row,
@@ -2061,8 +2106,8 @@
       display: flex;
       justify-content: space-between;
       border-bottom: 1px solid rgba(45, 66, 54, 0.1);
-      padding-bottom: 12px;
-      font-size: 13px;
+      padding-bottom: 16px;
+      font-size: 16px;
     }
 
     .contact-instagram-btn {
@@ -2202,6 +2247,8 @@
         flex-direction: column;
         align-items: flex-start;
         gap: 4px;
+        font-size: 14px;
+        padding-bottom: 10px;
       }
 
       .contact-field-value {
@@ -2228,6 +2275,255 @@
       .value-image-container {
         order: 3;
         margin: 0 !important;
+      }
+    }
+
+    /* Admin Portal Styles */
+    .admin-card {
+      background-color: var(--color-white);
+      border-radius: var(--border-radius);
+      border: 1px solid var(--color-light-gray);
+      padding: 40px;
+      max-width: 500px;
+      margin: 60px auto;
+      box-shadow: 0 4px 20px rgba(60, 42, 33, 0.05);
+      text-align: center;
+    }
+
+    .admin-card h2 {
+      font-family: var(--font-body);
+      font-weight: 700;
+      color: var(--color-chocolate);
+      margin-bottom: 12px;
+      font-size: 24px;
+    }
+
+    .admin-card p {
+      font-size: 14px;
+      color: var(--color-caramel);
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    .admin-help-text {
+      margin-top: 20px;
+      font-size: 12px !important;
+      color: #888 !important;
+    }
+
+    .form-group {
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--color-forest);
+      margin-bottom: 8px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 14px;
+      font-family: var(--font-body);
+      border: 1px solid var(--color-light-gray);
+      border-radius: 6px;
+      background-color: var(--color-white);
+      color: var(--color-chocolate);
+      box-sizing: border-box;
+      transition: border-color var(--transition-fast);
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--color-forest);
+    }
+
+    .admin-dashboard {
+      background-color: var(--color-white);
+      border-radius: var(--border-radius);
+      border: 1px solid var(--color-light-gray);
+      padding: 30px;
+      margin-top: 20px;
+      box-shadow: 0 4px 20px rgba(60, 42, 33, 0.05);
+    }
+
+    .admin-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      border-bottom: 1px solid rgba(45, 66, 54, 0.1);
+      padding-bottom: 20px;
+    }
+
+    .admin-header-row h2 {
+      font-family: var(--font-body);
+      font-weight: 700;
+      color: var(--color-chocolate);
+      font-size: 28px;
+      margin-bottom: 4px;
+    }
+
+    .admin-header-row p {
+      font-size: 14px;
+      color: var(--color-caramel);
+    }
+
+    .admin-header-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn-secondary {
+      background-color: var(--color-forest) !important;
+      border-color: var(--color-forest) !important;
+    }
+
+    .btn-outline {
+      background-color: transparent !important;
+      border: 1px solid var(--color-light-gray) !important;
+      color: var(--color-chocolate) !important;
+    }
+
+    .btn-outline:hover {
+      background-color: var(--color-light-gray) !important;
+    }
+
+    .admin-table-container {
+      overflow-x: auto;
+    }
+
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    .admin-table th {
+      padding: 14px 16px;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--color-caramel);
+      border-bottom: 2px solid rgba(45, 66, 54, 0.1);
+    }
+
+    .admin-table td {
+      padding: 16px;
+      font-size: 14px;
+      color: var(--color-chocolate);
+      border-bottom: 1px solid var(--color-light-gray);
+      vertical-align: middle;
+    }
+
+    .admin-thumb {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 4px;
+      background-color: var(--color-bg);
+    }
+
+    .admin-badge {
+      display: inline-block;
+      padding: 4px 8px;
+      font-size: 11px;
+      font-weight: 600;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .admin-badge.active {
+      background-color: #e2f0d9;
+      color: #385723;
+    }
+
+    .admin-badge.archived {
+      background-color: #fce4d6;
+      color: #c65911;
+    }
+
+    .admin-actions-cell {
+      display: flex;
+      gap: 8px;
+    }
+
+    .admin-action-btn {
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 4px;
+      cursor: pointer;
+      border: 1px solid rgba(45, 66, 54, 0.2);
+      background-color: var(--color-white);
+      color: var(--color-forest);
+      transition: all var(--transition-fast);
+    }
+
+    .admin-action-btn:hover {
+      background-color: var(--color-forest);
+      color: var(--color-white);
+    }
+
+    .admin-action-btn.archive-btn {
+      color: #c65911;
+      border-color: rgba(198, 89, 17, 0.3);
+    }
+
+    .admin-action-btn.archive-btn:hover {
+      background-color: #c65911;
+      color: var(--color-white);
+    }
+
+    .admin-action-btn.delete-btn {
+      color: #c00000;
+      border-color: rgba(192, 0, 0, 0.3);
+    }
+
+    .admin-action-btn.delete-btn:hover {
+      background-color: #c00000;
+      color: var(--color-white);
+    }
+
+    .admin-modal-content {
+      max-width: 650px;
+      padding: 30px 40px !important;
+      overflow-y: auto;
+      box-sizing: border-box;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      border-top: 1px solid var(--color-light-gray);
+      padding-top: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      .admin-header-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
       }
     }
   </style>
@@ -2289,7 +2585,8 @@
 
       <div class="hero">
         <div class="hero-content">
-          <h1 class="hero-title">Preloved, <br><span>Relove.</span><img src="icons/3and4.png" alt="Characters Icon" class="hero-title-icon"></h1>
+          <h1 class="hero-title">Preloved, <br><span>Relove.</span><img src="icons/3and4.png" alt="Characters Icon"
+              class="hero-title-icon"></h1>
           <p class="hero-subtitle">At PIP&NOO, we're combating the culture of fast fashion by combining textiles and
             hand craft into timeless, deeply loved, and completely unique pieces.</p>
           <button class="btn" onclick="navigateTo('collections')">Shop the Collections</button>
@@ -2371,9 +2668,8 @@
             <div class="custom-request-content">
               <h2 class="custom-request-title">Request a Custom Piece</h2>
               <p class="custom-request-desc">
-                Got a jumper that you can't bear to throw away? An old throw,
-                or a pair of jeans that's seen better days but still means something? Send it to us. We'll turn it into
-                something you'll wear again - a bag, a jacket, a piece that carries the memory forwards.
+                Got an old jummper that you don't want to throw out? An old shirt, skirt, curtain, blanket,
+                cloth or more? Get in touch with us to discuss turning your preloved into an item you can relove.
               </p>
               <button class="btn" onclick="navigateTo('contact')">Enquire About Custom Work</button>
             </div>
@@ -2409,7 +2705,7 @@
                 </div>
 
               </div>
-              
+
             </div>
           </div>
         </div>
@@ -2418,24 +2714,51 @@
 
     <!-- COLLECTIONS SECTION -->
     <section id="section-collections" class="page-section">
-      <div class="container section-padding"
-        style="display: flex; justify-content: center; align-items: center; min-height: 50vh;">
-        <div
-          style="text-align: center; max-width: 600px; padding: 60px 40px; background-color: var(--color-bg); border: 1px solid var(--color-light-gray); border-radius: 12px; box-shadow: 0 8px 30px rgba(60, 42, 33, 0.02);">
-          <h1 class="shop-title"
-            style="font-size: 42px; margin-bottom: 20px; font-family: var(--font-display); color: var(--color-chocolate);">
-            Coming Soon</h1>
-          <p class="shop-desc"
-            style="font-size: 15px; color: var(--color-chocolate); line-height: 1.8; margin-bottom: 36px; max-width: 100%;">
-            Our website is currently under construction as we prepare our collections page. Check back soon for the full
-            launch, or reach out below with any enquiries!
-          </p>
-          <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-            <a href="#contact" onclick="navigateTo('contact'); return false;" class="btn">Get in Touch</a>
-            <a href="https://www.instagram.com/pipandnoo.london/" target="_blank" class="btn btn-secondary">Follow
-              Instagram</a>
+      <div class="container section-padding">
+
+        <div class="shop-header">
+          <h1 class="shop-title">Relove Collections</h1>
+          <p class="shop-desc">Explore our Relove collection.</p>
+        </div>
+
+        <div class="filters-accordion-container">
+          <div class="filters-trigger-row">
+            <button class="filters-toggle-btn" onclick="toggleFiltersAccordion()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                style="margin-right: 4px; vertical-align: middle;">
+                <path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z" />
+              </svg>
+              Filters
+            </button>
+            <div class="active-filters-tabs" id="activeFiltersTabs">
+              <!-- Active filters dynamically injected -->
+            </div>
+          </div>
+
+          <div class="filters-dropdown" id="filtersDropdown">
+            <div class="filters-dropdown-content">
+              <!-- Filter Group: Type -->
+              <div class="filter-group">
+                <span class="filter-label">Type:</span>
+                <div class="filter-options">
+                  <button class="filter-btn" data-filter-type="category" data-filter-value="Clothes"
+                    onclick="toggleFilter(this)">Clothes</button>
+                  <button class="filter-btn" data-filter-type="category" data-filter-value="Accessories"
+                    onclick="toggleFilter(this)">Accessories</button>
+                  <button class="filter-btn" data-filter-type="category" data-filter-value="Bags"
+                    onclick="toggleFilter(this)">Bags</button>
+                </div>
+              </div>
+
+
+            </div>
           </div>
         </div>
+
+        <div class="products-grid" id="productsGrid">
+          <!-- Dynamic JS Injection -->
+        </div>
+
       </div>
     </section>
 
@@ -2523,10 +2846,10 @@
                 <span class="dot" onclick="event.stopPropagation(); setBeginningsSlide(8)"></span>
                 <span class="dot" onclick="event.stopPropagation(); setBeginningsSlide(9)"></span>
                 <span class="dot" onclick="event.stopPropagation(); setBeginningsSlide(10)"></span>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="story-text">
+          <div class="story-text">
             <h2 style="text-align: right;">Todds to Teens</h2>
             <p>I made clothes for my children from toddlers all the way through to their teens, and today I still do. My
               son always tells me his friends love the shirts I make him. As they grew up, my focus shifted too. I moved
@@ -2598,6 +2921,66 @@
 
       </div>
     </section>
+
+    <!-- ADMIN SECTION -->
+    <section id="section-admin" class="page-section">
+      <div class="container section-padding">
+        <!-- Admin login card -->
+        <div id="admin-login-card" class="admin-card">
+          <h2>Admin Login</h2>
+          <p>Please enter your Google Web App URL and Admin Password to manage the product catalog.</p>
+          <div class="form-group" style="margin-bottom: 15px;">
+            <label for="admin-sheet-url">Google Web App URL</label>
+            <input type="text" id="admin-sheet-url" placeholder="https://script.google.com/macros/s/.../exec"
+              class="form-control">
+          </div>
+          <div class="form-group" style="margin-bottom: 20px;">
+            <label for="admin-sheet-password">Admin Password</label>
+            <input type="password" id="admin-sheet-password" placeholder="Enter your secret password"
+              class="form-control">
+          </div>
+          <button class="btn" onclick="loginAdmin()">Login</button>
+          <p class="admin-help-text">Deploy your Apps Script as a Web App (access: "Anyone", execute: "Me") and paste
+            its URL above along with your password.
+          </p>
+        </div>
+
+        <!-- Admin Dashboard (Initially hidden) -->
+        <div id="admin-dashboard" class="admin-dashboard" style="display: none;">
+          <div class="admin-header-row">
+            <div>
+              <h2>Catalog Dashboard</h2>
+              <p>Adding and editing products dynamically inside your Google Sheet.</p>
+            </div>
+            <div class="admin-header-actions">
+              <button class="btn btn-secondary" onclick="showAddProductForm()">+ Add New Product</button>
+              <button class="btn btn-outline" onclick="logoutAdmin()">Logout</button>
+            </div>
+          </div>
+
+          <div class="admin-table-container">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Title</th>
+                  <th>Price</th>
+                  <th>Category</th>
+                  <th>Color</th>
+                  <th>Stock</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-products-table-body">
+                <!-- Injected via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+
+      </div>
+    </section>
   </main>
 
   <!-- ----------------------------------------------------
@@ -2607,7 +2990,8 @@
     <div class="container">
       <div class="footer-grid">
         <div>
-          <div class="footer-logo"><img src="icons/pic logo white.png" alt="PIP & NOO Logo" class="footer-logo-img"></div>
+          <div class="footer-logo"><img src="icons/pic logo white.png" alt="PIP & NOO Logo" class="footer-logo-img">
+          </div>
           <p class="footer-desc">Crafting a definitive alternative to fast fashion by converting textile waste into
             timeless, highly unique handmade pieces.</p>
         </div>
@@ -2696,9 +3080,488 @@
     </div>
   </div>
 
+  <!-- Add/Edit Product Modal Form -->
+  <div id="admin-product-modal" class="detail-overlay" style="z-index: 10000;"
+    onclick="closeAdminProductModalOutside(event)">
+    <div class="detail-modal admin-modal-content" onclick="event.stopPropagation()">
+      <button class="close-detail-btn" onclick="closeAdminProductModal()">&times;</button>
+      <h3 id="admin-modal-title"
+        style="margin-bottom: 20px; font-family: var(--font-body); font-weight: 700; color: var(--color-chocolate);">Add
+        New Product</h3>
+
+      <form id="admin-product-form" onsubmit="saveProduct(event)">
+        <input type="hidden" id="edit-product-id">
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="form-title">Product Title</label>
+            <input type="text" id="form-title" class="form-control">
+          </div>
+
+          <div class="form-group">
+            <label for="form-price">Price (£)</label>
+            <input type="number" id="form-price" step="0.01" class="form-control">
+          </div>
+
+          <div class="form-group">
+            <label for="form-category">Category (Product Type for Filters)</label>
+            <select id="form-category" class="form-control">
+              <option value="Clothes">Clothes</option>
+              <option value="Bags">Bags</option>
+              <option value="Accessories">Accessories</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="form-tag">Visual Tag</label>
+            <input type="text" id="form-tag" class="form-control" placeholder="e.g. Special, Stitch, New...">
+          </div>
+
+          <div class="form-group">
+            <label for="form-color">Color</label>
+            <input type="text" id="form-color" class="form-control" placeholder="Green, Red, Blue...">
+          </div>
+
+          <div class="form-group">
+            <label for="form-size">Size</label>
+            <input type="text" id="form-size" class="form-control" placeholder="Medium (M)">
+          </div>
+
+          <div class="form-group">
+            <label for="form-dimensions">Dimensions</label>
+            <input type="text" id="form-dimensions" class="form-control" placeholder="Chest: 50cm, Length: 60cm">
+          </div>
+
+          <div class="form-group">
+            <label for="form-materials">Materials</label>
+            <input type="text" id="form-materials" class="form-control" placeholder="Upcycled Linen & Cotton">
+          </div>
+
+          <div class="form-group">
+            <label for="form-care">Care Instructions</label>
+            <input type="text" id="form-care" class="form-control" placeholder="Gentle hand wash cold">
+          </div>
+
+          <div class="form-group">
+            <label for="form-then">Upcycling - THEN</label>
+            <input type="text" id="form-then" class="form-control" placeholder="e.g. Vintage tablecloth">
+          </div>
+
+          <div class="form-group">
+            <label for="form-now">Upcycling - NOW</label>
+            <input type="text" id="form-now" class="form-control" placeholder="e.g. Summer picnic dress">
+          </div>
+
+          <div class="form-group" style="grid-column: 1 / -1;">
+            <label for="form-images">Images (Comma separated paths, e.g. products1/image.jpg)</label>
+            <input type="text" id="form-images" class="form-control"
+              placeholder="products1/20260614_151200.jpg, products1/20260614_151233.jpg">
+          </div>
+
+          <div class="form-group" style="grid-column: 1 / -1;">
+            <label for="form-desc">Product Description</label>
+            <textarea id="form-desc" class="form-control" rows="3"></textarea>
+          </div>
+
+          <div class="form-group" style="grid-column: 1 / -1;">
+            <label for="form-backstory">Maker's Backstory</label>
+            <textarea id="form-backstory" class="form-control" rows="3"></textarea>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary" onclick="closeAdminProductModal()">Cancel</button>
+          <button type="submit" class="btn">Save Product</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <script>
     // State Variables
     let cart = [];
+    let shopProducts = [];
+    let activeFilters = {
+      category: []
+    };
+
+
+
+    // Filter toggle accordion
+    function toggleFiltersAccordion() {
+      const dropdown = document.getElementById('filtersDropdown');
+      if (dropdown) {
+        dropdown.classList.toggle('active');
+      }
+    }
+
+    // Toggle filter selections
+    function toggleFilter(button) {
+      const type = button.getAttribute('data-filter-type');
+      const value = button.getAttribute('data-filter-value');
+
+      const idx = activeFilters[type].indexOf(value);
+      if (idx > -1) {
+        activeFilters[type].splice(idx, 1);
+        button.classList.remove('active');
+      } else {
+        activeFilters[type].push(value);
+        button.classList.add('active');
+      }
+
+      renderActiveFilterTabs();
+      renderProducts();
+    }
+
+    // Render active filter tabs at the top
+    function renderActiveFilterTabs() {
+      const container = document.getElementById('activeFiltersTabs');
+      if (!container) return;
+
+      container.innerHTML = '';
+
+      Object.keys(activeFilters).forEach(type => {
+        activeFilters[type].forEach(value => {
+          const tab = document.createElement('div');
+          tab.className = 'active-filter-tab';
+          tab.innerHTML = `
+            ${value}
+            <button class="remove-filter-btn" onclick="removeFilter('${type}', '${value}')">&times;</button>
+          `;
+          container.appendChild(tab);
+        });
+      });
+    }
+
+    // Remove filter via tab button click
+    function removeFilter(type, value) {
+      const idx = activeFilters[type].indexOf(value);
+      if (idx > -1) {
+        activeFilters[type].splice(idx, 1);
+      }
+
+      // Update UI button state
+      const buttons = document.querySelectorAll(`.filter-btn[data-filter-type="${type}"][data-filter-value="${value}"]`);
+      buttons.forEach(btn => btn.classList.remove('active'));
+
+      renderActiveFilterTabs();
+      renderProducts();
+    }
+
+    // Render products list based on current active filters
+    function renderProducts() {
+      const grid = document.getElementById('productsGrid');
+      if (!grid) return;
+
+      grid.innerHTML = '';
+
+      // Filter list: only show items with inventory > 0, and ignore ID 0 verification probe
+      const filtered = shopProducts.filter(p => {
+        if (p.id === 0) return false;
+        if (p.inventory <= 0) return false;
+
+        const categoryMatch = activeFilters.category.length === 0 || activeFilters.category.includes(p.category);
+
+        return categoryMatch;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="no-products">
+            <h3>No products found</h3>
+            <p>Try clearing some of your filters to see more one-of-a-kind items.</p>
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.style.cursor = 'pointer';
+        card.setAttribute('onclick', `openProductDetail(${p.id})`);
+
+        const isInCart = cart.some(item => item.id === p.id);
+
+        const tagBadge = p.tag ? `
+          <div class="product-badges">
+            <span class="product-category-meta" style="background-color: var(--color-white); padding: 4px 8px; border-radius: 4px; font-size: 10px;">${p.tag}</span>
+          </div>
+        ` : '';
+
+        const upcycleHtml = p.then && p.now ? `
+          <div class="product-card-upcycle" style="font-size: 11px; margin-top: 5px; display: flex; flex-direction: column; gap: 2px; align-items: flex-start; line-height: 1.2;">
+            <div>
+              <span style="color: var(--color-caramel); font-weight: 700; text-transform: uppercase; font-size: 9px; letter-spacing: 0.5px; margin-right: 2px;">Then:</span>
+              <span style="color: var(--color-chocolate); opacity: 0.85; font-size: 11px;">${p.then}</span>
+            </div>
+            <div>
+              <span style="color: var(--color-caramel); font-weight: 700; text-transform: uppercase; font-size: 9px; letter-spacing: 0.5px; margin-right: 2px;">Now:</span>
+              <span style="color: var(--color-chocolate); opacity: 0.85; font-size: 11px;">${p.now}</span>
+            </div>
+          </div>
+        ` : '';
+
+        card.innerHTML = `
+          <div class="product-img-wrapper">
+            <img class="product-img" src="${p.images[0]}" alt="${p.title}">
+            ${tagBadge}
+          </div>
+          <div class="product-info">
+            <div class="product-info-top">
+              <span class="product-price">£${p.price.toFixed(2)}</span>
+              <h3 class="product-card-title">${p.title}</h3>
+              ${upcycleHtml}
+            </div>
+            <div class="product-card-bottom" style="justify-content: flex-end;">
+              <button class="add-to-cart-btn" onclick="event.stopPropagation(); addToCart(${p.id})" ${isInCart ? 'disabled' : ''} aria-label="Add to Bag">
+                ${isInCart ? '✓' : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>'}
+              </button>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // Open product details side-drawer/modal
+    function openProductDetail(id) {
+      const p = shopProducts.find(item => item.id === id);
+      if (!p) return;
+
+      const grid = document.getElementById('detailModalGrid');
+      if (!grid) return;
+
+      const isInCart = cart.some(item => item.id === p.id);
+
+      grid.innerHTML = `
+        <div class="detail-gallery">
+          <div class="detail-main-img">
+            <img id="detailMainImgElement" src="${p.images[0]}" alt="${p.title}">
+          </div>
+          <div class="detail-thumbs">
+            ${p.images.map((img, idx) => `
+              <div class="detail-thumb ${idx === 0 ? 'active' : ''}" onclick="changeDetailMainImage('${img}', this)">
+                <img src="${img}" alt="${p.title} Detail ${idx + 1}">
+              </div>
+            `).join('')}
+          </div>
+        </div>
+        <div class="detail-content">
+          ${p.tag ? `<span class="detail-category">${p.tag}</span>` : ''}
+          <h2 class="detail-title font-display">${p.title}</h2>
+          <div class="detail-price-row">
+            <span class="detail-price">£${p.price.toFixed(2)}</span>
+          </div>
+          ${p.then && p.now ? `
+            <div class="detail-upcycle" style="margin-bottom: 20px; padding: 12px 16px; background-color: #f7faf9; border-left: 3px solid var(--color-mint); font-size: 13px; display: flex; flex-direction: column; gap: 6px; border-radius: 0 4px 4px 0; border-top: 1px dashed rgba(0,0,0,0.05); border-bottom: 1px dashed rgba(0,0,0,0.05);">
+              <div><strong style="color: var(--color-caramel); text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; margin-right: 4px;">Then:</strong> <span style="color: var(--color-chocolate);">${p.then}</span></div>
+              <div><strong style="color: var(--color-chocolate); text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; margin-right: 4px;">Now:</strong> <span style="color: var(--color-chocolate);">${p.now}</span></div>
+            </div>
+          ` : ''}
+          <p class="detail-desc">${p.description}</p>
+          
+          <div class="detail-spec">
+            <div class="detail-spec-group">
+              <span class="spec-label">Size</span>
+              <span>${p.spec.size}</span>
+            </div>
+            <div class="detail-spec-group">
+              <span class="spec-label">Dimensions</span>
+              <span>${p.spec.dimensions}</span>
+            </div>
+            <div class="detail-spec-group">
+              <span class="spec-label">Materials</span>
+              <span>${p.spec.materials}</span>
+            </div>
+            <div class="detail-spec-group">
+              <span class="spec-label">Care Instructions</span>
+              <span>${p.spec.care}</span>
+            </div>
+          </div>
+          
+          <button class="btn detail-add-btn" onclick="addToCart(${p.id}); toggleDetailModal(false);" ${isInCart ? 'disabled' : ''}>
+            ${isInCart ? 'Added to Bag' : 'Add to Bag'}
+          </button>
+        </div>
+        
+        <div class="detail-backstory">
+          <h3 class="detail-backstory-label">*backstory title*<h3>
+          <p class="detail-backstory-text">${p.backstory}</p>
+        </div>
+      `;
+
+      toggleDetailModal(true);
+    }
+
+    // Switch main preview image in details modal
+    function changeDetailMainImage(imgSrc, thumbEl) {
+      const mainImg = document.getElementById('detailMainImgElement');
+      if (mainImg) {
+        mainImg.src = imgSrc;
+      }
+
+      const thumbs = document.querySelectorAll('.detail-thumb');
+      thumbs.forEach(t => t.classList.remove('active'));
+      thumbEl.classList.add('active');
+    }
+
+    // Add to cart
+    function addToCart(productId) {
+      const p = shopProducts.find(item => item.id === productId);
+      if (!p) return;
+
+      if (cart.some(item => item.id === productId)) return;
+
+      cart.push(p);
+      localStorage.setItem('pn_cart', JSON.stringify(cart));
+
+      renderCart();
+      renderProducts();
+      toggleCart(true);
+    }
+
+    // Remove from cart
+    function removeFromCart(productId) {
+      cart = cart.filter(item => item.id !== productId);
+      localStorage.setItem('pn_cart', JSON.stringify(cart));
+
+      renderCart();
+      renderProducts();
+    }
+
+    // Render side-drawer cart items
+    function renderCart() {
+      const list = document.getElementById('cartItemsList');
+      const subtotalEl = document.getElementById('cartSubtotal');
+      const headerTitle = document.querySelector('.cart-header-title');
+      const checkoutBtn = document.getElementById('checkoutBtn');
+
+      if (!list || !subtotalEl) return;
+
+      list.innerHTML = '';
+
+      const cartCount = cart.length;
+      if (headerTitle) {
+        headerTitle.innerText = `Your Bag (${cartCount})`;
+      }
+
+      const navBagCount = document.getElementById('cartCount');
+      if (navBagCount) {
+        navBagCount.innerText = cartCount;
+        navBagCount.style.display = cartCount > 0 ? 'inline-flex' : 'none';
+      }
+
+      let subtotal = 0;
+
+      if (cart.length === 0) {
+        list.innerHTML = `
+          <div class="cart-empty-state">
+            <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="var(--color-caramel)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0.7;">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            <h4>Your bag is empty</h4>
+            <p style="font-size: 13px; color: var(--color-caramel); max-width: 240px; margin: 0 auto 10px;">Select a unique upcycled item to begin your collection.</p>
+            <button class="btn btn-secondary" onclick="toggleCart(false)">Continue Browsing</button>
+          </div>
+        `;
+        subtotalEl.innerText = '£0.00';
+        if (checkoutBtn) checkoutBtn.disabled = true;
+        return;
+      }
+
+      if (checkoutBtn) checkoutBtn.disabled = false;
+
+      cart.forEach(item => {
+        subtotal += item.price;
+        const itemEl = document.createElement('div');
+        itemEl.className = 'cart-item';
+        
+        // Show Then / Now upcycling details in cart if present
+        const upcycleMeta = (item.then && item.now) 
+          ? `<div class="cart-item-meta" style="font-size: 10px; margin-top: 2px; opacity: 0.8;">Upcycled from: ${item.then}</div>`
+          : `<div class="cart-item-meta">${item.category}</div>`;
+
+        itemEl.innerHTML = `
+          <div class="cart-item-img">
+            <img src="${item.images[0]}" alt="${item.title}">
+          </div>
+          <div class="cart-item-details">
+            <h4 class="cart-item-title" style="margin: 0; line-height: 1.3;">${item.title}</h4>
+            ${upcycleMeta}
+            <div class="cart-item-price">£${item.price.toFixed(2)}</div>
+          </div>
+          <button class="remove-item-btn" onclick="removeFromCart(${item.id})" aria-label="Remove item" style="background: none; border: none; cursor: pointer; padding: 5px;">&times;</button>
+        `;
+        list.appendChild(itemEl);
+      });
+
+      subtotalEl.innerText = `£${subtotal.toFixed(2)}`;
+    }
+
+    // Checkout flow: connects to serverless Stripe route, falls back to local demo mock if offline/local file
+    async function checkout() {
+      if (cart.length === 0) return;
+
+      const checkoutBtn = document.getElementById('checkoutBtn');
+      const originalText = checkoutBtn ? checkoutBtn.innerText : 'Checkout';
+      if (checkoutBtn) {
+        checkoutBtn.innerText = 'Connecting to Stripe...';
+        checkoutBtn.disabled = true;
+      }
+
+      try {
+        const response = await fetch('/api/create-checkout-session', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ items: cart })
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.url) {
+            // Clear cart before redirecting
+            cart = [];
+            localStorage.setItem('pn_cart', JSON.stringify(cart));
+            window.location.href = data.url;
+            return;
+          }
+        }
+
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Serverless Checkout session endpoint error');
+      } catch (err) {
+        console.warn('Redirect checkout failed, using local offline simulation instead:', err);
+
+        // Fallback simulated checkout for local preview mode
+        cart.forEach(cartItem => {
+          const prod = shopProducts.find(p => p.id === cartItem.id);
+          if (prod) {
+            prod.inventory = 0;
+          }
+        });
+
+        localStorage.setItem('pn_products', JSON.stringify(shopProducts));
+
+        cart = [];
+        localStorage.setItem('pn_cart', JSON.stringify(cart));
+
+        toggleCart(false);
+        toggleSuccessModal(true);
+
+        renderCart();
+        renderProducts();
+      } finally {
+        if (checkoutBtn) {
+          checkoutBtn.innerText = originalText;
+          checkoutBtn.disabled = false;
+        }
+      }
+    }
 
     // Story Beginnings Slideshow State
     const beginningsImages = [
@@ -2980,12 +3843,77 @@
     }
 
     // Initialize the app
-    window.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('DOMContentLoaded', initApp);
+
+    async function initApp() {
       // Load cart from localStorage
       const storedCart = localStorage.getItem('pn_cart');
       if (storedCart) {
         cart = JSON.parse(storedCart);
       }
+
+      // Resolve Web App URL: constant first, then localStorage (for admin setup)
+      const webAppUrl = GOOGLE_SHEET_WEB_APP_URL || localStorage.getItem('pn_sheet_url');
+
+      if (webAppUrl) {
+        try {
+          const response = await fetch(webAppUrl);
+          if (response.ok) {
+            shopProducts = (await response.json()).filter(p => p.id !== 0);
+            localStorage.setItem('pn_products', JSON.stringify(shopProducts));
+          } else {
+            throw new Error('Google Sheet Web App responded with error status: ' + response.status);
+          }
+        } catch (error) {
+          console.error("Failed to load products from Google Sheet. Using cached local storage backup:", error);
+          const storedProducts = localStorage.getItem('pn_products');
+          if (storedProducts) {
+            shopProducts = JSON.parse(storedProducts);
+          }
+        }
+      } else {
+        // Fallback to local products.json database if Google Sheets integration is not configured yet
+        try {
+          const response = await fetch('products.json');
+          const defaultProducts = await response.json();
+          const storedProducts = localStorage.getItem('pn_products');
+          let needsReset = false;
+          if (storedProducts) {
+            try {
+              shopProducts = JSON.parse(storedProducts);
+              if (shopProducts.length !== defaultProducts.length) {
+                needsReset = true;
+              } else {
+                for (let i = 0; i < defaultProducts.length; i++) {
+                  if (!shopProducts.some(sp => sp.id === defaultProducts[i].id)) {
+                    needsReset = true;
+                    break;
+                  }
+                }
+              }
+            } catch (e) {
+              needsReset = true;
+            }
+          } else {
+            needsReset = true;
+          }
+
+          if (needsReset) {
+            shopProducts = JSON.parse(JSON.stringify(defaultProducts));
+            localStorage.setItem('pn_products', JSON.stringify(shopProducts));
+          }
+        } catch (error) {
+          console.error("Failed to load default local products.json database:", error);
+          const storedProducts = localStorage.getItem('pn_products');
+          if (storedProducts) {
+            shopProducts = JSON.parse(storedProducts);
+          }
+        }
+      }
+
+      // Render initial shop products and cart
+      renderProducts();
+      renderCart();
 
       // Initialize story slideshow auto scroll
       initBeginningsSlideshow();
@@ -3027,7 +3955,7 @@
       if (contactEl) {
         contactObserver.observe(contactEl);
       }
-    });
+    }
 
     // ----------------------------------------------------
     // SPA ROUTING
@@ -3035,12 +3963,16 @@
     function handleHashRouting() {
       const hash = window.location.hash.substring(1) || 'home';
       // Map hash to section ids
-      const validRoutes = ['home', 'collections', 'story', 'contact'];
+      const validRoutes = ['home', 'collections', 'story', 'contact', 'admin'];
       let targetRoute = validRoutes.includes(hash) ? hash : 'home';
 
       const isContact = targetRoute === 'contact';
       if (isContact) {
         targetRoute = 'home';
+      }
+
+      if (targetRoute === 'admin') {
+        checkAdminLoginState();
       }
 
       // Update UI active links
@@ -3136,6 +4068,473 @@
     function closeDetailOutside(e) {
       if (e.target === document.getElementById('detailOverlay')) {
         toggleDetailModal(false);
+      }
+    }
+
+    // ----------------------------------------------------
+    // ADMIN PORTAL LOGIC (GitHub REST API Git-based CMS)
+    // ----------------------------------------------------
+    // ----------------------------------------------------
+    // GOOGLE SHEETS INTEGRATION CONFIGURATION
+    // ----------------------------------------------------
+    // Paste your deployed Google Apps Script Web App URL here to make it permanent for all public visitors:
+    const GOOGLE_SHEET_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzCUi5SR8ZySa-zsvJYvVY2yQZpoMwSQRVazDWSG6Mp4Ra9kGQBKQYXNQ6hTNjF5wyWEA/exec";
+
+    function checkAdminLoginState() {
+      const url = GOOGLE_SHEET_WEB_APP_URL || localStorage.getItem('pn_sheet_url');
+      const password = localStorage.getItem('pn_sheet_password');
+
+      const loginCard = document.getElementById('admin-login-card');
+      const dashboard = document.getElementById('admin-dashboard');
+
+      if (url && password) {
+        if (loginCard) loginCard.style.display = 'none';
+        if (dashboard) dashboard.style.display = 'block';
+        loadAdminProducts();
+      } else {
+        if (loginCard) loginCard.style.display = 'block';
+        if (dashboard) dashboard.style.display = 'none';
+
+        // Populate fields with stored config if available (prioritize hardcoded URL)
+        const urlInput = document.getElementById('admin-sheet-url');
+        const passInput = document.getElementById('admin-sheet-password');
+        if (urlInput) urlInput.value = GOOGLE_SHEET_WEB_APP_URL || localStorage.getItem('pn_sheet_url') || '';
+        if (passInput) passInput.value = localStorage.getItem('pn_sheet_password') || '';
+      }
+    }
+
+    async function loginAdmin() {
+      const urlInput = document.getElementById('admin-sheet-url');
+      const passInput = document.getElementById('admin-sheet-password');
+      if (!urlInput || !passInput) return;
+
+      const url = urlInput.value.trim();
+      const password = passInput.value.trim();
+
+      if (!url) {
+        alert('Please enter your Google Web App URL.');
+        return;
+      }
+      if (!password) {
+        alert('Please enter your Admin Password.');
+        return;
+      }
+
+      const loginBtn = document.querySelector('#admin-login-card button');
+      const originalBtnText = loginBtn ? loginBtn.innerText : 'Login';
+      if (loginBtn) {
+        loginBtn.innerText = 'Verifying with Google Sheets...';
+        loginBtn.disabled = true;
+      }
+
+      try {
+        // Send a verification request using the clean verify action
+        const res = await fetch(url, {
+          method: 'POST',
+          credentials: 'omit',
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify({
+            action: 'verify',
+            secret: password
+          })
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          if (data.success) {
+            localStorage.setItem('pn_sheet_url', url);
+            localStorage.setItem('pn_sheet_password', password);
+            checkAdminLoginState();
+          } else {
+            alert(`Authentication failed: ${data.error || 'Incorrect Password'}`);
+          }
+        } else {
+          alert(`Failed to connect to Google Sheets Web App. Status: ${res.status}`);
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Connection error. Please verify your Google Web App URL (ends with /exec) and ensure you deployed it with "Anyone" access.');
+      } finally {
+        if (loginBtn) {
+          loginBtn.innerText = originalBtnText;
+          loginBtn.disabled = false;
+        }
+      }
+    }
+
+    function logoutAdmin() {
+      localStorage.removeItem('pn_sheet_password');
+      checkAdminLoginState();
+      navigateTo('home');
+    }
+
+    async function loadAdminProducts() {
+      const tableBody = document.getElementById('admin-products-table-body');
+      if (tableBody) {
+        tableBody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 30px;">Loading catalog from Google Sheets...</td></tr>';
+      }
+
+      const url = GOOGLE_SHEET_WEB_APP_URL || localStorage.getItem('pn_sheet_url');
+      if (!url) {
+        if (tableBody) {
+          tableBody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 30px; color: orange;">Google Sheet Web App URL not configured.</td></tr>';
+        }
+        return;
+      }
+
+      try {
+        const res = await fetch(url, {
+          credentials: 'omit'
+        });
+        if (res.ok) {
+          shopProducts = (await res.json()).filter(p => p.id !== 0);
+          localStorage.setItem('pn_products', JSON.stringify(shopProducts));
+          renderAdminProductsTable();
+          renderProducts(); // Update public shop view too
+        } else {
+          if (tableBody) {
+            tableBody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 30px; color: red;">Failed to retrieve catalog from Google Sheets. Status: ${res.status}</td></tr>`;
+          }
+        }
+      } catch (err) {
+        console.error("Fetch catalog error:", err);
+        if (tableBody) {
+          tableBody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 30px; color: red;">Error fetching catalog from Google Sheets. Check web app URL and access permissions.</td></tr>';
+        }
+      }
+    }
+
+    function renderAdminProductsTable() {
+      const tableBody = document.getElementById('admin-products-table-body');
+      if (!tableBody) return;
+      tableBody.innerHTML = '';
+
+      if (shopProducts.length === 0) {
+        tableBody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 30px;">No products found in the catalog.</td></tr>';
+        return;
+      }
+
+      shopProducts.forEach(p => {
+        const tr = document.createElement('tr');
+
+        const isArchived = p.inventory <= 0;
+        const statusBadge = isArchived
+          ? '<span class="admin-badge archived">Sold Out</span>'
+          : '<span class="admin-badge active">In Stock</span>';
+
+        const archiveActionLabel = isArchived ? 'Re-stock' : 'Archive';
+
+        tr.innerHTML = `
+          <td><img src="${p.images[0]}" class="admin-thumb" alt="${p.title}"></td>
+          <td style="font-weight: 600;">${p.title}</td>
+          <td>£${p.price.toFixed(2)}</td>
+          <td>${p.category}</td>
+          <td>${p.color}</td>
+          <td>${statusBadge}</td>
+          <td>
+            <div class="admin-actions-cell">
+              <button class="admin-action-btn" onclick="editProduct(${p.id})">Edit</button>
+              <button class="admin-action-btn archive-btn" onclick="toggleProductArchive(${p.id})">${archiveActionLabel}</button>
+              <button class="admin-action-btn delete-btn" onclick="deleteProduct(${p.id})">Delete</button>
+            </div>
+          </td>
+        `;
+        tableBody.appendChild(tr);
+      });
+    }
+
+    function showAddProductForm() {
+      const modal = document.getElementById('admin-product-modal');
+      const form = document.getElementById('admin-product-form');
+      const title = document.getElementById('admin-modal-title');
+
+      if (!modal || !form || !title) return;
+
+      title.innerText = 'Add New Product';
+      form.reset();
+      document.getElementById('edit-product-id').value = '';
+      document.getElementById('form-tag').value = '';
+      document.getElementById('form-then').value = '';
+      document.getElementById('form-now').value = '';
+
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function editProduct(id) {
+      const modal = document.getElementById('admin-product-modal');
+      const title = document.getElementById('admin-modal-title');
+      if (!modal || !title) return;
+
+      const p = shopProducts.find(item => item.id === id);
+      if (!p) return;
+
+      title.innerText = 'Edit Product';
+
+      document.getElementById('edit-product-id').value = p.id;
+      document.getElementById('form-title').value = p.title;
+      document.getElementById('form-price').value = p.price;
+      document.getElementById('form-category').value = p.category;
+      document.getElementById('form-tag').value = p.tag || '';
+      document.getElementById('form-color').value = p.color;
+      document.getElementById('form-size').value = (p.spec && p.spec.size) || '';
+      document.getElementById('form-dimensions').value = (p.spec && p.spec.dimensions) || '';
+      document.getElementById('form-materials').value = (p.spec && p.spec.materials) || '';
+      document.getElementById('form-care').value = (p.spec && p.spec.care) || '';
+      document.getElementById('form-images').value = p.images ? p.images.join(', ') : '';
+      document.getElementById('form-desc').value = p.description || '';
+      document.getElementById('form-backstory').value = p.backstory || '';
+      document.getElementById('form-then').value = p.then || '';
+      document.getElementById('form-now').value = p.now || '';
+
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeAdminProductModal() {
+      const modal = document.getElementById('admin-product-modal');
+      if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function closeAdminProductModalOutside(e) {
+      if (e.target === document.getElementById('admin-product-modal')) {
+        closeAdminProductModal();
+      }
+    }
+
+    async function saveProduct(event) {
+      event.preventDefault();
+
+      const idVal = document.getElementById('edit-product-id').value;
+      const title = document.getElementById('form-title').value.trim();
+      const price = parseFloat(document.getElementById('form-price').value);
+      const category = document.getElementById('form-category').value;
+      const tag = document.getElementById('form-tag').value.trim();
+      const color = document.getElementById('form-color').value.trim();
+      const size = document.getElementById('form-size').value.trim();
+      const dimensions = document.getElementById('form-dimensions').value.trim();
+      const materials = document.getElementById('form-materials').value.trim();
+      const care = document.getElementById('form-care').value.trim();
+      const imagesStr = document.getElementById('form-images').value.trim();
+      const description = document.getElementById('form-desc').value.trim();
+      const backstory = document.getElementById('form-backstory').value.trim();
+      const then = document.getElementById('form-then').value.trim();
+      const now = document.getElementById('form-now').value.trim();
+
+      const images = imagesStr ? imagesStr.split(',').map(s => s.trim()).filter(Boolean) : [];
+
+      let id = idVal ? parseInt(idVal) : null;
+      if (!id) {
+        id = shopProducts.length > 0 ? Math.max(...shopProducts.map(p => p.id)) + 1 : 1;
+      }
+
+      const product = {
+        id,
+        title: title || 'Untitled Product',
+        price: isNaN(price) ? 0.00 : price,
+        category: category || 'Clothes',
+        tag: tag || '',
+        color: color || '',
+        images: images.length > 0 ? images : ['products1/20260614_151200.jpg'],
+        description: description || '',
+        backstory: backstory || '',
+        spec: { size, dimensions, materials, care },
+        then,
+        now,
+        inventory: 1
+      };
+
+      const modal = document.getElementById('admin-product-modal');
+      const saveBtn = modal ? modal.querySelector('button[type="submit"]') : null;
+      const originalBtnText = saveBtn ? saveBtn.innerText : 'Save Product';
+
+      if (saveBtn) {
+        saveBtn.innerText = 'Saving to Google Sheets...';
+        saveBtn.disabled = true;
+      }
+
+      const url = GOOGLE_SHEET_WEB_APP_URL || localStorage.getItem('pn_sheet_url');
+      const password = localStorage.getItem('pn_sheet_password');
+
+      try {
+        const res = await fetch(url, {
+          method: 'POST',
+          credentials: 'omit',
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify({
+            action: 'save',
+            secret: password,
+            product: product
+          })
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          if (data.success) {
+            const idx = shopProducts.findIndex(p => p.id === id);
+            if (idx > -1) {
+              shopProducts[idx] = product;
+            } else {
+              shopProducts.push(product);
+            }
+            localStorage.setItem('pn_products', JSON.stringify(shopProducts));
+
+            closeAdminProductModal();
+            renderAdminProductsTable();
+            renderProducts();
+            alert('Successfully saved and synchronized directly to Google Sheet!');
+          } else {
+            alert(`Failed to save: ${data.error || 'Unauthorized'}`);
+          }
+        } else {
+          alert(`Server responded with error status: ${res.status}`);
+        }
+      } catch (err) {
+        console.warn("Save request met network/redirect error, verifying if it succeeded anyway...", err);
+
+        // Wait 1.5 seconds and fetch latest catalog to verify if the save actually succeeded (self-healing verification)
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        try {
+          await loadAdminProducts();
+          const verifiedProduct = shopProducts.find(p => p.id === id);
+          if (verifiedProduct && verifiedProduct.title === title) {
+            closeAdminProductModal();
+            alert('Successfully saved and synchronized directly to Google Sheet!');
+            return;
+          }
+        } catch (verifyErr) {
+          console.error("Self-healing verification fetch failed too:", verifyErr);
+        }
+
+        alert('Connection error. Failed to save product to Google Sheet.');
+      } finally {
+        if (saveBtn) {
+          saveBtn.innerText = originalBtnText;
+          saveBtn.disabled = false;
+        }
+      }
+    }
+
+    async function toggleProductArchive(id) {
+      const p = shopProducts.find(item => item.id === id);
+      if (!p) return;
+
+      const isArchived = p.inventory <= 0;
+      const newInventory = isArchived ? 1 : 0;
+      const actionText = isArchived ? 'restock' : 'archive';
+
+      if (!confirm(`Are you sure you want to ${actionText} "${p.title}"?`)) {
+        return;
+      }
+
+      const updatedProduct = { ...p, inventory: newInventory };
+
+      const url = GOOGLE_SHEET_WEB_APP_URL || localStorage.getItem('pn_sheet_url');
+      const password = localStorage.getItem('pn_sheet_password');
+
+      try {
+        const res = await fetch(url, {
+          method: 'POST',
+          credentials: 'omit',
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify({
+            action: 'save',
+            secret: password,
+            product: updatedProduct
+          })
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          if (data.success) {
+            shopProducts = shopProducts.map(item => item.id === id ? updatedProduct : item);
+            localStorage.setItem('pn_products', JSON.stringify(shopProducts));
+
+            renderAdminProductsTable();
+            renderProducts();
+            alert(`Product "${p.title}" successfully ${actionText}ed in Google Sheet!`);
+          } else {
+            alert(`Failed to ${actionText} product: ${data.error || 'Unauthorized'}`);
+          }
+        } else {
+          alert(`Failed to connect. Status: ${res.status}`);
+        }
+      } catch (err) {
+        console.warn("Archive toggle met redirect error, verifying if it succeeded anyway...", err);
+
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        try {
+          await loadAdminProducts();
+          const verifiedProduct = shopProducts.find(p => p.id === id);
+          if (verifiedProduct && verifiedProduct.inventory === newInventory) {
+            alert(`Product "${p.title}" successfully ${actionText}ed in Google Sheet!`);
+            return;
+          }
+        } catch (verifyErr) {
+          console.error("Self-healing verification fetch failed too:", verifyErr);
+        }
+
+        alert(`Connection error. Failed to ${actionText} product.`);
+      }
+    }
+
+    async function deleteProduct(id) {
+      const p = shopProducts.find(item => item.id === id);
+      if (!p) return;
+
+      if (!confirm(`Are you sure you want to permanently delete "${p.title}"? This cannot be undone and will delete the row in your Google Sheet.`)) {
+        return;
+      }
+
+      const url = GOOGLE_SHEET_WEB_APP_URL || localStorage.getItem('pn_sheet_url');
+      const password = localStorage.getItem('pn_sheet_password');
+
+      try {
+        const res = await fetch(url, {
+          method: 'POST',
+          credentials: 'omit',
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify({
+            action: 'delete',
+            secret: password,
+            id: id
+          })
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          if (data.success) {
+            shopProducts = shopProducts.filter(item => item.id !== id);
+            localStorage.setItem('pn_products', JSON.stringify(shopProducts));
+
+            renderAdminProductsTable();
+            renderProducts();
+            alert(`Product "${p.title}" permanently deleted from Google Sheet!`);
+          } else {
+            alert(`Failed to delete: ${data.error || 'Unauthorized'}`);
+          }
+        } else {
+          alert(`Failed to connect. Status: ${res.status}`);
+        }
+      } catch (err) {
+        console.warn("Delete met redirect error, verifying if it succeeded anyway...", err);
+
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        try {
+          await loadAdminProducts();
+          const verifiedProduct = shopProducts.find(p => p.id === id);
+          if (!verifiedProduct) {
+            alert(`Product "${p.title}" permanently deleted from Google Sheet!`);
+            return;
+          }
+        } catch (verifyErr) {
+          console.error("Self-healing verification fetch failed too:", verifyErr);
+        }
+
+        alert('Connection error. Failed to delete product.');
       }
     }
   </script>
