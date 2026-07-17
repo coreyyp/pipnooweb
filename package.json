@@ -1,0 +1,8 @@
+{
+  "name": "pn-website-shop",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "stripe": "^12.0.0"
+  }
+}

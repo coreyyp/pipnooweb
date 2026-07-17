@@ -1886,6 +1886,7 @@
     }
 
     .detail-title {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
       font-size: 32px;
     }
 
@@ -1898,11 +1899,12 @@
     }
 
     .detail-price {
-      font-family: var(--font-display);
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
       font-size: 28px;
     }
 
     .detail-desc {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
       font-size: 14px;
       color: #55443b;
       line-height: 1.7;
@@ -1939,12 +1941,21 @@
       width: 100%;
       text-align: center;
       margin-top: 10px;
+      background-color: var(--color-forest) !important;
+      border-color: var(--color-forest) !important;
+      color: var(--color-bg) !important;
+    }
+
+    .detail-add-btn:hover {
+      background-color: var(--color-mint) !important;
+      border-color: var(--color-mint) !important;
+      color: var(--color-bg) !important;
     }
 
     .detail-add-btn:disabled {
-      background-color: var(--color-light-gray);
-      border-color: var(--color-light-gray);
-      color: #9d8c80;
+      background-color: var(--color-light-gray) !important;
+      border-color: var(--color-light-gray) !important;
+      color: #9d8c80 !important;
       cursor: not-allowed;
       transform: none;
     }
@@ -1961,13 +1972,14 @@
     }
 
     .detail-backstory-label {
-      font-family: var(--font-display);
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
       font-size: 22px;
       color: var(--color-brown);
       margin: 0 0 4px 0;
     }
 
     .detail-backstory-text {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
       font-size: 14px;
       color: #55443b;
       line-height: 1.8;
@@ -3489,49 +3501,66 @@
       subtotalEl.innerText = `£${subtotal.toFixed(2)}`;
     }
 
-    // Checkout flow: marks items out of stock and archives them
-    function checkout() {
+    // Checkout flow: connects to serverless Stripe route, falls back to local demo mock if offline/local file
+    async function checkout() {
       if (cart.length === 0) return;
 
-      const url = GOOGLE_SHEET_WEB_APP_URL || localStorage.getItem('pn_sheet_url');
-      if (url) {
-        // Send decrement requests in parallel for all items in cart to update Google Sheet stock
-        const decrementPromises = cart.map(cartItem => {
-          return fetch(url, {
-            method: 'POST',
-            credentials: 'omit',
-            headers: { 'Content-Type': 'text/plain' },
-            body: JSON.stringify({
-              action: 'decrement',
-              id: cartItem.id
-            })
-          }).catch(err => console.error("Failed to decrement inventory on Sheet:", err));
-        });
-
-        // Silently reload catalog after Google Sheets update completes to align public shop
-        Promise.all(decrementPromises).then(() => {
-          loadAdminProducts();
-        });
+      const checkoutBtn = document.getElementById('checkoutBtn');
+      const originalText = checkoutBtn ? checkoutBtn.innerText : 'Checkout';
+      if (checkoutBtn) {
+        checkoutBtn.innerText = 'Connecting to Stripe...';
+        checkoutBtn.disabled = true;
       }
 
-      // Decrement locally immediately for instant UI feedback
-      cart.forEach(cartItem => {
-        const prod = shopProducts.find(p => p.id === cartItem.id);
-        if (prod) {
-          prod.inventory = 0;
+      try {
+        const response = await fetch('/api/create-checkout-session', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ items: cart })
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.url) {
+            // Clear cart before redirecting
+            cart = [];
+            localStorage.setItem('pn_cart', JSON.stringify(cart));
+            window.location.href = data.url;
+            return;
+          }
         }
-      });
 
-      localStorage.setItem('pn_products', JSON.stringify(shopProducts));
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Serverless Checkout session endpoint error');
+      } catch (err) {
+        console.warn('Redirect checkout failed, using local offline simulation instead:', err);
 
-      cart = [];
-      localStorage.setItem('pn_cart', JSON.stringify(cart));
+        // Fallback simulated checkout for local preview mode
+        cart.forEach(cartItem => {
+          const prod = shopProducts.find(p => p.id === cartItem.id);
+          if (prod) {
+            prod.inventory = 0;
+          }
+        });
 
-      toggleCart(false);
-      toggleSuccessModal(true);
+        localStorage.setItem('pn_products', JSON.stringify(shopProducts));
 
-      renderCart();
-      renderProducts();
+        cart = [];
+        localStorage.setItem('pn_cart', JSON.stringify(cart));
+
+        toggleCart(false);
+        toggleSuccessModal(true);
+
+        renderCart();
+        renderProducts();
+      } finally {
+        if (checkoutBtn) {
+          checkoutBtn.innerText = originalText;
+          checkoutBtn.disabled = false;
+        }
+      }
     }
 
     // Story Beginnings Slideshow State
