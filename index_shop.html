@@ -1728,7 +1728,7 @@
     }
 
     /* ----------------------------------------------------
-       9. PRODUCT DETAIL MODAL
+       9. PRODUCT DETAIL MODAL (FULL PAGE ETSY-STYLE)
        ---------------------------------------------------- */
     .detail-overlay {
       position: fixed;
@@ -1736,8 +1736,8 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(60, 42, 33, 0.4);
-      backdrop-filter: blur(4px);
+      background-color: rgba(60, 42, 33, 0.6);
+      backdrop-filter: blur(6px);
       z-index: 1000;
       opacity: 0;
       pointer-events: none;
@@ -1751,231 +1751,354 @@
 
     .detail-modal {
       background-color: var(--color-bg);
-      width: 75%;
+      width: 100%;
       height: 100%;
       position: fixed;
       top: 0;
-      right: 0;
+      left: 0;
       overflow-y: auto;
-      box-shadow: -10px 0 30px rgba(60, 42, 33, 0.15);
       z-index: 1001;
-      transform: translateX(100%);
+      transform: translateY(100%);
       transition: transform var(--transition-smooth);
     }
 
     .detail-overlay.active .detail-modal {
-      transform: translateX(0);
-    }
-
-    @media (max-width: 992px) {
-      .detail-modal {
-        width: 100%;
-      }
+      transform: translateY(0);
     }
 
     .close-detail-btn {
-      position: absolute;
-      top: 20px;
-      right: 20px;
+      position: fixed;
+      top: 24px;
+      right: 28px;
       font-size: 28px;
       color: var(--color-chocolate);
-      z-index: 10;
-      width: 40px;
-      height: 40px;
+      z-index: 1050;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
-      background-color: rgba(250, 246, 240, 0.8);
+      background-color: var(--color-white);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
       display: flex;
       align-items: center;
       justify-content: center;
+      cursor: pointer;
+      border: 1px solid var(--color-light-gray);
+      transition: all var(--transition-fast);
     }
 
     .close-detail-btn:hover {
+      background-color: var(--color-chocolate);
+      color: var(--color-white);
+      transform: scale(1.05);
+    }
+
+    /* 3-Column Layout Container */
+    .detail-page-container {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 60px 40px 80px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    .detail-top-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) 340px;
+      gap: 36px;
+      align-items: start;
+    }
+
+    .detail-left-column {
+      display: grid;
+      grid-template-columns: 76px 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    /* Vertical Thumbnail Gallery */
+    .detail-thumbs-vertical {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 560px;
+      overflow-y: auto;
+      padding-right: 2px;
+    }
+
+    .detail-thumb-vertical {
+      width: 72px;
+      height: 90px;
+      border-radius: 8px;
+      border: 2px solid transparent;
+      overflow: hidden;
+      cursor: pointer;
+      background-color: var(--color-white);
+      transition: all var(--transition-fast);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+
+    .detail-thumb-vertical:hover {
+      border-color: var(--color-mint);
+      transform: translateY(-2px);
+    }
+
+    .detail-thumb-vertical.active {
+      border-color: var(--color-forest);
+      box-shadow: 0 4px 12px rgba(45, 66, 54, 0.2);
+    }
+
+    .detail-thumb-vertical img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Main Vertical Showcase Image (Portrait/Etsy Style) */
+    .detail-main-img-box {
+      width: 100%;
+      height: 560px;
+      border-radius: 12px;
+      overflow: hidden;
+      background-color: var(--color-light-gray);
+      box-shadow: 0 6px 20px rgba(60, 42, 33, 0.08);
+      border: 1px solid var(--color-light-gray);
+      position: relative;
+      cursor: zoom-in;
+    }
+
+    .detail-main-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      transition: transform var(--transition-smooth);
+    }
+
+    .detail-main-img-box:hover img {
+      transform: scale(1.03);
+    }
+
+    /* Photo Overlay Like Button (Top Right Corner) */
+    .detail-img-like-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(4px);
+      border: 1px solid var(--color-light-gray);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+      transition: all var(--transition-fast);
+      color: var(--color-chocolate);
+    }
+
+    .detail-img-like-btn:hover {
+      transform: scale(1.1);
       background-color: var(--color-white);
       color: var(--color-orange);
     }
 
-    .detail-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
+    .detail-img-like-btn.liked svg,
+    .detail-action-like-btn.liked svg {
+      fill: var(--color-orange);
+      stroke: var(--color-orange);
     }
 
-    @media (max-width: 768px) {
-      .detail-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .detail-gallery {
-      background-color: var(--color-light-gray);
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      min-height: 600px;
-    }
-
-    .detail-main-img {
-      width: 100%;
-      height: 100%;
+    /* Photo Overlay Navigation Arrows (Left / Right) */
+    .detail-img-nav-btn {
       position: absolute;
-      top: 0;
-      left: 0;
-      overflow: hidden;
-      background-color: var(--color-bg);
+      top: 50%;
+      transform: translateY(-50%);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(4px);
+      border: 1px solid var(--color-light-gray);
       display: flex;
-      justify-content: center;
       align-items: center;
-    }
-
-    .detail-main-img svg,
-    .detail-main-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .detail-thumbs {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 10px;
-      z-index: 5;
-    }
-
-    .detail-thumb {
-      width: 60px;
-      height: 72px;
-      border-radius: 4px;
-      border: 2px solid transparent;
-      overflow: hidden;
+      justify-content: center;
       cursor: pointer;
-      background-color: var(--color-bg);
+      z-index: 10;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+      transition: all var(--transition-fast);
+      color: var(--color-chocolate);
+      opacity: 0.85;
+    }
+
+    .detail-img-nav-btn:hover {
+      opacity: 1;
+      transform: translateY(-50%) scale(1.08);
+      background-color: var(--color-white);
+      color: var(--color-forest);
+    }
+
+    .detail-img-nav-btn.prev {
+      left: 14px;
+    }
+
+    .detail-img-nav-btn.next {
+      right: 14px;
+    }
+
+    /* Actions Row with Add to Bag & Heart Button */
+    .detail-actions-row {
       display: flex;
-      justify-content: center;
+      gap: 12px;
       align-items: center;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    }
-
-    .detail-thumb.active {
-      border-color: var(--color-orange);
-    }
-
-    .detail-thumb svg,
-    .detail-thumb img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
     }
 
-    .detail-content {
-      padding: 40px;
+    .detail-action-like-btn {
+      width: 52px;
+      height: 52px;
+      flex-shrink: 0;
+      border-radius: 8px;
+      background-color: var(--color-white);
+      border: 1.5px solid var(--color-light-gray);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--color-chocolate);
+      transition: all var(--transition-fast);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    .detail-action-like-btn:hover {
+      border-color: var(--color-orange);
+      color: var(--color-orange);
+      transform: translateY(-2px);
+    }
+
+    /* Middle Column: Title, Then/Now, Care/Composition */
+    .detail-center-info {
       display: flex;
       flex-direction: column;
-      gap: 20px;
-      justify-content: center;
-    }
-
-    .detail-category {
-      font-size: 12px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: var(--color-mint);
+      gap: 22px;
     }
 
     .detail-title {
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
-      font-size: 32px;
-    }
-
-    .detail-price-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--color-light-gray);
-      padding-bottom: 16px;
-    }
-
-    .detail-price {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
       font-size: 28px;
+      font-weight: 700;
+      color: var(--color-chocolate);
+      line-height: 1.25;
+      margin: 0;
+    }
+
+    .detail-category-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--color-forest);
+      background-color: rgba(45, 66, 54, 0.08);
+      padding: 4px 10px;
+      border-radius: 4px;
+      width: fit-content;
+    }
+
+    .detail-upcycle-card {
+      padding: 16px 20px;
+      background-color: #f4f8f6;
+      border-left: 4px solid var(--color-forest);
+      border-radius: 0 8px 8px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 13px;
+    }
+
+    .detail-upcycle-card span.label {
+      color: var(--color-caramel);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 0.5px;
+      margin-right: 6px;
     }
 
     .detail-desc {
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
       font-size: 14px;
-      color: #55443b;
+      color: #4a3d36;
       line-height: 1.7;
       white-space: pre-line;
     }
 
-    .detail-spec {
-      background-color: var(--color-white);
-      padding: 18px;
-      border-radius: var(--border-radius);
-      border: 1px solid var(--color-light-gray);
-      font-size: 13px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
+    /* 4-Box 2x2 Specification Grid */
+    .detail-spec-grid-2x2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
     }
 
-    .detail-spec-group {
+    .detail-spec-box {
+      background-color: var(--color-white);
+      border-radius: 10px;
+      padding: 18px 20px;
+      border: 1px solid var(--color-light-gray);
+      box-shadow: 0 2px 8px rgba(60, 42, 33, 0.03);
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 6px;
+      justify-content: center;
+      min-height: 84px;
     }
 
     .spec-label {
       font-weight: 700;
       color: var(--color-caramel);
       text-transform: uppercase;
-      font-size: 10px;
+      font-size: 10.5px;
       letter-spacing: 0.8px;
-      display: block;
     }
 
-    .detail-add-btn {
-      width: 100%;
-      text-align: center;
-      margin-top: 10px;
-      background-color: var(--color-forest) !important;
-      border-color: var(--color-forest) !important;
-      color: var(--color-bg) !important;
+    .spec-val {
+      font-size: 13.5px;
+      color: var(--color-chocolate);
+      font-weight: 500;
+      line-height: 1.4;
     }
 
-    .detail-add-btn:hover {
-      background-color: var(--color-mint) !important;
-      border-color: var(--color-mint) !important;
-      color: var(--color-bg) !important;
-    }
-
-    .detail-add-btn:disabled {
-      background-color: var(--color-light-gray) !important;
-      border-color: var(--color-light-gray) !important;
-      color: #9d8c80 !important;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    .detail-backstory {
-      grid-column: 1 / -1;
-      padding: 40px;
-      border-top: 1px solid var(--color-light-gray);
+    /* Bottom Section: Maker Backstory */
+    .detail-backstory-card {
       background-color: #FAF6F0;
+      border: 1px solid var(--color-light-gray);
+      border-radius: 12px;
+      padding: 36px 40px;
       display: flex;
       flex-direction: column;
       gap: 12px;
-      min-width: 0;
+      margin-top: 10px;
     }
 
     .detail-backstory-label {
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
       font-size: 22px;
-      color: var(--color-brown);
-      margin: 0 0 4px 0;
+      font-weight: 700;
+      color: var(--color-chocolate);
+      margin: 0;
+    }
+
+    .detail-backstory-text {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+      font-size: 14.5px;
+      color: #55443b;
+      line-height: 1.85;
+      margin: 0;
+      white-space: pre-line;
     }
 
     .detail-backstory-text {
@@ -1985,10 +2108,125 @@
       line-height: 1.8;
       margin: 0;
       white-space: pre-line;
-      word-wrap: break-word;
-      word-break: break-word;
-      overflow-wrap: break-word;
-      min-width: 0;
+    }
+
+    /* Right Sticky Purchasing Sidebar (Etsy Style) */
+    .detail-right-sidebar {
+      position: sticky;
+      top: 100px;
+      background-color: var(--color-white);
+      border-radius: 14px;
+      padding: 28px;
+      border: 1px solid var(--color-light-gray);
+      box-shadow: 0 8px 30px rgba(60, 42, 33, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .detail-price-box {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      border-bottom: 1px solid var(--color-light-gray);
+      padding-bottom: 18px;
+    }
+
+    .detail-price-val {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+      font-size: 34px;
+      font-weight: 700;
+      color: var(--color-chocolate);
+    }
+
+    .detail-price-subtext {
+      font-size: 12px;
+      color: var(--color-caramel);
+    }
+
+    .detail-add-btn {
+      width: 100%;
+      padding: 16px;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      background-color: var(--color-forest) !important;
+      border-color: var(--color-forest) !important;
+      color: var(--color-bg) !important;
+      transition: all var(--transition-fast);
+      box-shadow: 0 4px 14px rgba(45, 66, 54, 0.2);
+    }
+
+    .detail-add-btn:hover {
+      background-color: var(--color-mint) !important;
+      border-color: var(--color-mint) !important;
+      color: var(--color-bg) !important;
+      transform: translateY(-2px);
+    }
+
+    .detail-add-btn:disabled {
+      background-color: var(--color-light-gray) !important;
+      border-color: var(--color-light-gray) !important;
+      color: #9d8c80 !important;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .detail-guarantee-box {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 12px;
+      color: var(--color-chocolate);
+      border-top: 1px solid var(--color-light-gray);
+      padding-top: 18px;
+    }
+
+    .guarantee-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .guarantee-item svg {
+      flex-shrink: 0;
+      stroke: var(--color-forest);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1100px) {
+      .detail-page-container {
+        grid-template-columns: 1fr;
+        padding: 40px 24px 60px 24px;
+      }
+
+      .detail-right-sidebar {
+        position: static;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .detail-left-column {
+        grid-template-columns: 1fr;
+      }
+
+      .detail-thumbs-vertical {
+        flex-direction: row;
+        max-height: none;
+        overflow-x: auto;
+        order: 2;
+      }
+
+      .detail-main-img-box {
+        order: 1;
+      }
+
+      .detail-spec-card {
+        grid-template-columns: 1fr;
+      }
     }
 
     /* ----------------------------------------------------
@@ -2553,7 +2791,17 @@
       </nav>
 
       <div class="nav-actions">
-        <button class="cart-trigger" onclick="toggleCart(true)" aria-label="Open Shopping Bag">
+        <button class="cart-trigger" id="likedNavTrigger" onclick="toggleCart(true, 'liked')" aria-label="Open Liked Items" style="margin-right: 4px;">
+          <span>Liked</span>
+          <span class="cart-icon">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="var(--color-orange)" stroke="var(--color-orange)" stroke-width="2">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+            <span class="cart-count" id="likedNavCount" style="display: none;">0</span>
+          </span>
+        </button>
+
+        <button class="cart-trigger" onclick="toggleCart(true, 'bag')" aria-label="Open Shopping Bag">
           <span>Bag</span>
           <span class="cart-icon">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
@@ -3181,6 +3429,7 @@
     // State Variables
     let cart = [];
     let shopProducts = [];
+    let likedProducts = JSON.parse(localStorage.getItem('pn_liked_products') || '[]');
     let activeFilters = {
       category: []
     };
@@ -3302,6 +3551,8 @@
           </div>
         ` : '';
 
+        const isLiked = likedProducts.includes(p.id);
+
         card.innerHTML = `
           <div class="product-img-wrapper">
             <img class="product-img" src="${p.images[0]}" alt="${p.title}">
@@ -3314,8 +3565,10 @@
               ${upcycleHtml}
             </div>
             <div class="product-card-bottom" style="justify-content: flex-end;">
-              <button class="add-to-cart-btn" onclick="event.stopPropagation(); addToCart(${p.id})" ${isInCart ? 'disabled' : ''} aria-label="Add to Bag">
-                ${isInCart ? '✓' : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>'}
+              <button class="add-to-cart-btn ${isLiked ? 'liked' : ''}" onclick="event.stopPropagation(); toggleProductLike(${p.id});" aria-label="Add to Liked">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="${isLiked ? 'var(--color-orange)' : 'none'}" stroke="${isLiked ? 'var(--color-orange)' : 'currentColor'}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
               </button>
             </div>
           </div>
@@ -3325,74 +3578,149 @@
     }
 
     // Open product details side-drawer/modal
+    // Open product details full-page modal (Etsy Style)
     function openProductDetail(id) {
       const p = shopProducts.find(item => item.id === id);
       if (!p) return;
+
+      activeProductDetailImages = p.images || [];
+      currentProductDetailIndex = 0;
 
       const grid = document.getElementById('detailModalGrid');
       if (!grid) return;
 
       const isInCart = cart.some(item => item.id === p.id);
 
+      const upcycleHtml = p.then && p.now ? `
+        <div class="detail-upcycle-card">
+          <div><span class="label">Then:</span> <span style="color: var(--color-chocolate);">${p.then}</span></div>
+          <div><span class="label">Now:</span> <span style="color: var(--color-chocolate);">${p.now}</span></div>
+        </div>
+      ` : '';
+
       grid.innerHTML = `
-        <div class="detail-gallery">
-          <div class="detail-main-img">
-            <img id="detailMainImgElement" src="${p.images[0]}" alt="${p.title}">
-          </div>
-          <div class="detail-thumbs">
-            ${p.images.map((img, idx) => `
-              <div class="detail-thumb ${idx === 0 ? 'active' : ''}" onclick="changeDetailMainImage('${img}', this)">
-                <img src="${img}" alt="${p.title} Detail ${idx + 1}">
+        <div class="detail-page-container">
+          <!-- TOP 3-COLUMN LAYOUT -->
+          <div class="detail-top-grid">
+            
+            <!-- COLUMN 1: PHOTOS & VERTICAL THUMBNAILS -->
+            <div class="detail-left-column">
+              <!-- Vertical Thumbnail Gallery -->
+              <div class="detail-thumbs-vertical">
+                ${p.images.map((img, idx) => `
+                  <div class="detail-thumb-vertical ${idx === 0 ? 'active' : ''}" onclick="changeDetailMainImage('${img}', this)">
+                    <img src="${img}" alt="${p.title} Thumbnail ${idx + 1}">
+                  </div>
+                `).join('')}
               </div>
-            `).join('')}
+
+              <!-- Main Showcase Vertical Photo -->
+              <div class="detail-main-img-box" onclick="openProductFullscreenImage()">
+                <button class="detail-img-like-btn ${likedProducts.includes(p.id) ? 'liked' : ''}" id="photoOverlayLikeBtn" onclick="event.stopPropagation(); toggleProductLike(${p.id});" aria-label="Save to Wishlist">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                  </svg>
+                </button>
+
+                <button class="detail-img-nav-btn prev" onclick="event.stopPropagation(); navigateProductDetailImage(-1);" aria-label="Previous Image">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"/>
+                  </svg>
+                </button>
+
+                <button class="detail-img-nav-btn next" onclick="event.stopPropagation(); navigateProductDetailImage(1);" aria-label="Next Image">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"/>
+                  </svg>
+                </button>
+
+                <img id="detailMainImgElement" src="${p.images[0]}" alt="${p.title}">
+              </div>
+            </div>
+
+            <!-- COLUMN 2: TITLE, THEN/NOW, DESCRIPTION & CARE/COMPOSITION -->
+            <div class="detail-center-info">
+              ${p.tag ? `<span class="detail-category-tag">${p.tag}</span>` : ''}
+              <h1 class="detail-title">${p.title}</h1>
+              
+              ${upcycleHtml}
+
+              <div class="detail-desc">${p.description}</div>
+
+              <!-- 2x2 Separate Rectangle Cards for Size, Dimensions, Composition & Care -->
+              <div class="detail-spec-grid-2x2">
+                <div class="detail-spec-box">
+                  <span class="spec-label">Size</span>
+                  <span class="spec-val">${p.spec.size}</span>
+                </div>
+                <div class="detail-spec-box">
+                  <span class="spec-label">Dimensions</span>
+                  <span class="spec-val">${p.spec.dimensions || 'N/A'}</span>
+                </div>
+                <div class="detail-spec-box">
+                  <span class="spec-label">Materials & Composition</span>
+                  <span class="spec-val">${p.spec.materials}</span>
+                </div>
+                <div class="detail-spec-box">
+                  <span class="spec-label">Care Instructions</span>
+                  <span class="spec-val">${p.spec.care}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- COLUMN 3: PRICE & CART ACTIONS SIDEBAR -->
+            <div class="detail-right-sidebar">
+              <div class="detail-price-box">
+                <div class="detail-price-val">£${p.price.toFixed(2)}</div>
+                <div class="detail-price-subtext">Tax included. Free UK shipping.</div>
+              </div>
+
+              <!-- Add to Bag & Heart Button Row -->
+              <div class="detail-actions-row">
+                <button class="btn detail-add-btn" id="detailAddBtn" onclick="addToCart(${p.id}); toggleDetailModal(false);" ${isInCart ? 'disabled' : ''} style="flex: 1;">
+                  ${isInCart ? 'Added to Bag' : 'Add to Bag'}
+                </button>
+                <button class="detail-action-like-btn ${likedProducts.includes(p.id) ? 'liked' : ''}" id="sidebarActionLikeBtn" onclick="toggleProductLike(${p.id});" aria-label="Favorite item">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                  </svg>
+                </button>
+              </div>
+
+              <div class="detail-guarantee-box">
+                <div class="guarantee-item">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  </svg>
+                  <span>100% Radically Upcycled & One-of-a-Kind</span>
+                </div>
+                <div class="guarantee-item">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="1" y="3" width="15" height="13"/>
+                    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                    <circle cx="5.5" cy="18.5" r="2.5"/>
+                    <circle cx="18.5" cy="18.5" r="2.5"/>
+                  </svg>
+                  <span>Dispatched sustainably from London</span>
+                </div>
+              </div>
+            </div>
+
           </div>
-        </div>
-        <div class="detail-content">
-          ${p.tag ? `<span class="detail-category">${p.tag}</span>` : ''}
-          <h2 class="detail-title font-display">${p.title}</h2>
-          <div class="detail-price-row">
-            <span class="detail-price">£${p.price.toFixed(2)}</span>
+
+          <!-- BOTTOM SECTION: MAKER BACKSTORY (SCROLL DOWN) -->
+          <div class="detail-backstory-card">
+            <h3 class="detail-backstory-label">Maker Backstory</h3>
+            <p class="detail-backstory-text">${p.backstory}</p>
           </div>
-          ${p.then && p.now ? `
-            <div class="detail-upcycle" style="margin-bottom: 20px; padding: 12px 16px; background-color: #f7faf9; border-left: 3px solid var(--color-mint); font-size: 13px; display: flex; flex-direction: column; gap: 6px; border-radius: 0 4px 4px 0; border-top: 1px dashed rgba(0,0,0,0.05); border-bottom: 1px dashed rgba(0,0,0,0.05);">
-              <div><strong style="color: var(--color-caramel); text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; margin-right: 4px;">Then:</strong> <span style="color: var(--color-chocolate);">${p.then}</span></div>
-              <div><strong style="color: var(--color-chocolate); text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; margin-right: 4px;">Now:</strong> <span style="color: var(--color-chocolate);">${p.now}</span></div>
-            </div>
-          ` : ''}
-          <p class="detail-desc">${p.description}</p>
-          
-          <div class="detail-spec">
-            <div class="detail-spec-group">
-              <span class="spec-label">Size</span>
-              <span>${p.spec.size}</span>
-            </div>
-            <div class="detail-spec-group">
-              <span class="spec-label">Dimensions</span>
-              <span>${p.spec.dimensions}</span>
-            </div>
-            <div class="detail-spec-group">
-              <span class="spec-label">Materials</span>
-              <span>${p.spec.materials}</span>
-            </div>
-            <div class="detail-spec-group">
-              <span class="spec-label">Care Instructions</span>
-              <span>${p.spec.care}</span>
-            </div>
-          </div>
-          
-          <button class="btn detail-add-btn" onclick="addToCart(${p.id}); toggleDetailModal(false);" ${isInCart ? 'disabled' : ''}>
-            ${isInCart ? 'Added to Bag' : 'Add to Bag'}
-          </button>
-        </div>
-        
-        <div class="detail-backstory">
-          <h3 class="detail-backstory-label">*backstory title*<h3>
-          <p class="detail-backstory-text">${p.backstory}</p>
         </div>
       `;
 
       toggleDetailModal(true);
     }
+
+    let activeProductDetailImages = [];
+    let currentProductDetailIndex = 0;
 
     // Switch main preview image in details modal
     function changeDetailMainImage(imgSrc, thumbEl) {
@@ -3401,9 +3729,64 @@
         mainImg.src = imgSrc;
       }
 
-      const thumbs = document.querySelectorAll('.detail-thumb');
-      thumbs.forEach(t => t.classList.remove('active'));
-      thumbEl.classList.add('active');
+      const thumbs = document.querySelectorAll('.detail-thumb-vertical');
+      thumbs.forEach((t, idx) => {
+        const isActive = t === thumbEl;
+        t.classList.toggle('active', isActive);
+        if (isActive) {
+          currentProductDetailIndex = idx;
+        }
+      });
+    }
+
+    // Navigate product photos using overlay arrows (< and >)
+    function navigateProductDetailImage(direction) {
+      if (!activeProductDetailImages || activeProductDetailImages.length <= 1) return;
+      
+      currentProductDetailIndex = (currentProductDetailIndex + direction + activeProductDetailImages.length) % activeProductDetailImages.length;
+      const newImgSrc = activeProductDetailImages[currentProductDetailIndex];
+
+      const mainImg = document.getElementById('detailMainImgElement');
+      if (mainImg) {
+        mainImg.src = newImgSrc;
+      }
+
+      const thumbs = document.querySelectorAll('.detail-thumb-vertical');
+      thumbs.forEach((t, idx) => {
+        t.classList.toggle('active', idx === currentProductDetailIndex);
+      });
+    }
+
+    // Toggle heart like button state for product ID and sync across UI & cart
+    function toggleProductLike(productId) {
+      const idx = likedProducts.indexOf(productId);
+      if (idx > -1) {
+        likedProducts.splice(idx, 1);
+      } else {
+        likedProducts.push(productId);
+      }
+
+      localStorage.setItem('pn_liked_products', JSON.stringify(likedProducts));
+
+      const overlayBtn = document.getElementById('photoOverlayLikeBtn');
+      const sidebarBtn = document.getElementById('sidebarActionLikeBtn');
+      
+      const isLiked = likedProducts.includes(productId);
+      
+      [overlayBtn, sidebarBtn].forEach(btn => {
+        if (btn) {
+          btn.classList.toggle('liked', isLiked);
+        }
+      });
+
+      renderCart();
+      renderProducts();
+    }
+
+    // Trigger full-screen lightbox for product photo
+    function openProductFullscreenImage() {
+      if (!activeProductDetailImages || activeProductDetailImages.length === 0) return;
+      openStoryLightbox(activeProductDetailImages, currentProductDetailIndex);
     }
 
     // Add to cart
@@ -3446,10 +3829,11 @@
         headerTitle.innerText = `Your Bag (${cartCount})`;
       }
 
-      const navBagCount = document.getElementById('cartCount');
-      if (navBagCount) {
-        navBagCount.innerText = cartCount;
-        navBagCount.style.display = cartCount > 0 ? 'inline-flex' : 'none';
+      const likedNavCount = document.getElementById('likedNavCount');
+      const likedItemsCount = likedProducts.length;
+      if (likedNavCount) {
+        likedNavCount.innerText = likedItemsCount;
+        likedNavCount.style.display = likedItemsCount > 0 ? 'inline-flex' : 'none';
       }
 
       let subtotal = 0;
@@ -3469,34 +3853,69 @@
         `;
         subtotalEl.innerText = '£0.00';
         if (checkoutBtn) checkoutBtn.disabled = true;
-        return;
+      } else {
+        if (checkoutBtn) checkoutBtn.disabled = false;
+
+        cart.forEach(item => {
+          subtotal += item.price;
+          const itemEl = document.createElement('div');
+          itemEl.className = 'cart-item';
+          
+          const upcycleMeta = (item.then && item.now) 
+            ? `<div class="cart-item-meta" style="font-size: 10px; margin-top: 2px; opacity: 0.8;">Upcycled from: ${item.then}</div>`
+            : `<div class="cart-item-meta">${item.category}</div>`;
+
+          itemEl.innerHTML = `
+            <div class="cart-item-img">
+              <img src="${item.images[0]}" alt="${item.title}">
+            </div>
+            <div class="cart-item-details">
+              <h4 class="cart-item-title" style="margin: 0; line-height: 1.3;">${item.title}</h4>
+              ${upcycleMeta}
+              <div class="cart-item-price">£${item.price.toFixed(2)}</div>
+            </div>
+            <button class="remove-item-btn" onclick="removeFromCart(${item.id})" aria-label="Remove item" style="background: none; border: none; cursor: pointer; padding: 5px;">&times;</button>
+          `;
+          list.appendChild(itemEl);
+        });
       }
 
-      if (checkoutBtn) checkoutBtn.disabled = false;
-
-      cart.forEach(item => {
-        subtotal += item.price;
-        const itemEl = document.createElement('div');
-        itemEl.className = 'cart-item';
-        
-        // Show Then / Now upcycling details in cart if present
-        const upcycleMeta = (item.then && item.now) 
-          ? `<div class="cart-item-meta" style="font-size: 10px; margin-top: 2px; opacity: 0.8;">Upcycled from: ${item.then}</div>`
-          : `<div class="cart-item-meta">${item.category}</div>`;
-
-        itemEl.innerHTML = `
-          <div class="cart-item-img">
-            <img src="${item.images[0]}" alt="${item.title}">
+      // Render Liked Products Wishlist section inside bag drawer
+      const likedItems = shopProducts.filter(p => likedProducts.includes(p.id) && p.inventory > 0);
+      if (likedItems.length > 0) {
+        const likedSection = document.createElement('div');
+        likedSection.id = 'cartLikedSection';
+        likedSection.style.cssText = 'margin-top: 24px; padding-top: 20px; border-top: 2px stroke var(--color-light-gray); border-top-style: dashed;';
+        likedSection.innerHTML = `
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+            <h4 style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--color-caramel); margin: 0; display: flex; align-items: center; gap: 6px;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="var(--color-orange)" stroke="var(--color-orange)">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              </svg>
+              Liked Items (${likedItems.length})
+            </h4>
           </div>
-          <div class="cart-item-details">
-            <h4 class="cart-item-title" style="margin: 0; line-height: 1.3;">${item.title}</h4>
-            ${upcycleMeta}
-            <div class="cart-item-price">£${item.price.toFixed(2)}</div>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            ${likedItems.map(item => {
+              const inCart = cart.some(c => c.id === item.id);
+              return `
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px; background-color: var(--color-white); border-radius: 8px; border: 1px solid var(--color-light-gray);">
+                  <img src="${item.images[0]}" alt="${item.title}" style="width: 44px; height: 52px; object-fit: cover; border-radius: 6px; cursor: pointer;" onclick="openProductDetail(${item.id})">
+                  <div style="flex: 1; min-width: 0;">
+                    <div style="font-size: 12.5px; font-weight: 600; color: var(--color-chocolate); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer;" onclick="openProductDetail(${item.id})">${item.title}</div>
+                    <div style="font-size: 12px; font-weight: 700; color: var(--color-caramel);">£${item.price.toFixed(2)}</div>
+                  </div>
+                  <button class="btn" style="padding: 6px 12px; font-size: 11px; ${inCart ? 'opacity: 0.6;' : ''}" onclick="addToCart(${item.id})" ${inCart ? 'disabled' : ''}>
+                    ${inCart ? 'In Bag' : '+ Add'}
+                  </button>
+                  <button onclick="toggleProductLike(${item.id})" style="background: none; border: none; font-size: 16px; color: #a09088; cursor: pointer; padding: 2px 6px;">&times;</button>
+                </div>
+              `;
+            }).join('')}
           </div>
-          <button class="remove-item-btn" onclick="removeFromCart(${item.id})" aria-label="Remove item" style="background: none; border: none; cursor: pointer; padding: 5px;">&times;</button>
         `;
-        list.appendChild(itemEl);
-      });
+        list.appendChild(likedSection);
+      }
 
       subtotalEl.innerText = `£${subtotal.toFixed(2)}`;
     }
@@ -4028,11 +4447,20 @@
       nav.classList.toggle('active');
     }
 
-    function toggleCart(isOpen) {
+    function toggleCart(isOpen, targetView = 'bag') {
       const overlay = document.getElementById('cartOverlay');
       if (isOpen) {
         overlay.classList.add('active');
         document.body.style.overflow = 'hidden';
+
+        if (targetView === 'liked') {
+          setTimeout(() => {
+            const likedBox = document.getElementById('cartLikedSection');
+            if (likedBox) {
+              likedBox.scrollIntoView({ behavior: 'smooth' });
+            }
+          }, 150);
+        }
       } else {
         overlay.classList.remove('active');
         document.body.style.overflow = '';
