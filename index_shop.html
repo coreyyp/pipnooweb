@@ -3952,28 +3952,27 @@
         }
 
         const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || 'Serverless Checkout session endpoint error');
+        throw new Error(errorData.error || `Checkout endpoint returned status ${response.status}`);
       } catch (err) {
-        console.warn('Redirect checkout failed, using local offline simulation instead:', err);
+        console.error('Redirect checkout failed:', err);
 
-        // Fallback simulated checkout for local preview mode
-        cart.forEach(cartItem => {
-          const prod = shopProducts.find(p => p.id === cartItem.id);
-          if (prod) {
-            prod.inventory = 0;
-          }
-        });
-
-        localStorage.setItem('pn_products', JSON.stringify(shopProducts));
-
-        cart = [];
-        localStorage.setItem('pn_cart', JSON.stringify(cart));
-
-        toggleCart(false);
-        toggleSuccessModal(true);
-
-        renderCart();
-        renderProducts();
+        // If running locally (file:// or localhost) without Vercel backend, use mock preview modal
+        if (window.location.protocol === 'file:' || window.location.hostname === 'localhost') {
+          cart.forEach(cartItem => {
+            const prod = shopProducts.find(p => p.id === cartItem.id);
+            if (prod) prod.inventory = 0;
+          });
+          localStorage.setItem('pn_products', JSON.stringify(shopProducts));
+          cart = [];
+          localStorage.setItem('pn_cart', JSON.stringify(cart));
+          toggleCart(false);
+          toggleSuccessModal(true);
+          renderCart();
+          renderProducts();
+        } else {
+          // On live domain, alert the exact error so user/admin knows what environment key is missing
+          alert(`Checkout Error: ${err.message}\n\nPlease check Vercel environment variables (STRIPE_SECRET_KEY and GOOGLE_SHEET_WEB_APP_URL).`);
+        }
       } finally {
         if (checkoutBtn) {
           checkoutBtn.innerText = originalText;
