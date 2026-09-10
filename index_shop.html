@@ -2145,6 +2145,7 @@
     }
 
     .detail-add-btn {
+      position: relative;
       width: 100%;
       padding: 16px;
       font-size: 14px;
@@ -2157,6 +2158,62 @@
       color: var(--color-bg) !important;
       transition: all var(--transition-fast);
       box-shadow: 0 4px 14px rgba(45, 66, 54, 0.2);
+      overflow: visible;
+    }
+
+    .detail-add-btn:hover {
+      background-color: #213329 !important;
+      transform: translateY(-2px);
+    }
+
+    .detail-add-btn.just-added {
+      background-color: var(--color-orange) !important;
+      border-color: var(--color-orange) !important;
+      color: var(--color-white) !important;
+      transform: scale(1.04);
+      box-shadow: 0 6px 20px rgba(217, 93, 57, 0.35);
+    }
+
+    .detail-add-btn.view-bag {
+      background-color: var(--color-caramel) !important;
+      border-color: var(--color-caramel) !important;
+      color: var(--color-white) !important;
+      box-shadow: 0 4px 14px rgba(143, 98, 64, 0.25);
+    }
+
+    /* Firework Particle Burst Container & Elements */
+    .firework-burst-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    .firework-particle {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+      animation: particleBurst 0.75s cubic-bezier(0.12, 0.8, 0.32, 1) forwards;
+    }
+
+    @keyframes particleBurst {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) translate(0, 0) scale(1);
+      }
+      70% {
+        opacity: 0.9;
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) translate(var(--dx), var(--dy)) scale(0.2);
+      }
     }
 
     .detail-add-btn:hover {
@@ -3677,8 +3734,8 @@
 
               <!-- Add to Bag & Heart Button Row -->
               <div class="detail-actions-row">
-                <button class="btn detail-add-btn" id="detailAddBtn" onclick="addToCart(${p.id}); toggleDetailModal(false);" ${isInCart ? 'disabled' : ''} style="flex: 1;">
-                  ${isInCart ? 'Added to Bag' : 'Add to Bag'}
+                <button class="btn detail-add-btn ${isInCart ? 'view-bag' : ''}" id="detailAddBtn" onclick="handleDetailAddBtnClick(event, ${p.id});" style="flex: 1;">
+                  ${isInCart ? 'View Bag' : 'Add to Bag'}
                 </button>
                 <button class="detail-action-like-btn ${likedProducts.includes(p.id) ? 'liked' : ''}" id="sidebarActionLikeBtn" onclick="toggleProductLike(${p.id});" aria-label="Favorite item">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -3769,6 +3826,83 @@
     function openProductFullscreenImage() {
       if (!activeProductDetailImages || activeProductDetailImages.length === 0) return;
       openStoryLightbox(activeProductDetailImages, currentProductDetailIndex);
+    }
+
+    // Create subtle firework particle burst effect on button click
+    function createFireworkBurst(buttonElement) {
+      if (!buttonElement) return;
+
+      const container = document.createElement('div');
+      container.className = 'firework-burst-container';
+      buttonElement.appendChild(container);
+
+      const colors = ['#D95D39', '#8CA89E', '#8F6240', '#2D4236', '#E8D8C8', '#E6A15C'];
+      const particleCount = 18;
+
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'firework-particle';
+
+        // Calculate random explosion vector angle & distance
+        const angle = (i / particleCount) * (2 * Math.PI) + (Math.random() * 0.4 - 0.2);
+        const distance = 45 + Math.random() * 40; // 45px to 85px radius
+        const dx = Math.cos(angle) * distance;
+        const dy = Math.sin(angle) * distance;
+
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const size = 6 + Math.random() * 5; // 6px to 11px particle size
+
+        particle.style.cssText = `
+          --dx: ${dx}px;
+          --dy: ${dy}px;
+          background-color: ${color};
+          width: ${size}px;
+          height: ${size}px;
+        `;
+
+        container.appendChild(particle);
+      }
+
+      // Cleanup DOM container after animation completes
+      setTimeout(() => {
+        if (container.parentNode) {
+          container.parentNode.removeChild(container);
+        }
+      }, 800);
+    }
+
+    // Handle detail view Add to Bag button click with firework effect & transition to View Bag
+    function handleDetailAddBtnClick(event, productId) {
+      const btn = event.currentTarget;
+      const isInCart = cart.some(item => item.id === productId);
+
+      if (isInCart || btn.classList.contains('view-bag')) {
+        // If already added, clicking opens the shopping bag drawer
+        toggleCart(true);
+        return;
+      }
+
+      // 1. Add item to cart without auto-sliding down or closing modal
+      const p = shopProducts.find(item => item.id === productId);
+      if (p) {
+        cart.push(p);
+        localStorage.setItem('pn_cart', JSON.stringify(cart));
+        renderCart();
+        renderProducts();
+      }
+
+      // 2. Trigger subtle firework explosion on the button
+      createFireworkBurst(btn);
+
+      // 3. Transform button state into "Added!" then "View Bag"
+      btn.classList.add('just-added');
+      btn.innerText = 'Added!';
+
+      setTimeout(() => {
+        btn.classList.remove('just-added');
+        btn.classList.add('view-bag');
+        btn.innerText = 'View Bag';
+      }, 700);
     }
 
     // Add to cart
