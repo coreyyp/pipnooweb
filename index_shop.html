@@ -1512,7 +1512,7 @@
       height: 100%;
       background-color: rgba(60, 42, 33, 0.4);
       backdrop-filter: blur(4px);
-      z-index: 1000;
+      z-index: 2000;
       opacity: 0;
       pointer-events: none;
       transition: opacity var(--transition-smooth);
@@ -1531,7 +1531,7 @@
       max-width: 440px;
       height: 100%;
       background-color: var(--color-bg);
-      z-index: 1001;
+      z-index: 2001;
       transform: translateX(100%);
       transition: transform var(--transition-smooth);
       box-shadow: -10px 0 30px rgba(60, 42, 33, 0.15);
@@ -3832,35 +3832,58 @@
     function createFireworkBurst(buttonElement) {
       if (!buttonElement) return;
 
+      const rect = buttonElement.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+
       const container = document.createElement('div');
       container.className = 'firework-burst-container';
-      buttonElement.appendChild(container);
+      container.style.cssText = `
+        position: fixed;
+        left: ${centerX}px;
+        top: ${centerY}px;
+        width: 0;
+        height: 0;
+        pointer-events: none;
+        z-index: 99999;
+      `;
+      document.body.appendChild(container);
 
-      const colors = ['#D95D39', '#8CA89E', '#8F6240', '#2D4236', '#E8D8C8', '#E6A15C'];
-      const particleCount = 18;
+      const colors = ['#D95D39', '#8CA89E', '#8F6240', '#2D4236', '#E6A15C', '#C24D2C'];
+      const particleCount = 20;
 
       for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
         particle.className = 'firework-particle';
 
-        // Calculate random explosion vector angle & distance
-        const angle = (i / particleCount) * (2 * Math.PI) + (Math.random() * 0.4 - 0.2);
-        const distance = 45 + Math.random() * 40; // 45px to 85px radius
+        const angle = (i / particleCount) * (2 * Math.PI) + (Math.random() * 0.3 - 0.15);
+        const distance = 50 + Math.random() * 45; // 50px to 95px radius
         const dx = Math.cos(angle) * distance;
         const dy = Math.sin(angle) * distance;
-
         const color = colors[Math.floor(Math.random() * colors.length)];
-        const size = 6 + Math.random() * 5; // 6px to 11px particle size
+        const size = 6 + Math.random() * 5;
 
         particle.style.cssText = `
-          --dx: ${dx}px;
-          --dy: ${dy}px;
-          background-color: ${color};
+          position: absolute;
           width: ${size}px;
           height: ${size}px;
+          border-radius: 50%;
+          background-color: ${color};
+          transform: translate(-50%, -50%) scale(1);
+          opacity: 1;
+          box-shadow: 0 0 6px ${color};
+          transition: transform 0.65s cubic-bezier(0.12, 0.8, 0.32, 1), opacity 0.65s ease-out;
         `;
 
         container.appendChild(particle);
+
+        // Animate particles via translate transform frame
+        requestAnimationFrame(() => {
+          setTimeout(() => {
+            particle.style.transform = `translate(${dx - size/2}px, ${dy - size/2}px) scale(0.2)`;
+            particle.style.opacity = '0';
+          }, 10);
+        });
       }
 
       // Cleanup DOM container after animation completes
@@ -3868,7 +3891,7 @@
         if (container.parentNode) {
           container.parentNode.removeChild(container);
         }
-      }, 800);
+      }, 750);
     }
 
     // Handle detail view Add to Bag button click with firework effect & transition to View Bag
@@ -3902,7 +3925,7 @@
         btn.classList.remove('just-added');
         btn.classList.add('view-bag');
         btn.innerText = 'View Bag';
-      }, 700);
+      }, 600);
     }
 
     // Add to cart
