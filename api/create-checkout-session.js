@@ -73,8 +73,8 @@ module.exports = async (req, res) => {
     // Determine host protocol for redirections
     const host = req.headers.host || 'localhost:3000';
     const protocol = host.startsWith('localhost') ? 'http://' : 'https://';
-    const successUrl = `${protocol}${host}/#success`;
-    const cancelUrl = `${protocol}${host}/#collections`;
+    const successUrl = `${protocol}${host}/index_shop.html#success`;
+    const cancelUrl = `${protocol}${host}/index_shop.html#collections`;
 
     // Create a secure Stripe checkout session
     const session = await stripe.checkout.sessions.create({
