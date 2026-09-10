@@ -622,6 +622,7 @@
     }
 
     .custom-request-card {
+      position: relative;
       background-color: var(--color-white);
       border-radius: var(--border-radius);
       padding: 80px;
@@ -631,6 +632,39 @@
       align-items: center;
       box-shadow: 0 10px 30px rgba(60, 42, 33, 0.04);
       border: 1px solid rgba(60, 42, 33, 0.05);
+    }
+
+    .custom-request-card::before {
+      content: '';
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      pointer-events: none;
+      z-index: 1;
+      border-radius: 4px;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='12' viewBox='0 0 16 12'%3E%3Cpath d='M0 2h16M8 2v8' stroke='%238F6240' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='12' viewBox='0 0 16 12'%3E%3Cpath d='M0 10h16M8 10v-8' stroke='%238F6240' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='16' viewBox='0 0 12 16'%3E%3Cpath d='M2 0v16M2 8h8' stroke='%238F6240' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='16' viewBox='0 0 12 16'%3E%3Cpath d='M10 0v16M10 8h-8' stroke='%238F6240' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-position:
+        top left,
+        bottom left,
+        top left,
+        top right;
+      background-repeat:
+        repeat-x,
+        repeat-x,
+        repeat-y,
+        repeat-y;
+      background-size:
+        16px 12px,
+        16px 12px,
+        12px 16px,
+        12px 16px;
+      opacity: 0.85;
     }
 
     .custom-request-content {
@@ -1646,17 +1680,64 @@
       color: var(--color-orange);
     }
 
-    /* Cross Stitch Line Divider (small 'x' sequence) */
+    /* Craft & Stitching Section Dividers */
     .cross-stitch-divider {
       position: relative;
       width: 100%;
-      height: 12px;
-      margin-top: 24px;
-      margin-bottom: 20px;
+      height: 14px;
+      margin: 40px 0;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='12' viewBox='0 0 16 12'%3E%3Cpath d='M3 2L9 10M9 2L3 10' stroke='%238F6240' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E");
       background-repeat: repeat-x;
       background-position: center;
       opacity: 0.85;
+    }
+
+    .knit-stitch-divider {
+      position: relative;
+      width: 100%;
+      height: 18px;
+      margin: 40px 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='16' viewBox='0 0 20 16'%3E%3Cpath d='M2 3L10 13L18 3M6 3L10 9L14 3' stroke='%238F6240' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+      background-repeat: repeat-x;
+      background-position: center;
+      opacity: 0.85;
+    }
+
+    .running-stitch-divider {
+      position: relative;
+      width: 100%;
+      height: 14px;
+      margin: 40px 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='12' viewBox='0 0 24 12'%3E%3Cline x1='3' y1='6' x2='15' y2='6' stroke='%238F6240' stroke-width='2.2' stroke-linecap='round'/%3E%3Ccircle cx='3' cy='6' r='1' fill='%236D4539'/%3E%3Ccircle cx='15' cy='6' r='1' fill='%236D4539'/%3E%3C/svg%3E");
+      background-repeat: repeat-x;
+      background-position: center;
+      opacity: 0.85;
+    }
+
+    .buttonhole-stitch-divider {
+      position: relative;
+      width: 100%;
+      height: 16px;
+      margin: 40px 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='14' viewBox='0 0 16 14'%3E%3Cpath d='M0 3h16M8 3v8' stroke='%238F6240' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: repeat-x;
+      background-position: center;
+      opacity: 0.85;
+    }
+
+    .zigzag-stitch-divider {
+      position: relative;
+      width: 100%;
+      height: 14px;
+      margin: 40px 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='12' viewBox='0 0 16 12'%3E%3Cpath d='M0 9L4 3L8 9L12 3L16 9' stroke='%238F6240' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+      background-repeat: repeat-x;
+      background-position: center;
+      opacity: 0.85;
+    }
+
+    .cart-drawer .cross-stitch-divider {
+      margin: 24px 0 20px;
     }
 
     .cart-footer {
@@ -2914,6 +2995,11 @@
       </div>
 
 
+      <!-- Knit V-Stitch Divider -->
+      <div class="container">
+        <div class="knit-stitch-divider"></div>
+      </div>
+
       <!-- Core Values -->
       <div class="values-section">
         <div class="container">
@@ -2946,6 +3032,11 @@
         </div>
       </div>
 
+      <!-- Running Stitch Divider -->
+      <div class="container">
+        <div class="running-stitch-divider"></div>
+      </div>
+
       <!-- Custom Pieces Request Section -->
       <div class="custom-request-section">
         <div class="container">
@@ -2963,6 +3054,11 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <!-- Cross-Stitch Divider -->
+      <div class="container">
+        <div class="cross-stitch-divider"></div>
       </div>
 
       <!-- Get in Touch Section -->
