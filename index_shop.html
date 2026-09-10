@@ -3875,6 +3875,15 @@
         headerTitle.innerText = `Your Bag (${cartCount})`;
       }
 
+      const navBagCount = document.getElementById('cartCount');
+      if (navBagCount) {
+        navBagCount.innerText = cartCount;
+        navBagCount.style.display = cartCount > 0 ? 'inline-flex' : 'none';
+        navBagCount.classList.remove('bounce');
+        void navBagCount.offsetWidth;
+        if (cartCount > 0) navBagCount.classList.add('bounce');
+      }
+
       const likedNavCount = document.getElementById('likedNavCount');
       const likedItemsCount = likedProducts.length;
       if (likedNavCount) {
