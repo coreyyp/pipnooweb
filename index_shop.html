@@ -3861,20 +3861,7 @@
 
     // Render side-drawer cart items
     function renderCart() {
-      const list = document.getElementById('cartItemsList');
-      const subtotalEl = document.getElementById('cartSubtotal');
-      const headerTitle = document.querySelector('.cart-header-title');
-      const checkoutBtn = document.getElementById('checkoutBtn');
-
-      if (!list || !subtotalEl) return;
-
-      list.innerHTML = '';
-
       const cartCount = cart.length;
-      if (headerTitle) {
-        headerTitle.innerText = `Your Bag (${cartCount})`;
-      }
-
       const navBagCount = document.getElementById('cartCount');
       if (navBagCount) {
         navBagCount.innerText = cartCount;
@@ -3889,6 +3876,19 @@
       if (likedNavCount) {
         likedNavCount.innerText = likedItemsCount;
         likedNavCount.style.display = likedItemsCount > 0 ? 'inline-flex' : 'none';
+      }
+
+      const list = document.getElementById('cartItemsList');
+      const subtotalEl = document.getElementById('cartSubtotal');
+      const headerTitle = document.querySelector('.cart-header-title');
+      const checkoutBtn = document.getElementById('checkoutBtn');
+
+      if (!list || !subtotalEl) return;
+
+      list.innerHTML = '';
+
+      if (headerTitle) {
+        headerTitle.innerText = `Your Bag (${cartCount})`;
       }
 
       let subtotal = 0;
